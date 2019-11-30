@@ -53,7 +53,10 @@ public class LoginFrame extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 //todo: check the user input
                 // go to the next page or deny access
-                
+                ClassFrame cf = new ClassFrame();
+                cf.setLocationRelativeTo(null);
+                cf.setVisible(true);
+                dispose();
 
             }
         });
