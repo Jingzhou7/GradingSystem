@@ -4,8 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+
 
 public class LoginFrame extends JFrame {
 
@@ -22,16 +21,13 @@ public class LoginFrame extends JFrame {
     private JButton btnSignUp;
 
 
+    private final String USERNAME = "cpk";
+    private final String PASSWORD = "123";
 
     public LoginFrame() {
         super("Login");
         setSize(400,200);
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
-        });
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(false);
         addActiveComponent();
         setLocationRelativeTo(null);
@@ -53,10 +49,18 @@ public class LoginFrame extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 //todo: check the user input
                 // go to the next page or deny access
-                ClassFrame cf = new ClassFrame();
-                cf.setLocationRelativeTo(null);
-                cf.setVisible(true);
-                dispose();
+                JButton source = (JButton) actionEvent.getSource();
+                String name = tfName.getText();
+                String pwd = new String(pfPwd.getPassword());
+                if(name.equals(USERNAME) && pwd.equals(PASSWORD)) {
+                    ClassFrame cf = new ClassFrame();
+                    cf.setLocationRelativeTo(null);
+                    cf.setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(source, "Wrong username or password");
+                }
+
 
             }
         });

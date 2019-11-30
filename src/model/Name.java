@@ -17,4 +17,9 @@ public class Name {
         this.lname = lname;
     }
 
+    @Override
+    public String toString() {
+        return (fname + " " + mname + " " + lname);
+    }
+
 }

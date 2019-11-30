@@ -8,4 +8,10 @@ public class Student {
     private double[] bonusPoints;
     private Grade grade;
 
+
+    @Override
+    public String toString() {
+        return name.toString();
+    }
+
 }

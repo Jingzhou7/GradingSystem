@@ -24,6 +24,7 @@ public class ClassFrame extends JFrame {
         pack();
 
         addActiveComponent();
+
     }
 
     private void addActiveComponent() {
@@ -32,6 +33,16 @@ public class ClassFrame extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 LoginFrame lf = new LoginFrame();
                 lf.setVisible(true);
+                dispose();
+            }
+        });
+
+        modifyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                CategoryFrame catf = new CategoryFrame();
+                catf.setLocationRelativeTo(null);
+                catf.setVisible(true);
                 dispose();
             }
         });
