@@ -2,40 +2,18 @@ package ui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class CategoryFrame extends JFrame{
-
-    private JButton backBtn;
-    private JTable table1;
-    private JPanel mainPanel;
+public class AssignmentFrame {
     private JButton backButton;
+    private JTable table1;
     private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JButton button5;
-    private JComboBox comboBox1;
+    private JButton addAssignmentButton;
+    private JButton deleteAssignmentButton;
+    private JButton modifyWeightsButton;
     private JPanel ButtonPanel;
-
-    public CategoryFrame() {
-        setName("Category");
-        setVisible(false);
-        setContentPane(mainPanel);
-        addActiveComponent();
-    }
-
-    private void addActiveComponent() {
-        backBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                ClassFrame cf = new ClassFrame();
-                cf.setLocationRelativeTo(null);
-                cf.setVisible(true);
-                dispose();
-            }
-        });
-    }
+    private JPanel MainPanel;
+    private JComboBox comboBox1;
+    private JPanel ChoicePanel;
 
     private void createUIComponents() {
         String [] header={"Class Name","Section", "Semester", "Student Count"};
