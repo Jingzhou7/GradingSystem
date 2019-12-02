@@ -1,6 +1,7 @@
 package GradingSystem;
 
 import model.*;
+import ui.LoginFrame;
 
 import java.util.List;
 
@@ -11,5 +12,10 @@ public class GradingSystem {
     List<Assignment> assignments;
     List<Category> categories;
     List<Student> students;
+
+    public GradingSystem() {
+
+    }
+
 
 }

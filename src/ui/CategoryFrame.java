@@ -7,26 +7,30 @@ import java.awt.event.ActionListener;
 
 public class CategoryFrame extends JFrame{
 
-    private JButton backBtn;
+
     private JTable table1;
     private JPanel mainPanel;
     private JButton backButton;
-    private JButton button2;
+    private JButton viewButton;
     private JButton button3;
     private JButton button4;
     private JButton button5;
     private JComboBox comboBox1;
     private JPanel ButtonPanel;
+    private JPanel ChoicePanel;
 
     public CategoryFrame() {
         setName("Category");
         setVisible(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(mainPanel);
         addActiveComponent();
+
+
     }
 
     private void addActiveComponent() {
-        backBtn.addActionListener(new ActionListener() {
+        backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 ClassFrame cf = new ClassFrame();
@@ -35,6 +39,18 @@ public class CategoryFrame extends JFrame{
                 dispose();
             }
         });
+
+        viewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                AssignmentFrame af = new AssignmentFrame();
+                af.pack();
+                af.setLocationRelativeTo(null);
+                af.setVisible(true);
+                dispose();
+            }
+        });
+
     }
 
     private void createUIComponents() {

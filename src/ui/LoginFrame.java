@@ -21,8 +21,8 @@ public class LoginFrame extends JFrame {
     private JButton btnSignUp;
 
 
-    private final String USERNAME = "cpk";
-    private final String PASSWORD = "123";
+    private final String USERNAME = "1";
+    private final String PASSWORD = "1";
 
     public LoginFrame() {
         super("Login");
@@ -125,12 +125,6 @@ public class LoginFrame extends JFrame {
 
     }
 
-
-
-    public static void main(String[] args) {
-        LoginFrame lf = new LoginFrame();
-        lf.setVisible(true);
-    }
 
 }
 

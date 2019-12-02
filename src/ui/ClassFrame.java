@@ -2,7 +2,6 @@ package ui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,6 +15,8 @@ public class ClassFrame extends JFrame {
     private JButton modifyButton;
     private JTable table1;
     private JComboBox comboBox1;
+    private JPanel ButtonPanel;
+    private JPanel OptionPanel;
 
     public ClassFrame() {
         setName("Classes");
@@ -41,6 +42,7 @@ public class ClassFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 CategoryFrame catf = new CategoryFrame();
+                catf.pack();
                 catf.setLocationRelativeTo(null);
                 catf.setVisible(true);
                 dispose();
@@ -76,7 +78,20 @@ public class ClassFrame extends JFrame {
                 {"CS101", "S1", "FALL19", "100"}, {"CS330", "S1", "FALL19", "85"},  {"CS591", "S1", "FALL19", "30"}, {"CS591", "S2", "FALL19", "30"},
                 {"CS101", "S1", "FALL19", "100"}, {"CS330", "S1", "FALL19", "85"},  {"CS591", "S1", "FALL19", "30"}, {"CS591", "S2", "FALL19", "30"}};
         DefaultTableModel model = new DefaultTableModel(data, header);
-        table1 = new JTable(data, header);
+        table1 = new JTable(model);
 
+        removeClassButton = new JButton("Remove Class");
+        removeClassButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                // check for selected row first
+                if(table1.getSelectedRow() != -1) {
+                    // remove selected row from the model
+                    model.removeRow(table1.getSelectedRow());
+                    JOptionPane.showMessageDialog(null, "Selected row deleted successfully");
+
+                }
+            }
+        });
     }
 }
