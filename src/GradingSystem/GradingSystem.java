@@ -1,7 +1,10 @@
 package GradingSystem;
 
-import model.*;
-import ui.LoginFrame;
+import model.Assignment;
+import model.Category;
+import model.Section;
+import model.Student;
+import model.Class;
 
 import java.util.List;
 
@@ -17,5 +20,10 @@ public class GradingSystem {
 
     }
 
+
+    public void addClass(String className, String classId, List<Section> sections, List<Category> categories, List<Assignment> assignments) {
+        Class myClass = new Class(className, classId, sections, categories, assignments);
+
+    }
 
 }

@@ -54,7 +54,7 @@ public class LoginFrame extends JFrame {
                 String pwd = new String(pfPwd.getPassword());
                 if(name.equals(USERNAME) && pwd.equals(PASSWORD)) {
                     ClassFrame cf = new ClassFrame();
-                    cf.setLocationRelativeTo(null);
+//                    cf.setLocationRelativeTo(null);
                     cf.setVisible(true);
                     dispose();
                 } else {

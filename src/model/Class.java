@@ -9,6 +9,20 @@ public class Class {
     private List<Category> categories;
     private List<Assignment> assignments;
 
+    //no-arg constructor
+    public Class() {
+        className = "CS591";
+
+    }
+    //constructor
+    public Class(String className, String classId, List<Section> sections, List<Category> categories, List<Assignment> assignments) {
+        this.className = className;
+        this.classId = classId;
+        this.sections = sections;
+        this.categories = categories;
+        this.assignments = assignments;
+    }
+
 
 
 }

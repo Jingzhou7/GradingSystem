@@ -21,9 +21,10 @@ public class ClassFrame extends JFrame {
     public ClassFrame() {
         setName("Classes");
         setContentPane(mainPanel);
+        setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
-
+        setLocationRelativeTo(null);
         addActiveComponent();
 
     }
@@ -41,10 +42,8 @@ public class ClassFrame extends JFrame {
         modifyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                CategoryFrame catf = new CategoryFrame();
+                CourseDetailFrame catf = new CourseDetailFrame();
                 catf.pack();
-                catf.setLocationRelativeTo(null);
-                catf.setVisible(true);
                 dispose();
             }
         });

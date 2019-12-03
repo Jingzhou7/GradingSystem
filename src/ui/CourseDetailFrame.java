@@ -2,83 +2,87 @@ package ui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class CourseDetailFrame extends JFrame {
+public class CourseDetailFrame extends JFrame{
+
+
+
+    private JPanel mainPanel;
+    private JButton backButton;
     private JButton importStudentsBtn;
     private JButton addStudentBtn;
     private JButton deleteStudentBtn;
-    private JButton showGradesBtn;
+    private JButton viewGradesBtn;
     private JButton addCategoryBtn;
     private JButton deleteCategoryBtn;
-    private JButton backBtn;
+    private JButton modifyCategoryBtn;
     private JTable studentTable;
+    private JComboBox comboBox1;
+    private JPanel ButtonPanel;
+    private JPanel ChoicePanel;
     private JTable categoryTable;
 
-    public CourseDetailFrame(){
-        super("Course detail page");
-        setLayout(new GridLayout());
-        setSize(400,200);
-        addComponent();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        pack();
+
+    public CourseDetailFrame() {
+        setName("Course detail frame");
         setVisible(true);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setContentPane(mainPanel);
+        pack();
+        setLocationRelativeTo(null);
+        addActiveComponent();
+
+
+
     }
 
-    private void addComponent(){
-        JPanel j = new JPanel();
+    private void addActiveComponent() {
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                ClassFrame cf = new ClassFrame();
+//                cf.setLocationRelativeTo(null);
 
-        GridLayout layout = new GridLayout(7,1);
-        layout.setHgap(5);
-        layout.setVgap(5);
-        j.setLayout(layout);
-        System.out.println(j.getLayout());
-        importStudentsBtn = new JButton("Import students");
-        addStudentBtn = new JButton("Add student");
-        deleteStudentBtn = new JButton("Delete students");
-        showGradesBtn = new JButton("Show grades");
-        addCategoryBtn = new JButton("Add category");
-        deleteCategoryBtn = new JButton("Delete category");
-        backBtn = new JButton("Back");
+                dispose();
+            }
+        });
 
-        j.add(importStudentsBtn);
-        j.add(addStudentBtn);
-        j.add(deleteStudentBtn);
-        j.add(showGradesBtn);
-        j.add(addCategoryBtn);
-        j.add(deleteCategoryBtn);
-        j.add(backBtn);
+        addStudentBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                AddStudentFrame asf = new AddStudentFrame();
+            }
+        });
 
-        JPanel j2 = new JPanel();
-        GridLayout layout2 = new GridLayout(2,1);
-        j2.setLayout(layout2);
+        importStudentsBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                AssignmentFrame af = new AssignmentFrame();
+                af.pack();
+                af.setLocationRelativeTo(null);
+                af.setVisible(true);
+                dispose();
+            }
+        });
 
+    }
 
+    private void createUIComponents() {
         String [] studentHeader={"Student name", "Email", "Section"};
         String [][] studentData={{"Kaijia You", "caydenyo@bu.edu", "1"}, {"Peiqing Lu", "lupeiqing@bu.edu", "1"},  {"Jingzhou Xue", "xuejingzhou@bu.edu", "2"}, {"Harsh", "harsh@bu.edu", "3"}};
         DefaultTableModel studentModel = new DefaultTableModel(studentData,studentHeader);
 
         studentTable = new JTable(studentModel);
-        studentTable.setFillsViewportHeight(true);
-
-        j2.add(new JScrollPane(studentTable));
 
         String [] categoryHeader={"Category", "Weight(%)"};
         String [][] categoryData={{"Participation", "15"}, {"Assignment", "25"},  {"Exam", "60"}};
         DefaultTableModel categoryModel = new DefaultTableModel(categoryData,categoryHeader);
-//        DefaultTableModel tabelModel = new DefaultTableModel(categoryHeader, 0){
-//            @Override
-//            public boolean isCellEditable(int row, int column){
-//                return false;
-//            }
-//        };
+
 
         categoryTable = new JTable(categoryModel);
-        categoryTable.setFillsViewportHeight(true);
 
-        j2.add(new JScrollPane(categoryTable));
-
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, j, j2);
-        setContentPane(splitPane);
     }
 }

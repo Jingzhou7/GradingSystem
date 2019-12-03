@@ -1,8 +1,9 @@
 package ui;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class GradingFrame {
+public class GradingFrame extends JFrame{
     private JPanel mainPanel;
     private JButton backButton;
     private JTable table1;
@@ -11,4 +12,5 @@ public class GradingFrame {
     private JButton button3;
     private JButton button4;
     private JComboBox comboBox1;
+
 }

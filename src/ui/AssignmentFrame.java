@@ -2,7 +2,6 @@ package ui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,17 +21,17 @@ public class AssignmentFrame extends JFrame{
     public AssignmentFrame() {
 
         setName("Category");
-        setVisible(false);
+        setVisible(true);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(mainPanel);
-
+        pack();
+        setLocationRelativeTo(null);
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                CategoryFrame catf = new CategoryFrame();
+                CourseDetailFrame catf = new CourseDetailFrame();
                 catf.pack();
-                catf.setLocationRelativeTo(null);
-                catf.setVisible(true);
                 dispose();
             }
         });
