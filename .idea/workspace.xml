@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a894943f-a954-4e6f-b970-7415ccb01a94" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/ui/AddStudentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AddStudentFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AssignmentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AssignmentFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/ClassFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ClassFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/AddCategoryFrame.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/AddCategoryFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/ModifyCategoryFrame.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/ModifyCategoryFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/MyExcelUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/code.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/code.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Name.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Name.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Student.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/CourseDetailFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CourseDetailFrame.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,11 +35,15 @@
   <component name="ProjectId" id="1TuQEegsI3ROF1g8ZaTJLkolkAJ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -63,8 +76,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1574307389102</updated>
+      <workItem from="1575418777264" duration="12811000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

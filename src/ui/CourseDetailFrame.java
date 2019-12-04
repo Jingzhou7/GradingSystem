@@ -1,14 +1,15 @@
 package ui;
 
+import model.Student;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.List;
 
 public class CourseDetailFrame extends JFrame{
-
-
-
     private JPanel mainPanel;
     private JButton backButton;
     private JButton importStudentsBtn;
@@ -36,7 +37,34 @@ public class CourseDetailFrame extends JFrame{
         addActiveComponent();
 
 
-
+        addCategoryBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddCategoryFrame();
+            }
+        });
+        modifyCategoryBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ModifyCategoryFrame();
+            }
+        });
+        importStudentsBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser chooser = new JFileChooser();
+                chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+                chooser.showDialog(new JLabel(), "选择");
+                File file = chooser.getSelectedFile();
+                String excelFileName = file.getAbsoluteFile().toString();
+                System.out.println(excelFileName);
+                // 读取Excel文件内容
+                List<Student> readResult = MyExcelUtil.readExcel(excelFileName);
+                for (int i = 0;i < readResult.size();i++){
+                    System.out.println(readResult.get(i).toString());
+                }
+            }
+        });
     }
 
     private void addActiveComponent() {
