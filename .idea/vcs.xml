@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/CS591-TriantaEna" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/FancyBank" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/deeplearning4j-examples" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/java-reinforcement-learning-tic-tac-toe" vcs="Git" />
+  </component>
+</project>

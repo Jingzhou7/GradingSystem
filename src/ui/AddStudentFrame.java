@@ -29,6 +29,10 @@ public class AddStudentFrame extends JFrame{
         pack();
         setLocationRelativeTo(null);
 
+        addActiveComponent();
+    }
+
+    private void addActiveComponent() {
         clearAllBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -36,8 +40,7 @@ public class AddStudentFrame extends JFrame{
                 lastNameTextField.setText("");
                 middleNameTextField.setText("");
                 sectionTextField.setText("");
-                dispose();
-                AddStudentFrame asf = new AddStudentFrame();
+
             }
         });
         confirmBtn.addActionListener(new ActionListener() {

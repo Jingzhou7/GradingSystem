@@ -43,9 +43,7 @@ public class CourseDetailFrame extends JFrame{
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                ClassFrame cf = new ClassFrame();
-//                cf.setLocationRelativeTo(null);
-
+                new ClassFrame();
                 dispose();
             }
         });
@@ -53,17 +51,14 @@ public class CourseDetailFrame extends JFrame{
         addStudentBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                AddStudentFrame asf = new AddStudentFrame();
+                new AddStudentFrame();
             }
         });
 
         importStudentsBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                AssignmentFrame af = new AssignmentFrame();
-                af.pack();
-                af.setLocationRelativeTo(null);
-                af.setVisible(true);
+                new AssignmentFrame();
                 dispose();
             }
         });

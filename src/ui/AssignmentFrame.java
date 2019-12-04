@@ -30,8 +30,7 @@ public class AssignmentFrame extends JFrame{
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                CourseDetailFrame catf = new CourseDetailFrame();
-                catf.pack();
+                new CourseDetailFrame();
                 dispose();
             }
         });

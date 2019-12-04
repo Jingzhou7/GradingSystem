@@ -33,8 +33,7 @@ public class ClassFrame extends JFrame {
         backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                LoginFrame lf = new LoginFrame();
-                lf.setVisible(true);
+                new LoginFrame();
                 dispose();
             }
         });
@@ -42,8 +41,7 @@ public class ClassFrame extends JFrame {
         modifyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                CourseDetailFrame catf = new CourseDetailFrame();
-                catf.pack();
+                new CourseDetailFrame();
                 dispose();
             }
         });
