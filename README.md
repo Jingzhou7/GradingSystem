@@ -1,5 +1,6 @@
 # GradingSystem
 cs591 GradingSystem design
+
 @author Harsh Dedhiya
 @author Jingzhou Xue
 @author Kaijia You
@@ -7,7 +8,9 @@ cs591 GradingSystem design
 
 
 This is a Grading system designed specifically to substitute the excel grading sheets.
+
 The advantages of our system includes:
+
   Another level of security with our login page
   Allows us to easily make new classes based on older courses
   Manage the students in a class
