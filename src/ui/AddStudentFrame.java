@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AddStudentFrame extends JFrame{
+
     private JPanel mainPanel;
     private JTextField firstNameTextField;
     private JTextField lastNameTextField;

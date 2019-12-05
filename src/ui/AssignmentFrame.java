@@ -1,5 +1,7 @@
 package ui;
 
+import GradingSystem.GradingSystem;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
@@ -18,7 +20,7 @@ public class AssignmentFrame extends JFrame{
     private JPanel ChoicePanel;
 
 
-    public AssignmentFrame() {
+    public AssignmentFrame(GradingSystem gs) {
 
         setName("Category");
         setVisible(true);
@@ -30,7 +32,7 @@ public class AssignmentFrame extends JFrame{
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new CourseDetailFrame();
+                new CourseDetailFrame(gs);
                 dispose();
             }
         });

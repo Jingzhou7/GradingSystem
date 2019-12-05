@@ -1,5 +1,7 @@
 package ui;
 
+import GradingSystem.GradingSystem;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
@@ -7,6 +9,7 @@ import java.awt.event.ActionListener;
 
 public class ClassFrame extends JFrame {
 
+    private GradingSystem gs;
     private JPanel mainPanel;
     private JButton backBtn;
     private JButton addClassButton;
@@ -18,8 +21,9 @@ public class ClassFrame extends JFrame {
     private JPanel ButtonPanel;
     private JPanel OptionPanel;
 
-    public ClassFrame() {
+    public ClassFrame(GradingSystem gs) {
         setName("Classes");
+        this.gs = gs;
         setContentPane(mainPanel);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,7 +38,7 @@ public class ClassFrame extends JFrame {
         backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new LoginFrame();
+                new LoginFrame(gs);
                 dispose();
             }
         });
@@ -50,7 +54,7 @@ public class ClassFrame extends JFrame {
         modifyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new CourseDetailFrame();
+                new CourseDetailFrame(gs);
                 dispose();
             }
         });

@@ -1,5 +1,6 @@
 package ui;
 
+import GradingSystem.GradingSystem;
 import model.Student;
 
 import javax.swing.*;
@@ -10,6 +11,7 @@ import java.io.File;
 import java.util.List;
 
 public class CourseDetailFrame extends JFrame{
+    private GradingSystem gs;
     private JPanel mainPanel;
     private JButton backButton;
     private JButton importStudentsBtn;
@@ -26,8 +28,12 @@ public class CourseDetailFrame extends JFrame{
     private JTable categoryTable;
 
 
-    public CourseDetailFrame() {
+    public CourseDetailFrame(GradingSystem gs) {
+
+        this.gs = gs;
+
         setName("Course detail frame");
+
         setVisible(true);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,7 +77,7 @@ public class CourseDetailFrame extends JFrame{
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new ClassFrame();
+                new ClassFrame(gs);
                 dispose();
             }
         });
@@ -86,7 +92,7 @@ public class CourseDetailFrame extends JFrame{
         importStudentsBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new AssignmentFrame();
+                new AssignmentFrame(gs);
                 dispose();
             }
         });

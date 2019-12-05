@@ -5,6 +5,7 @@ import model.Category;
 import model.Section;
 import model.Student;
 import model.Class;
+import ui.LoginFrame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,5 +55,11 @@ public class GradingSystem {
         categories.add(newCategory);
         return true;
     }
+
+    //starting point of the grading system
+    public void run() {
+        LoginFrame lf = new LoginFrame(this);
+    }
+
 
 }

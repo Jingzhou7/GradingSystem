@@ -1,5 +1,7 @@
 package ui;
 
+import GradingSystem.GradingSystem;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,6 +10,7 @@ import java.awt.event.ActionListener;
 
 public class LoginFrame extends JFrame {
 
+    private GradingSystem gs;
     private JLabel lblName;
     private JLabel lblPwd;
     private JLabel lblWelcome;
@@ -24,8 +27,9 @@ public class LoginFrame extends JFrame {
     private final String USERNAME = "1";
     private final String PASSWORD = "1";
 
-    public LoginFrame() {
+    public LoginFrame(GradingSystem gs) {
         super("Login");
+        this.gs = gs;
         setSize(400,200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -53,8 +57,7 @@ public class LoginFrame extends JFrame {
                 String name = tfName.getText();
                 String pwd = new String(pfPwd.getPassword());
                 if(name.equals(USERNAME) && pwd.equals(PASSWORD)) {
-                    ClassFrame cf = new ClassFrame();
-//                    cf.setLocationRelativeTo(null);
+                    ClassFrame cf = new ClassFrame(gs);
                     cf.setVisible(true);
                     dispose();
                 } else {
