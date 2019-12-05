@@ -10,6 +10,9 @@ public class Assignment {
     private Category category;
     private double maxPoint;  // set the max score of the assignment for score calculation
 
+    public Assignment(String assignmentName) {
+        this.assignmentName = assignmentName;
+    }
 
 
 }

@@ -8,6 +8,7 @@ public class Class {
     private List<Section> sections;
     private List<Category> categories;
     private List<Assignment> assignments;
+    private String semester;
 
     //no-arg constructor
     public Class() {
@@ -15,12 +16,13 @@ public class Class {
 
     }
     //constructor
-    public Class(String className, String classId, List<Section> sections, List<Category> categories, List<Assignment> assignments) {
+    public Class(String className, String classId, List<Section> sections, List<Category> categories, List<Assignment> assignments, String semester) {
         this.className = className;
         this.classId = classId;
         this.sections = sections;
         this.categories = categories;
         this.assignments = assignments;
+        this.semester = semester;
     }
 
 

@@ -25,7 +25,9 @@
         <children>
           <component id="45244" class="javax.swing.JTable" binding="studentTable" custom-create="true">
             <constraints/>
-            <properties/>
+            <properties>
+              <preferredScrollableViewportSize width="450" height="200"/>
+            </properties>
           </component>
         </children>
       </scrollpane>
@@ -114,7 +116,9 @@
         <children>
           <component id="b02ec" class="javax.swing.JTable" binding="categoryTable" custom-create="true">
             <constraints/>
-            <properties/>
+            <properties>
+              <preferredScrollableViewportSize width="450" height="200"/>
+            </properties>
           </component>
         </children>
       </scrollpane>

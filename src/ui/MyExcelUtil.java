@@ -1,5 +1,6 @@
 package ui;
 
+import model.Name;
 import model.Student;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -145,7 +146,7 @@ public class MyExcelUtil {
     }
 
     private static Student convertRowToData(Row row) {
-        Student resultData = new Student();
+        Student resultData = new Student(new Name(""));
 
         Cell cell;
         int cellNum = 0;

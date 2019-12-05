@@ -1,12 +1,26 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Student {
     private Name name;
     private String email;
     private String sid;
-    private String[] comments;
+    private List<String> comments;
     private double[] bonusPoints;
     private Grade grade;
+
+
+    public Student(Name name) {
+        this.name = name;
+        setEmail(null);
+        setSid(null);
+        comments = new ArrayList<>();
+        bonusPoints = new double[]{};
+        grade = new Grade();
+
+    }
 
     public Name getName() {
         return name;
@@ -32,22 +46,6 @@ public class Student {
 
     public void setSid(String sid) {
         this.sid = sid;
-    }
-
-    public String[] getComments() {
-        return comments;
-    }
-
-    public void setComments(String[] comments) {
-        this.comments = comments;
-    }
-
-    public double[] getBonusPoints() {
-        return bonusPoints;
-    }
-
-    public void setBonusPoints(double[] bonusPoints) {
-        this.bonusPoints = bonusPoints;
     }
 
     public Grade getGrade() {

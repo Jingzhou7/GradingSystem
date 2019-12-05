@@ -2,19 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a894943f-a954-4e6f-b970-7415ccb01a94" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/AddCategoryFrame.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/AddCategoryFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/ModifyCategoryFrame.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/ModifyCategoryFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/MyExcelUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/code.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/code.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Name.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Name.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GradingSystem/GradingSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GradingSystem/GradingSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Assignment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Class.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Class.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Grade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Grade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Section.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Section.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/CourseDetailFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CourseDetailFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/CourseDetailFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CourseDetailFrame.form" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,8 +37,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="findjar.last.used.dir" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../poi-4.1.1" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />

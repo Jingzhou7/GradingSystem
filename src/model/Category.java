@@ -4,6 +4,9 @@ public class Category {
     private String categoryName;
     private double weight;
 
+    public Category(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
     // constructor
     public Category(String name, double weight) {

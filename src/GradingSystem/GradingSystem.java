@@ -6,6 +6,7 @@ import model.Section;
 import model.Student;
 import model.Class;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,15 +16,43 @@ public class GradingSystem {
     List<Assignment> assignments;
     List<Category> categories;
     List<Student> students;
+    List<String> semesters;
+    List<Class> classes;
+
+
 
     public GradingSystem() {
+        assignments = new ArrayList<>();
+        categories = new ArrayList<>();
+        students = new ArrayList<>();
+        semesters = new ArrayList<>();
+        classes = new ArrayList<>();
+
+        categories.add(new Category("Exam"));
+        categories.add(new Category("Programming Assignment"));
+        categories.add(new Category("Participation"));
 
     }
 
 
-    public void addClass(String className, String classId, List<Section> sections, List<Category> categories, List<Assignment> assignments) {
-        Class myClass = new Class(className, classId, sections, categories, assignments);
+    public boolean addClass(String className, String classId, List<Section> sections, List<Category> categories, List<Assignment> assignments, String semester) {
+        Class newClass = new Class(className, classId, sections, categories, assignments, semester);
+        classes.add(newClass);
+        return true;
+    }
 
+    public boolean removeClass(Class oldClass) {
+        if(classes.contains(oldClass)) {
+            classes.remove(oldClass);
+            return true;
+        } else
+            return false; //no such class found
+    }
+
+    public boolean addCategory(String name) {
+        Category newCategory = new Category(name);
+        categories.add(newCategory);
+        return true;
     }
 
 }
