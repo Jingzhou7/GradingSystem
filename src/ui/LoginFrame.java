@@ -32,9 +32,10 @@ public class LoginFrame extends JFrame {
         this.gs = gs;
         setSize(400,200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+
         addActiveComponent();
         setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     private void addActiveComponent() {
