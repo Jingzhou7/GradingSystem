@@ -1,13 +1,14 @@
 package ui;
 
 import GradingSystem.GradingSystem;
+import model.Course;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ClassFrame extends JFrame {
+public class CourseFrame extends JFrame {
 
     private GradingSystem gs;
     private JPanel mainPanel;
@@ -21,7 +22,7 @@ public class ClassFrame extends JFrame {
     private JPanel ButtonPanel;
     private JPanel OptionPanel;
 
-    public ClassFrame(GradingSystem gs) {
+    public CourseFrame(GradingSystem gs) {
         setName("Classes");
         this.gs = gs;
         setContentPane(mainPanel);
@@ -85,10 +86,15 @@ public class ClassFrame extends JFrame {
                 JButton source = (JButton) e.getSource();
                 int selected = table1.getSelectedRow();
                 if (selected != -1) {
-                    Integer classID = (Integer) model.getValueAt(selected, 0);
-                    model.Class targetClass = gs.getClass(classID);
 
+                    //remove from the List of classes
+                    int classID = Integer.parseInt(model.getValueAt(selected, 0).toString());
+                    Course targetCourse = gs.getClass(classID);
+                    gs.getCourses().remove(targetCourse);
 
+                    //remove the entry in the table
+                    model.removeRow(table1.getSelectedRow());
+                    JOptionPane.showMessageDialog(null, "Selected row deleted successfully");
 
 //                    boolean checkBalance = checkEnough(bc.getAccount(account_index).getBalance(), b.getCloseAccountFee());
 //                    if (checkBalance) {

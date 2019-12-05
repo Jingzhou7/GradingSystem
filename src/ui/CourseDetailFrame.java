@@ -77,7 +77,7 @@ public class CourseDetailFrame extends JFrame{
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new ClassFrame(gs);
+                new CourseFrame(gs);
                 dispose();
             }
         });

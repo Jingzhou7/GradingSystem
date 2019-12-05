@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public class Section extends Class{
+public class Section extends Course {
     private String sectionId;
 
     public Section(List<Student> students, String sectionId) {

@@ -1,6 +1,6 @@
 package ui;
 
-import model.Class;
+import model.Course;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -32,7 +32,7 @@ public class addClassFrame extends JFrame {
                 //todo: confirm adding a class
                 // use the information filled to create a class object and add to the classes list
 
-                Class newClass = new Class();
+                Course newCourse = new Course();
 
 
             }

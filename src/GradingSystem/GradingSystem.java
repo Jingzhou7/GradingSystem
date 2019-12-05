@@ -2,9 +2,8 @@ package GradingSystem;
 
 import model.Assignment;
 import model.Category;
-import model.Section;
 import model.Student;
-import model.Class;
+import model.Course;
 import ui.LoginFrame;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ public class GradingSystem {
     List<Category> categories;
     List<Student> students;
     List<String> semesters;
-    List<Class> classes;
+    List<Course> courses;
 
 
 
@@ -27,7 +26,7 @@ public class GradingSystem {
         categories = new ArrayList<>();
         students = new ArrayList<>();
         semesters = new ArrayList<>();
-        classes = new ArrayList<>();
+        courses = new ArrayList<>();
 
         categories.add(new Category("Exam"));
         categories.add(new Category("Programming Assignment"));
@@ -35,20 +34,24 @@ public class GradingSystem {
 
     }
 
-    public Class getClass(int classId) {
+    public Course getCourse(int classId) {
 
-        return classes.get(classId);
+        return courses.get(classId);
     }
 
-    public boolean addClass(String className, int classId, List<Category> categories, List<Assignment> assignments, String semester, List<Student> students) {
-        Class newClass = new Class(className, classId, categories, assignments, semester, students);
-        classes.add(newClass);
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public boolean addCourse(String className, int classId, List<Category> categories, List<Assignment> assignments, String semester, List<Student> students) {
+        Course newCourse = new Course(className, classId, categories, assignments, semester, students);
+        courses.add(newCourse);
         return true;
     }
 
-    public boolean removeClass(Class oldClass) {
-        if(classes.contains(oldClass)) {
-            classes.remove(oldClass);
+    public boolean removeCourse(Course oldCourse) {
+        if(courses.contains(oldCourse)) {
+            courses.remove(oldCourse);
             return true;
         } else
             return false; //no such class found

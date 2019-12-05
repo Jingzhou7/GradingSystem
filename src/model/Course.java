@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public class Class {
+public class Course {
     protected String className;
     protected int classId;
     protected List<Category> categories;
@@ -11,14 +11,14 @@ public class Class {
     protected List<Student> students;
 
     //no-arg constructor
-    public Class() {
+    public Course() {
         className = "CS591";
 
     }
 
 
     //constructor
-    public Class(String className, int classId, List<Category> categories, List<Assignment> assignments, String semester, List<Student> students) {
+    public Course(String className, int classId, List<Category> categories, List<Assignment> assignments, String semester, List<Student> students) {
         this.className = className;
         this.classId = classId;
         this.categories = categories;
