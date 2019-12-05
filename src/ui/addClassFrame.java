@@ -1,0 +1,52 @@
+package ui;
+
+import model.Class;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class addClassFrame extends JFrame {
+    private JPanel mainPanel;
+    private JTextField classNameTF;
+    private JLabel classNameLbl;
+    private JButton confirmButton;
+    private JButton cancelButton;
+
+    public addClassFrame() {
+        setName("Add Class frame");
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setContentPane(mainPanel);
+        pack();
+        setLocationRelativeTo(null);
+        addActiveComponent();
+
+
+    }
+
+    private void addActiveComponent() {
+        confirmButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                //todo: confirm adding a class
+                // use the information filled to create a class object and add to the classes list
+
+                Class newClass = new Class();
+
+
+            }
+        });
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                dispose();
+            }
+        });
+
+
+
+
+    }
+}

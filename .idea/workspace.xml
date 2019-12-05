@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a894943f-a954-4e6f-b970-7415ccb01a94" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/addClassFrame.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/addClassFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GradingSystem/GradingSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GradingSystem/GradingSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Assignment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Class.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Class.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Grade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Grade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Section.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Section.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/CourseDetailFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CourseDetailFrame.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/ClassFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ClassFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/LoginFrame.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

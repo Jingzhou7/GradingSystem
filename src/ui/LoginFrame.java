@@ -28,7 +28,7 @@ public class LoginFrame extends JFrame {
         super("Login");
         setSize(400,200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(false);
+        setVisible(true);
         addActiveComponent();
         setLocationRelativeTo(null);
     }
