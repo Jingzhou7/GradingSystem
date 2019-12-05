@@ -35,9 +35,13 @@ public class GradingSystem {
 
     }
 
+    public Class getClass(int classId) {
 
-    public boolean addClass(String className, String classId, List<Section> sections, List<Category> categories, List<Assignment> assignments, String semester) {
-        Class newClass = new Class(className, classId, sections, categories, assignments, semester);
+        return classes.get(classId);
+    }
+
+    public boolean addClass(String className, int classId, List<Category> categories, List<Assignment> assignments, String semester, List<Student> students) {
+        Class newClass = new Class(className, classId, categories, assignments, semester, students);
         classes.add(newClass);
         return true;
     }

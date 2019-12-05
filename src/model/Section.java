@@ -2,14 +2,16 @@ package model;
 
 import java.util.List;
 
-public class Section {
-    private List<Student> students;
+public class Section extends Class{
     private String sectionId;
 
     public Section(List<Student> students, String sectionId) {
+        super();
+        this.className = this.className + " Section " + sectionId;
         this.students = students;
         this.sectionId = sectionId;
     }
+
 
     public List<Student> getStudents() {
         return students;
