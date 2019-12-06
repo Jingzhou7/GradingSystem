@@ -26,7 +26,7 @@ public class MyExcelUtil {
         Workbook workbook = null;
         if (fileType.equalsIgnoreCase(XLS)) {
             workbook = new HSSFWorkbook(inputStream);
-        } else{
+        } else if (fileType.equalsIgnoreCase(XLSX)){
             workbook = new XSSFWorkbook(inputStream);
         }
         return workbook;
