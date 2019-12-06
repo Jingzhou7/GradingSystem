@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a894943f-a954-4e6f-b970-7415ccb01a94" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ui/addClassFrame.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/addClassFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/CommentFrame.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/CommentFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/StudentGradeFrame.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/StudentGradeFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/ClassFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ClassFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/LoginFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GradingSystem/GradingSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GradingSystem/GradingSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/CourseFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CourseFrame.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,11 +36,25 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../poi-4.1.1" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/ui" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/ui" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/ui" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -70,6 +88,9 @@
       <option name="presentableId" value="Default" />
       <updated>1574307389102</updated>
       <workItem from="1575418777264" duration="12811000" />
+      <workItem from="1575591866923" duration="826000" />
+      <workItem from="1575597218257" duration="113000" />
+      <workItem from="1575597334288" duration="5374000" />
     </task>
     <servers />
   </component>

@@ -4,7 +4,9 @@ import model.Assignment;
 import model.Category;
 import model.Student;
 import model.Course;
+import ui.CommentFrame;
 import ui.LoginFrame;
+import ui.StudentGradeFrame;
 
 import java.util.ArrayList;
 import java.util.List;
