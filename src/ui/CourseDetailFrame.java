@@ -41,36 +41,6 @@ public class CourseDetailFrame extends JFrame{
         pack();
         setLocationRelativeTo(null);
         addActiveComponent();
-
-
-        addCategoryBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new AddCategoryFrame();
-            }
-        });
-        modifyCategoryBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ModifyCategoryFrame();
-            }
-        });
-        importStudentsBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser chooser = new JFileChooser();
-                chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-                chooser.showDialog(new JLabel(), "选择");
-                File file = chooser.getSelectedFile();
-                String excelFileName = file.getAbsoluteFile().toString();
-                System.out.println(excelFileName);
-                // 读取Excel文件内容
-                List<Student> readResult = MyExcelUtil.readExcel(excelFileName);
-                for (int i = 0;i < readResult.size();i++){
-                    System.out.println(readResult.get(i).toString());
-                }
-            }
-        });
     }
 
     private void addActiveComponent() {
@@ -82,6 +52,20 @@ public class CourseDetailFrame extends JFrame{
             }
         });
 
+        importStudentsBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser chooser = new JFileChooser();
+                chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+                chooser.showDialog(new JLabel(), "select");
+                File file = chooser.getSelectedFile();
+                String excelFileName = file.getAbsoluteFile().toString();
+                System.out.println(excelFileName);
+                // read Excel
+                List<Student> readResult = MyExcelUtil.readExcel(excelFileName);
+            }
+        });
+
         addStudentBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -89,14 +73,40 @@ public class CourseDetailFrame extends JFrame{
             }
         });
 
-        importStudentsBtn.addActionListener(new ActionListener() {
+        deleteStudentBtn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                new AssignmentFrame(gs);
-                dispose();
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
 
+        viewGradesBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        addCategoryBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddCategoryFrame();
+            }
+        });
+
+        deleteCategoryBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        modifyCategoryBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ModifyCategoryFrame();
+            }
+        });
     }
 
     private void createUIComponents() {

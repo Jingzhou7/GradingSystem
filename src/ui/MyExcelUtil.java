@@ -23,13 +23,13 @@ public class MyExcelUtil {
     private static final String XLSX = "xlsx";
 
     public static Workbook getWorkbook(FileInputStream inputStream, String fileType) throws IOException {
+        Workbook workbook = null;
         if (fileType.equalsIgnoreCase(XLS)) {
-            HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
-            return workbook;
+            workbook = new HSSFWorkbook(inputStream);
         } else{
-            XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
-            return workbook;
+            workbook = new XSSFWorkbook(inputStream);
         }
+        return workbook;
     }
 
     public static List<Student> readExcel(String fileName) {
@@ -50,7 +50,7 @@ public class MyExcelUtil {
             inputStream = new FileInputStream(fileName);
             workbook = getWorkbook(inputStream, fileType);
 
-            // 读取excel中的数据
+            // get data in Excel
             List<Student> resultDataList = parseExcel(workbook);
 
             return resultDataList;
@@ -74,23 +74,23 @@ public class MyExcelUtil {
 
     private static List<Student> parseExcel(Workbook workbook) {
         List<Student> resultDataList = new ArrayList<>();
-        // 解析sheet
+        // parse sheet
         for (int sheetNum = 0; sheetNum < workbook.getNumberOfSheets(); sheetNum++) {
             Sheet sheet = workbook.getSheetAt(sheetNum);
 
-            // 校验sheet是否合法
+            // check if sheet is legal
             if (sheet == null) {
                 continue;
             }
 
-            // 获取第一行数据
+            // get first row data
             int firstRowNum = sheet.getFirstRowNum();
             Row firstRow = sheet.getRow(firstRowNum);
             if (null == firstRow) {
                 System.out.println("fail to parse excel, there is no data in first row!");
             }
 
-            // 解析每一行的数据，构造数据对象
+            // parse data in every row and build objec
             int rowStart = firstRowNum + 1;
             int rowEnd = sheet.getPhysicalNumberOfRows();
             for (int rowNum = rowStart; rowNum < rowEnd; rowNum++) {
@@ -118,26 +118,26 @@ public class MyExcelUtil {
         }
         String returnValue = null;
         switch (cell.getCellType()) {
-            case NUMERIC:   //数字
+            case NUMERIC:   // Number
                 Double doubleValue = cell.getNumericCellValue();
 
-                // 格式化科学计数法，取一位整数
+                // Scientific notation, only get one digit integer
                 DecimalFormat df = new DecimalFormat("0");
                 returnValue = df.format(doubleValue);
                 break;
-            case STRING:    //字符串
+            case STRING:    // String
                 returnValue = cell.getStringCellValue();
                 break;
-            case BOOLEAN:   //布尔
+            case BOOLEAN:   // Bool
                 Boolean booleanValue = cell.getBooleanCellValue();
                 returnValue = booleanValue.toString();
                 break;
-            case BLANK:     // 空值
+            case BLANK:     // Blank
                 break;
-            case FORMULA:   // 公式
+            case FORMULA:   // Formula
                 returnValue = cell.getCellFormula();
                 break;
-            case ERROR:     // 故障
+            case ERROR:     // Error
                 break;
             default:
                 break;
