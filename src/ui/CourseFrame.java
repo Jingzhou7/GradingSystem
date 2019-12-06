@@ -18,7 +18,7 @@ public class CourseFrame extends JFrame {
     private JButton removeClassButton;
     private JButton modifyButton;
     private JTable table1;
-    private JComboBox comboBox1;
+    private JComboBox semesterCB;
     private JPanel ButtonPanel;
     private JPanel OptionPanel;
 
@@ -32,7 +32,6 @@ public class CourseFrame extends JFrame {
         setLocationRelativeTo(null);
         addActiveComponent();
 
-
     }
 
     private void addActiveComponent() {
@@ -44,10 +43,18 @@ public class CourseFrame extends JFrame {
             }
         });
 
+        semesterCB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                //todo: based on the selected item in the comboBox, reset the table
+
+            }
+        });
+
         addClassButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new addClassFrame();
+                new AddClassFrame();
 
             }
         });
@@ -55,6 +62,8 @@ public class CourseFrame extends JFrame {
         modifyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+
+
                 new CourseDetailFrame(gs);
                 dispose();
             }
@@ -78,6 +87,7 @@ public class CourseFrame extends JFrame {
         DefaultTableModel model = new DefaultTableModel(data, header);
         table1 = new JTable(model);
 
+
         removeClassButton = new JButton("Remove Class");
         removeClassButton.addActionListener(new ActionListener() {
             @Override
@@ -89,7 +99,7 @@ public class CourseFrame extends JFrame {
 
                     //remove from the List of classes
                     int classID = Integer.parseInt(model.getValueAt(selected, 0).toString());
-                    Course targetCourse = gs.getClass(classID);
+                    Course targetCourse = gs.getCourse(classID);
                     gs.getCourses().remove(targetCourse);
 
                     //remove the entry in the table
@@ -130,5 +140,9 @@ public class CourseFrame extends JFrame {
                 }
             }
         });
+
+
+
+
     }
 }

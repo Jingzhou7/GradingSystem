@@ -6,14 +6,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class addClassFrame extends JFrame {
+public class AddClassFrame extends JFrame {
     private JPanel mainPanel;
     private JTextField classNameTF;
     private JLabel classNameLbl;
     private JButton confirmButton;
     private JButton cancelButton;
 
-    public addClassFrame() {
+    public AddClassFrame() {
         setName("Add Class frame");
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
