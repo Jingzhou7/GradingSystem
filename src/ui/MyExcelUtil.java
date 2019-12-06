@@ -22,7 +22,7 @@ public class MyExcelUtil {
     private static final String XLS = "xls";
     private static final String XLSX = "xlsx";
 
-    public static Workbook getWorkbook(FileInputStream inputStream, String fileType) throws IOException {
+    public static Workbook getWorkbook(InputStream inputStream, String fileType) throws IOException {
         Workbook workbook = null;
         if (fileType.equalsIgnoreCase(XLS)) {
             workbook = new HSSFWorkbook(inputStream);
