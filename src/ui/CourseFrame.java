@@ -82,7 +82,7 @@ public class CourseFrame extends JFrame {
 
         if(allCourses.size() != 0) {
             for(int i = 0;i < allCourses.size();i++) {
-                Object[] obj = {allCourses.get(i).getCourseIndex(), allCourses.get(i).getCourseName(), allCourses.get(i).getSemester(), allCourses.get(i).getStudents().size()+1};
+                Object[] obj = {allCourses.get(i).getCourseIndex(), allCourses.get(i).getCourseName(), allCourses.get(i).getSemester(), allCourses.get(i).getAllStudents().size()};
                 model.addRow(obj);
             }
         }

@@ -40,10 +40,10 @@ public class GradingSystem {
         students.add(new Student(new Name("Alice")));
         students.add(new Student(new Name("Bob")));
         ArrayList<Category> categories = new ArrayList<>();
-        categories.add(new Category("Exam"));
-        categories.add(new Category("Participation"));
-        categories.add(new Category("Homework"));
-        categories.add(new Category("Programing Assignment"));
+        categories.add(new Category("Exam",50));
+        categories.add(new Category("Participation",10));
+        categories.add(new Category("Homework", 15));
+        categories.add(new Category("Programing Assignment",25));
 
         Course course1 = new Course(1, FALL_2019, "CS591", categories, students);
         Course course2 = new Course(2, FALL_2019, "CS112 S1", categories, students);

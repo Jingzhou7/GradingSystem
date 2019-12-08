@@ -14,13 +14,22 @@ public class Student {
 
     public Student(Name name) {
         this.name = name;
-        setEmail(null);
-        setSid(null);
+        setEmail("cs@bu.edu");
+        setSid("U00000000");
         comments = new ArrayList<>();
         bonusPoints = new double[]{};
         grade = new Grade();
-
     }
+
+    public Student(Name name, String email, String sid) {
+        this.name = name;
+        this.email = email;
+        this.sid = sid;
+        comments = new ArrayList<>();
+        bonusPoints = new double[]{};
+        grade = new Grade();
+    }
+
 
     public Name getName() {
         return name;

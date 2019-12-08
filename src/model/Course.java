@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.CheckedOutputStream;
+
 
 public class Course {
     public static final String CURRENT_SEMESTER = "Fall 2019";
@@ -20,9 +20,9 @@ public class Course {
         setCourseName(courseName);
         categories = new ArrayList<>();
         students = new ArrayList<>();
-        categories.add(new Category("Exam"));
-        categories.add(new Category("Programming Assignment"));
-        categories.add(new Category("Participation"));
+        categories.add(new Category("Exam", 50));
+        categories.add(new Category("Programming Assignment",30));
+        categories.add(new Category("Participation",20));
     }
 
 
@@ -32,9 +32,6 @@ public class Course {
         this.courseName = courseName;
         this.categories = categories;
         this.students = students;
-        categories.add(new Category("Exam"));
-        categories.add(new Category("Programming Assignment"));
-        categories.add(new Category("Participation"));
     }
 
     public int getCourseIndex() {
@@ -61,16 +58,35 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public ArrayList<Category> getCategories() {
+    public ArrayList<Category> getAllCategories() {
         return categories;
     }
 
+    public Category getCategory(String categoryName) {
+        Category res = null;
+        for(Category c : categories) {
+            if(c.getCategoryName().equals(categoryName)) {
+                res = c;
+            }
+        }
+        return res;
+    }
     public void setCategories(ArrayList<Category> categories) {
         this.categories = categories;
     }
 
-    public ArrayList<Student> getStudents() {
+    public ArrayList<Student> getAllStudents() {
         return students;
+    }
+
+    public Student getStudent(String studentId) {
+        Student res = null;
+        for(Student s : students) {
+            if(s.getSid().equals(studentId)) {
+                res = s;
+            }
+        }
+        return res;
     }
 
     public void setStudents(ArrayList<Student> students) {
