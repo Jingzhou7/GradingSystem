@@ -1,6 +1,8 @@
 package ui;
 
 import GradingSystem.GradingSystem;
+import model.Category;
+import model.Course;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -8,6 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AssignmentFrame extends JFrame{
+    private GradingSystem gs;
+    private Course course;
+    private Category category;
+
     private JButton backButton;
     private JTable table1;
     private JButton button2;
@@ -20,7 +26,11 @@ public class AssignmentFrame extends JFrame{
     private JPanel ChoicePanel;
 
 
-    public AssignmentFrame(GradingSystem gs) {
+    public AssignmentFrame(GradingSystem gs, Course course, Category category) {
+        this.gs = gs;
+        this.course = course;
+        this.category = category;
+
 
         setName("Category");
         setVisible(true);
@@ -32,7 +42,7 @@ public class AssignmentFrame extends JFrame{
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new CourseDetailFrame(gs);
+                new CourseDetailFrame(gs, course);
                 dispose();
             }
         });

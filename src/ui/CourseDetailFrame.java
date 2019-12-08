@@ -1,6 +1,7 @@
 package ui;
 
 import GradingSystem.GradingSystem;
+import model.Course;
 import model.Student;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class CourseDetailFrame extends JFrame{
     private GradingSystem gs;
+    private Course course;
     private JPanel mainPanel;
     private JButton backButton;
     private JButton importStudentsBtn;
@@ -28,9 +30,9 @@ public class CourseDetailFrame extends JFrame{
     private JTable categoryTable;
 
 
-    public CourseDetailFrame(GradingSystem gs) {
-
+    public CourseDetailFrame(GradingSystem gs, Course course) {
         this.gs = gs;
+        this.course = course;
 
         setName("Course detail frame");
 

@@ -7,7 +7,6 @@ public class Assignment {
     private double weight;
     private Date releaseDate;
     private Date dueDate;
-    private Category category;
     private double maxPoint;  // set the max score of the assignment for score calculation
 
     public Assignment(String assignmentName) {

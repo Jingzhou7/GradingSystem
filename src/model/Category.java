@@ -1,8 +1,11 @@
 package model;
 
+import java.util.List;
+
 public class Category {
     private String categoryName;
     private double weight;
+    private List<Assignment> assignments;
 
     public Category(String categoryName) {
         this.categoryName = categoryName;
