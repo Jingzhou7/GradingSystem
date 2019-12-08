@@ -23,7 +23,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="85d25" class="javax.swing.JTable" binding="table1" custom-create="true" default-binding="true">
+          <component id="85d25" class="javax.swing.JTable" binding="assignmentTable" custom-create="true">
             <constraints/>
             <properties/>
           </component>

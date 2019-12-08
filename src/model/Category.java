@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Category {
@@ -9,12 +10,28 @@ public class Category {
 
     public Category(String categoryName) {
         this.categoryName = categoryName;
+        this.weight = 0;
+        assignments = new ArrayList<>();
+        assignments.add(new Assignment(categoryName + " 1"));
+        assignments.add(new Assignment(categoryName + " 2"));
+        assignments.add(new Assignment(categoryName + " 3"));
+        assignments.add(new Assignment(categoryName + " 4"));
     }
-
-    // constructor
     public Category(String name, double weight) {
         this.categoryName = name;
         this.weight = weight;
+        assignments = new ArrayList<>();
+        assignments.add(new Assignment(categoryName + " 1"));
+        assignments.add(new Assignment(categoryName + " 2"));
+        assignments.add(new Assignment(categoryName + " 3"));
+        assignments.add(new Assignment(categoryName + " 4"));
+    }
+    // constructor
+    public Category(String name, double weight, List<Assignment> assignments) {
+        this.categoryName = name;
+        this.weight = weight;
+        this.assignments = assignments;
+
     }
 
     // getters and setters
@@ -41,4 +58,7 @@ public class Category {
     }
 
 
+    public List<Assignment> getAllAssignments() {
+        return assignments;
+    }
 }

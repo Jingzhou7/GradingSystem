@@ -1,6 +1,7 @@
 package ui;
 
 import GradingSystem.GradingSystem;
+import model.Assignment;
 import model.Category;
 import model.Course;
 
@@ -8,6 +9,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class AssignmentFrame extends JFrame{
     private GradingSystem gs;
@@ -15,7 +17,7 @@ public class AssignmentFrame extends JFrame{
     private Category category;
 
     private JButton backButton;
-    private JTable table1;
+    private JTable assignmentTable;
     private JButton button2;
     private JButton addAssignmentButton;
     private JButton deleteAssignmentButton;
@@ -49,11 +51,25 @@ public class AssignmentFrame extends JFrame{
     }
 
     private void createUIComponents() {
-        String [] header={"Class Name","Section", "Semester", "Student Count"};
-        String [][] data={{"CS101", "S1", "FALL19", "100"}, {"CS330", "S1", "FALL19", "85"},  {"CS591", "S1", "FALL19", "30"}, {"CS591", "S2", "FALL19", "30"},
-                {"CS101", "S1", "FALL19", "100"}, {"CS330", "S1", "FALL19", "85"},  {"CS591", "S1", "FALL19", "30"}, {"CS591", "S2", "FALL19", "30"}};
 
-        DefaultTableModel model = new DefaultTableModel(data, header);
-        table1 = new JTable(data, header);
+
+
+        String [] assignmentHeader={"Assignment Name","Weight%", "Release Date", "Due Date", "Total Score"};
+        List<Assignment> allAssignments = category.getAllAssignments();
+        DefaultTableModel assignmentModel = new DefaultTableModel(assignmentHeader, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        if(allAssignments.size() != 0) {
+            for(int i = 0;i < allAssignments.size();i++) {
+                Object[] obj = {allAssignments.get(i).getAssignmentName(), allAssignments.get(i).getWeight(), allAssignments.get(i).getReleaseDate(), allAssignments.get(i).getDueDate(), allAssignments.get(i).getMaxPoint()};
+                assignmentModel.addRow(obj);
+            }
+        }
+        assignmentTable = new JTable(assignmentModel);
+
     }
 }
