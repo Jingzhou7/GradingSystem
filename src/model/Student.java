@@ -1,35 +1,53 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Student {
+    private static int count = 0;
     private Name name;
     private String email;
-    private String sid;
-    private List<String> comments;
-    private double[] bonusPoints;
-    private Grade grade;
+    private int sid;
+    private ArrayList<String> comments;
+    private ArrayList<Double> bonusPoints;
+    private ArrayList<Grade> grade;
 
 
     public Student(Name name) {
         this.name = name;
         setEmail("cs@bu.edu");
-        setSid("U00000000");
+        setSid(0);
         comments = new ArrayList<>();
-        bonusPoints = new double[]{};
-        grade = new Grade();
+        bonusPoints = new ArrayList<>();
+        grade = new ArrayList<Grade>();
     }
 
-    public Student(Name name, String email, String sid) {
+    public Student(Name name, String email, int sid) {
         this.name = name;
         this.email = email;
         this.sid = sid;
         comments = new ArrayList<>();
-        bonusPoints = new double[]{};
-        grade = new Grade();
+        bonusPoints = new ArrayList<>();
+        grade = new ArrayList<Grade>();
     }
 
+    public Student(Name name, String email, ArrayList<String> comments, ArrayList<Double> bonusPoints, ArrayList<Grade> grades){
+        this.name = name;
+        this.email = email;
+        this.sid = count;
+        count+=1;
+        this.comments = comments;
+        this.bonusPoints = bonusPoints;
+        this.grade = grades;
+    }
+
+    public Student(Name name, String email, int sid, ArrayList<String> comments, ArrayList<Double> bonusPoints, ArrayList<Grade> grades){
+        this.name = name;
+        this.email = email;
+        this.sid = sid;
+        this.comments = comments;
+        this.bonusPoints = bonusPoints;
+        this.grade = grades;
+    }
 
     public Name getName() {
         return name;
@@ -49,25 +67,32 @@ public class Student {
         this.email = email;
     }
 
-    public String getSid() {
+    public int getSid() {
         return sid;
     }
 
-    public void setSid(String sid) {
+    public void setSid(int sid) {
         this.sid = sid;
     }
 
-    public Grade getGrade() {
+    public ArrayList<Grade> getGrade() {
         return grade;
     }
 
-    public void setGrade(Grade grade) {
-        this.grade = grade;
+    public void setGrade(int id, double rawscore) {
+        Grade g = grade.get(id);
+        g.setRawScore(rawscore);
+        grade.set(id, g);
     }
 
     @Override
     public String toString() {
         return name.toString();
+    }
+
+    public static void setCount() {
+        ITSQLConn a = new ITSQLConn();
+        count = a.getCourseIDStart("student");
     }
 
 }

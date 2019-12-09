@@ -1,26 +1,32 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Section extends Course {
-    private String sectionId;
+    private int sectionId;
 
     public Section(int sectionIndex, String courseName) {
         super(sectionIndex, courseName);
         setCourseName(courseName + " Section " + sectionId);
     }
 
-    public Section(int sectionIndex, String semester, String courseName, ArrayList<Category> categories, ArrayList<Student> students) {
-        super(sectionIndex, semester, courseName, categories, students);
+    public Section(String semester, String courseName, ArrayList<Category> categories, ArrayList<Student> students, int sid){
+        super(semester, courseName, categories, students);
+        this.sectionId = sid;
         setCourseName(courseName + " Section " + sectionId);
     }
 
-    public String getSectionId() {
+    public Section(int courseid, String semester, String courseName, ArrayList<Category> categories, ArrayList<Student> students, int sid) {
+        super(courseid, semester, courseName, categories, students);
+        this.sectionId = sid;
+        setCourseName(courseName + " Section " + sectionId);
+    }
+
+    public int getSectionId() {
         return sectionId;
     }
 
-    public void setSectionId(String sectionId) {
+    public void setSectionId(int sectionId) {
         this.sectionId = sectionId;
     }
 }

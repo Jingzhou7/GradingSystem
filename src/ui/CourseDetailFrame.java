@@ -1,7 +1,6 @@
 package ui;
 
 import GradingSystem.GradingSystem;
-import model.Assignment;
 import model.Category;
 import model.Course;
 import model.Student;
@@ -11,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -155,7 +153,7 @@ public class CourseDetailFrame extends JFrame{
                 if (selected != -1) {
 
                     //remove from the List of classes
-                    String studentId = studentModel.getValueAt(selected, 2).toString();
+                    int studentId = Integer.parseInt(studentModel.getValueAt(selected, 2).toString());
                     Student targetStudent = course.getStudent(studentId);
                     course.getAllStudents().remove(targetStudent);
 

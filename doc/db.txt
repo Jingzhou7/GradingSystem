@@ -1,0 +1,93 @@
+drop database IF EXISTS gradingsystem;
+
+create database gradingsystem;
+
+use gradingsystem;
+
+
+
+CREATE TABLE `login` (
+
+                           `loginid` int(11) NOT NULL AUTO_INCREMENT,
+
+                           `username` varchar(45) DEFAULT NULL,
+
+                           `password` varchar(45) DEFAULT NULL,
+
+                           PRIMARY KEY (`loginid`)
+
+) ENGINE=InnoDB;
+
+CREATE TABLE `course` (
+
+                         `courseid` int(11) NOT NULL AUTO_INCREMENT,
+
+                         `semester` varchar(45) DEFAULT NULL,
+
+                         `name` varchar(45) DEFAULT NULL,
+
+                         `sectionid` int(11),
+
+                         PRIMARY KEY (`courseid`)
+
+) ENGINE=InnoDB;
+
+CREATE TABLE `category`(
+                        `categoryid` int(11) NOT NULL AUTO_INCREMENT,
+                        `courseid` int(11) NOT NULL,
+                        `weight` double,
+                        `name` varchar(45),
+                       PRIMARY KEY (`categoryid`)
+);
+
+CREATE TABLE `assignment`(
+                        `assignmentid` int(11) NOT NULL AUTO_INCREMENT,
+                        `categoryid` int(11) NOT NULL,
+                        `weight` double,
+                        `releasedate` DATE,
+                        `duedate`  DATE,
+                        `maxpoints` double,
+                        `name` varchar(45),
+                         PRIMARY KEY (`assignmentid`)
+);
+
+CREATE TABLE `student`(
+                        `studentid` int(11) NOT NULL AUTO_INCREMENT,
+                        `courseid` int(11) NOT NULL,
+                        `fname` varchar(45),
+                        `mname` varchar(45),
+                        `lname` varchar(45),
+                        `email` varchar(45),
+                        PRIMARY KEY (`studentid`)
+
+);
+
+CREATE TABLE `bonuspoints`(
+                        `studentid` int(11),
+                        `points` double
+);
+
+CREATE TABLE `studentcomments`(
+                        `studentid` int(11),
+                        `comment` varchar(45)
+);
+
+CREATE TABLE `grade`(
+                        `gradeid` int(11) NOT NULL AUTO_INCREMENT,
+                        `rawscore` double,
+                        `assignmentid` int(11),
+                        `studentid` int(11),
+                        `bonuspoints` double,
+                        `lettergrade` varchar(45),
+                        `comment` varchar(45),
+                        primary key(`gradeid`)
+);
+
+insert into login (username, password) VALUES ('CPK', 'PASSWORD');
+
+insert into course (semester, name, sectionid) VALUES ('FALL 2019', 'CS101', 0), ('FALL 2020', 'CS111', 0), ('FALL 2020', 'CS111', 1);
+
+insert into student (courseid, fname, mname, lname, email) VALUES (1, 'Harsh', 'J', 'Dedhiya', 'hdedhiya@gmail.com'),
+                                                                  (1, 'A', 'B', 'C', 'D'), (2, 'E', 'F', 'G', 'H');
+
+insert into category (courseid, weight, name) VALUES (1, .6, 'Participation'), (1, .4, 'Attendance'), (2, 1, 'Homework');
