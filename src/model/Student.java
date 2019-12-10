@@ -22,9 +22,7 @@ public class Student {
     }
 
     public Student(String fname, String lname, String mname, String email) {
-        this.name.setFname(fname);
-        this.name.setLname(lname);
-        this.name.setMname(mname);
+        name = new Name(fname, mname, lname);
         this.email = email;
         comments = new ArrayList<>();
         bonusPoints = new ArrayList<>();
