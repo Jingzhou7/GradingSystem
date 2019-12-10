@@ -1,7 +1,6 @@
 package ui;
 
 import GradingSystem.GradingSystem;
-import model.Course;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

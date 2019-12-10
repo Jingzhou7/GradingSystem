@@ -1,7 +1,6 @@
 package ui;
 
 import GradingSystem.GradingSystem;
-import model.Assignment;
 import model.Category;
 import model.Course;
 import model.Student;
@@ -11,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +69,9 @@ public class CourseDetailFrame extends JFrame{
                 System.out.println(excelFileName);
                 // read Excel
                 List<Student> readResult = MyExcelUtil.readExcel(excelFileName);
+                for (int i = 0;i < readResult.size();i++){
+                    System.out.println(readResult.get(i).toString());
+                }
             }
         });
 
@@ -155,7 +156,7 @@ public class CourseDetailFrame extends JFrame{
                 if (selected != -1) {
 
                     //remove from the List of classes
-                    String studentId = studentModel.getValueAt(selected, 2).toString();
+                    int studentId = Integer.parseInt(studentModel.getValueAt(selected, 2).toString());
                     Student targetStudent = course.getStudent(studentId);
                     course.getAllStudents().remove(targetStudent);
 

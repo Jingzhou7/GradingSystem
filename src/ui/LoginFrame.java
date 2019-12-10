@@ -24,14 +24,15 @@ public class LoginFrame extends JFrame {
     private JButton btnSignUp;
 
 
-    private final String USERNAME = "1";
-    private final String PASSWORD = "1";
+
 
     public LoginFrame(GradingSystem gs) {
         super("Login");
         this.gs = gs;
         setSize(400,200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
 
         addActiveComponent();
         setLocationRelativeTo(null);
@@ -57,7 +58,7 @@ public class LoginFrame extends JFrame {
                 JButton source = (JButton) actionEvent.getSource();
                 String name = tfName.getText();
                 String pwd = new String(pfPwd.getPassword());
-                if(name.equals(USERNAME) && pwd.equals(PASSWORD)) {
+                if(name.equals(gs.getUSERNAME()) && pwd.equals(gs.getPASSWORD())) {
                     CourseFrame cf = new CourseFrame(gs);
                     cf.setVisible(true);
                     dispose();
@@ -128,6 +129,9 @@ public class LoginFrame extends JFrame {
         add(pane, BorderLayout.CENTER);
 
     }
+
+
+
 
 
 }

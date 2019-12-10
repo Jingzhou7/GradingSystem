@@ -1,11 +1,11 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class Course {
     public static final String CURRENT_SEMESTER = "Fall 2019";
+    private static int count;
     private int courseIndex;
     private String semester;
     private String courseName;
@@ -28,6 +28,15 @@ public class Course {
 
     public Course(int courseIndex, String semester, String courseName, ArrayList<Category> categories, ArrayList<Student> students) {
         this.courseIndex = courseIndex;
+        this.semester = semester;
+        this.courseName = courseName;
+        this.categories = categories;
+        this.students = students;
+    }
+
+    public Course(String semester, String courseName, ArrayList<Category> categories, ArrayList<Student> students){
+        this.courseIndex = count;
+        count+=1;
         this.semester = semester;
         this.courseName = courseName;
         this.categories = categories;
@@ -79,10 +88,10 @@ public class Course {
         return students;
     }
 
-    public Student getStudent(String studentId) {
+    public Student getStudent(int studentId) {
         Student res = null;
         for(Student s : students) {
-            if(s.getSid().equals(studentId)) {
+            if(s.getSid() == (studentId)) {
                 res = s;
             }
         }
@@ -99,5 +108,8 @@ public class Course {
         return true;
     }
 
-
+    public static void setCount() {
+        ITSQLConn a = new ITSQLConn();
+        count = a.getCourseIDStart("course");
+    }
 }

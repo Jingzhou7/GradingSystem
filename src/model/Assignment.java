@@ -1,24 +1,37 @@
 package model;
 
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Assignment {
+    private static int count = 0;
+    private int id;
     private String assignmentName;
     private double weight;
-    private LocalDate releaseDate;
-    private LocalDate dueDate;
+    private Date releaseDate;
+    private Date dueDate;
     private double maxPoint;  // set the max score of the assignment for score calculation
 
     public Assignment(String assignmentName) {
         this.assignmentName = assignmentName;
         weight = 0;
-        releaseDate = LocalDate.of(2019,1,1);
-        dueDate = LocalDate.of(2019,10,10);
+        releaseDate = new Date(2019,1,1);
+        dueDate = new Date(2019,10,10);
         maxPoint = 0;
     }
 
-    public Assignment(String assignmentName, double weight, LocalDate releaseDate, LocalDate dueDate, double maxPoint) {
+    public Assignment(String assignmentName, double weight, Date releaseDate, Date dueDate, double maxPoint){
+        this.id = count;
+        count+=1;
+        this.assignmentName = assignmentName;
+        this.weight = weight;
+        this.releaseDate = releaseDate;
+        this.dueDate = dueDate;
+        this.maxPoint = maxPoint;
+    }
+
+    public Assignment(int id, String assignmentName, double weight, Date releaseDate, Date dueDate, double maxPoint) {
+        this.id = id;
         this.assignmentName = assignmentName;
         this.weight = weight;
         this.releaseDate = releaseDate;
@@ -42,19 +55,19 @@ public class Assignment {
         this.weight = weight;
     }
 
-    public LocalDate getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(LocalDate releaseDate) {
+    public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 
-    public LocalDate getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDate dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 
@@ -64,5 +77,10 @@ public class Assignment {
 
     public void setMaxPoint(double maxPoint) {
         this.maxPoint = maxPoint;
+    }
+
+    public static void setCount() {
+        ITSQLConn a = new ITSQLConn();
+        count = a.getCourseIDStart("assignment");
     }
 }
