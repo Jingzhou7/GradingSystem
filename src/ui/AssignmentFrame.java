@@ -4,6 +4,7 @@ import GradingSystem.GradingSystem;
 import model.Assignment;
 import model.Category;
 import model.Course;
+import model.Student;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +19,7 @@ public class AssignmentFrame extends JFrame{
 
     private JButton backButton;
     private JTable assignmentTable;
-    private JButton button2;
+    private JButton viewGradesButton;
     private JButton addAssignmentButton;
     private JButton deleteAssignmentButton;
     private JButton modifyWeightsButton;
@@ -41,10 +42,30 @@ public class AssignmentFrame extends JFrame{
         setContentPane(mainPanel);
         pack();
         setLocationRelativeTo(null);
+        addActiveComponent();
+
+
+    }
+
+    private void addActiveComponent() {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 new CourseDetailFrame(gs, course);
+                dispose();
+            }
+        });
+        addAssignmentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+//                new AddAssignmentFrame(gs, course, category);
+                dispose();
+            }
+        });
+        modifyWeightsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+//                new ModifyAssignmentFrame();
                 dispose();
             }
         });
@@ -70,6 +91,47 @@ public class AssignmentFrame extends JFrame{
             }
         }
         assignmentTable = new JTable(assignmentModel);
+
+        deleteAssignmentButton = new JButton("Delete Assignment");
+        deleteAssignmentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton source = (JButton) e.getSource();
+                int selected = assignmentTable.getSelectedRow();
+                if (selected != -1) {
+
+                    //remove from the List of classes
+                    String assignmentName = assignmentModel.getValueAt(selected, 0).toString();
+                    Assignment targetAssignment = category.getAssignment(assignmentName);
+                    category.getAllAssignments().remove(targetAssignment);
+
+                    //remove the entry in the table
+                    assignmentModel.removeRow(assignmentTable.getSelectedRow());
+                    JOptionPane.showMessageDialog(null, "Selected assignment deleted successfully");
+
+                }
+                else{
+                    JOptionPane.showMessageDialog(source, "Please select a row.");
+                }
+            }
+        });
+
+        viewGradesButton = new JButton("View Grades");
+        viewGradesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JButton source = (JButton) actionEvent.getSource();
+                int selected = assignmentTable.getSelectedRow();
+                if (selected != -1) {
+                    String assignmentName = assignmentModel.getValueAt(selected, 0).toString();
+                    Assignment currentAssignment = category.getAssignment(assignmentName);
+                    new GradingFrame(gs, course, category, currentAssignment);
+                    dispose();
+                }else {
+                    JOptionPane.showMessageDialog(source, "Please select a row.");
+                }
+            }
+        });
 
     }
 }

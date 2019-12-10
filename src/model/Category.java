@@ -61,4 +61,14 @@ public class Category {
     public List<Assignment> getAllAssignments() {
         return assignments;
     }
+
+    public Assignment getAssignment(String assignmentName) {
+        Assignment res = null;
+        for(Assignment a : assignments) {
+            if(a.getAssignmentName().equals(assignmentName)) {
+                res = a;
+            }
+        }
+        return res;
+    }
 }
