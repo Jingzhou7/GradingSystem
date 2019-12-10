@@ -1,6 +1,7 @@
 package ui;
 
 import GradingSystem.GradingSystem;
+import model.Course;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -8,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StudentGradeFrame extends JFrame{
+    private GradingSystem gs;
+    private Course course;
+
     private JPanel mainPanel;
     private JButton backButton;
     private JTable table1;
@@ -16,7 +20,11 @@ public class StudentGradeFrame extends JFrame{
     private JButton AddComment;
     private JPanel ChoicePanel;
 
-    public StudentGradeFrame(GradingSystem gs) {
+    public StudentGradeFrame(GradingSystem gs, Course course) {
+
+        this.gs = gs;
+        this.course = course;
+
         setName("Student Grade");
         setVisible(true);
 
@@ -27,7 +35,7 @@ public class StudentGradeFrame extends JFrame{
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new CourseDetailFrame(gs);
+                new CourseDetailFrame(gs, course);
                 dispose();
             }
         });

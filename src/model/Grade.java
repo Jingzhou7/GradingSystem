@@ -1,6 +1,8 @@
 package model;
 
 public class Grade {
+    private static int count = 0;
+    private int gradeid;
     private Assignment assignment;
     private double rawScore;
     private double bonusPoint;
@@ -21,6 +23,18 @@ public class Grade {
         setBonusPoint(0);
         setComment(null);
         setLetterGrade(null);
+    }
+
+    public Grade(Assignment a, double rawScore, double bonusp, String letterGrade, String comment){
+        this.gradeid = count;
+        count+=1;
+        this.bonusPoint = bonusp;
+        this.letterGrade = letterGrade;
+        this.comment = comment;
+    }
+
+    public Grade(int id, Assignment a, double rawScore, double bonusp, String lettergrade, String comment) {
+        this.gradeid = id;
     }
 
     public double getBonusPoint() {
@@ -66,7 +80,12 @@ public class Grade {
         else return "F";
     }
 
+    public static void setCount() {
+        ITSQLConn a = new ITSQLConn();
+        count = a.getCourseIDStart("grade");
+    }
 
-
-
+    public void setRawScore(double rawscore) {
+        this.rawScore = rawscore;
+    }
 }

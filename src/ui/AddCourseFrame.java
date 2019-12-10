@@ -1,19 +1,21 @@
 package ui;
 
-import model.Course;
+import GradingSystem.GradingSystem;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddClassFrame extends JFrame {
+public class AddCourseFrame extends JFrame {
+    private GradingSystem gs;
     private JPanel mainPanel;
     private JTextField classNameTF;
     private JLabel classNameLbl;
     private JButton confirmButton;
     private JButton cancelButton;
 
-    public AddClassFrame() {
+    public AddCourseFrame(GradingSystem gs) {
+        this.gs = gs;
         setName("Add Class frame");
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,9 +33,10 @@ public class AddClassFrame extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 //todo: confirm adding a class
                 // use the information filled to create a class object and add to the classes list
-
-                Course newCourse = new Course();
-
+                String courseName = classNameTF.getText();
+                gs.addCourse(courseName);
+                dispose();
+                new CourseFrame(gs);
 
             }
         });
@@ -42,6 +45,7 @@ public class AddClassFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 dispose();
+                new CourseFrame(gs);
             }
         });
 

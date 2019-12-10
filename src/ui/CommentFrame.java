@@ -1,6 +1,7 @@
 package ui;
 
 import GradingSystem.GradingSystem;
+import model.Course;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -9,12 +10,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CommentFrame extends JFrame{
+    private GradingSystem gs;
+    private Course course;
     private JButton backButton;
     private JTable table1;
     private JTable table2;
     private JPanel mainPanel;
 
-    public CommentFrame(GradingSystem gs) throws HeadlessException {
+    public CommentFrame(GradingSystem gs, Course course) {
+        this.gs = gs;
+        this.course = course;
+
         setName("Comment");
         setVisible(true);
 
@@ -25,7 +31,7 @@ public class CommentFrame extends JFrame{
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new CourseDetailFrame(gs);
+                new CourseDetailFrame(gs, course);
                 dispose();
             }
         });

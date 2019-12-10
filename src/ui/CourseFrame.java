@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class CourseFrame extends JFrame {
 
@@ -14,7 +15,6 @@ public class CourseFrame extends JFrame {
     private JPanel mainPanel;
     private JButton backBtn;
     private JButton addClassButton;
-    private JButton selectSemesterButton;
     private JButton removeClassButton;
     private JButton modifyButton;
     private JTable table1;
@@ -23,8 +23,9 @@ public class CourseFrame extends JFrame {
     private JPanel OptionPanel;
 
     public CourseFrame(GradingSystem gs) {
-        setName("Classes");
+
         this.gs = gs;
+        setName("All Courses");
         setContentPane(mainPanel);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,20 +55,13 @@ public class CourseFrame extends JFrame {
         addClassButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new AddClassFrame();
-
-            }
-        });
-
-        modifyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-
-                new CourseDetailFrame(gs);
+                new AddCourseFrame(gs);
                 dispose();
+
             }
         });
+
+
 
     }
 
@@ -76,15 +70,24 @@ public class CourseFrame extends JFrame {
 
     private void createUIComponents() {
 
-        String [] header={"Class ID", "Class Name","Section", "Semester", "Student Count"};
-        String [][] data={{"1", "CS101", "S1", "FALL19", "100"}, {"1", "CS330", "S1", "FALL19", "85"},  {"1", "CS591", "S1", "FALL19", "30"}, {"1", "CS591", "S2", "FALL19", "30"},
-                {"1", "CS101", "S1", "FALL19", "100"}, {"1", "CS330", "S1", "FALL19", "85"},  {"1", "CS591", "S1", "FALL19", "30"}, {"1", "CS591", "S2", "FALL19", "30"},
-                {"1", "CS101", "S1", "FALL19", "100"}, {"1", "CS330", "S1", "FALL19", "85"},  {"1", "CS591", "S1", "FALL19", "30"}, {"1", "CS591", "S2", "FALL19", "30"},
-                {"1", "CS101", "S1", "FALL19", "100"}, {"1", "CS330", "S1", "FALL19", "85"},  {"1", "CS591", "S1", "FALL19", "30"}, {"1", "CS591", "S2", "FALL19", "30"},
-                {"1", "CS101", "S1", "FALL19", "100"}, {"1", "CS330", "S1", "FALL19", "85"},  {"1", "CS591", "S1", "FALL19", "30"}, {"1", "CS591", "S2", "FALL19", "30"},
-                {"1", "CS101", "S1", "FALL19", "100"}, {"1", "CS330", "S1", "FALL19", "85"},  {"1", "CS591", "S1", "FALL19", "30"}, {"1", "CS591", "S2", "FALL19", "30"}};
+        String [] header={"Class ID", "Class Name", "Semester", "Student Count"};
+        ArrayList<Course> allCourses = gs.getAllCourses();
 
-        DefaultTableModel model = new DefaultTableModel(data, header);
+        DefaultTableModel model = new DefaultTableModel(header, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        if(allCourses.size() != 0) {
+            for(int i = 0;i < allCourses.size();i++) {
+                Object[] obj = {allCourses.get(i).getCourseIndex(), allCourses.get(i).getCourseName(), allCourses.get(i).getSemester(), allCourses.get(i).getAllStudents().size()};
+                model.addRow(obj);
+            }
+        }
+
+
         table1 = new JTable(model);
 
 
@@ -98,50 +101,38 @@ public class CourseFrame extends JFrame {
                 if (selected != -1) {
 
                     //remove from the List of classes
-                    int classID = Integer.parseInt(model.getValueAt(selected, 0).toString());
-                    Course targetCourse = gs.getCourse(classID);
-                    gs.getCourses().remove(targetCourse);
+                    int courseIndex = Integer.parseInt(model.getValueAt(selected, 0).toString());
+                    Course targetCourse = gs.getCourse(courseIndex);
+                    gs.getAllCourses().remove(targetCourse);
 
                     //remove the entry in the table
                     model.removeRow(table1.getSelectedRow());
                     JOptionPane.showMessageDialog(null, "Selected row deleted successfully");
 
-//                    boolean checkBalance = checkEnough(bc.getAccount(account_index).getBalance(), b.getCloseAccountFee());
-//                    if (checkBalance) {
-//                        Transaction check = bc.removeAccount(account_index, b.getCloseAccountFee());
-//                        if (check != null) {
-//                            JOptionPane.showMessageDialog(source, "Account deleted");
-//                            b.recentTransactions.put(b.getTransactionCounter(), check);
-//                            b.setTransactionCounter(b.getTransactionCounter() + 1);
-//                            place(bc);
-//                            frame.dispose();
-//                        } else {
-//                            JOptionPane.showMessageDialog(source, "Account did not exist or did not belong to this customer");
-//                        }
-//                    } else {
-//                        JOptionPane.showMessageDialog(source, "Insufficient funds in account to delete. The fee is: " + b.getCloseAccountFee());
-//                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(source, "Please select a row.");
-                }
-
-
-
-
-
-
-
-                if(table1.getSelectedRow() != -1) {
-                    // remove selected row from the model
-                    model.removeRow(table1.getSelectedRow());
-                    JOptionPane.showMessageDialog(null, "Selected row deleted successfully");
-
                 }
             }
         });
 
 
+        modifyButton = new JButton("Modify Class");
+        modifyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JButton source = (JButton) actionEvent.getSource();
+                int selected = table1.getSelectedRow();
+                if (selected != -1) {
+                    int index = (int) model.getValueAt(selected, 0);
+                    Course currentCourse = gs.getCourse(index);
+                    new CourseDetailFrame(gs, currentCourse);
+                    dispose();
+                }else {
+                    JOptionPane.showMessageDialog(source, "Please select a row.");
+                }
+            }
+        });
 
 
     }

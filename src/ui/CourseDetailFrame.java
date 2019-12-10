@@ -1,6 +1,8 @@
 package ui;
 
 import GradingSystem.GradingSystem;
+import model.Category;
+import model.Course;
 import model.Student;
 
 import javax.swing.*;
@@ -8,10 +10,12 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDetailFrame extends JFrame{
     private GradingSystem gs;
+    private Course course;
     private JPanel mainPanel;
     private JButton backButton;
     private JButton importStudentsBtn;
@@ -26,11 +30,12 @@ public class CourseDetailFrame extends JFrame{
     private JPanel ButtonPanel;
     private JPanel ChoicePanel;
     private JTable categoryTable;
+    private JButton modifyAssignmentsButton;
 
 
-    public CourseDetailFrame(GradingSystem gs) {
-
+    public CourseDetailFrame(GradingSystem gs, Course course) {
         this.gs = gs;
+        this.course = course;
 
         setName("Course detail frame");
 
@@ -41,6 +46,7 @@ public class CourseDetailFrame extends JFrame{
         pack();
         setLocationRelativeTo(null);
         addActiveComponent();
+
     }
 
     private void addActiveComponent() {
@@ -73,20 +79,17 @@ public class CourseDetailFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 new AddStudentFrame();
+                dispose();
             }
         });
 
-        deleteStudentBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
 
         viewGradesBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new StudentGradeFrame(gs, course);
+                dispose();
             }
         });
 
@@ -94,37 +97,120 @@ public class CourseDetailFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 new AddCategoryFrame();
+                dispose();
             }
         });
 
-        deleteCategoryBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
 
         modifyCategoryBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ModifyCategoryFrame();
+                dispose();
             }
         });
     }
 
     private void createUIComponents() {
-        String [] studentHeader={"Student name", "Email", "Section"};
-        String [][] studentData={{"Kaijia You", "caydenyo@bu.edu", "1"}, {"Peiqing Lu", "lupeiqing@bu.edu", "1"},  {"Jingzhou Xue", "xuejingzhou@bu.edu", "2"}, {"Harsh", "harsh@bu.edu", "3"}};
-        DefaultTableModel studentModel = new DefaultTableModel(studentData,studentHeader);
+        String [] studentHeader={"Student name", "Email", "Student ID"};
+        ArrayList<Student> allStudents = course.getAllStudents();
+        DefaultTableModel studentModel = new DefaultTableModel(studentHeader, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
+        if(allStudents.size() != 0) {
+            for(int i = 0;i < allStudents.size();i++) {
+                Object[] obj = {allStudents.get(i).getName(), allStudents.get(i).getEmail(), allStudents.get(i).getSid()};
+                studentModel.addRow(obj);
+            }
+        }
         studentTable = new JTable(studentModel);
 
         String [] categoryHeader={"Category", "Weight(%)"};
-        String [][] categoryData={{"Participation", "15"}, {"Assignment", "25"},  {"Exam", "60"}};
-        DefaultTableModel categoryModel = new DefaultTableModel(categoryData,categoryHeader);
 
-
+        DefaultTableModel categoryModel = new DefaultTableModel(categoryHeader, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        ArrayList<Category> allCategories = course.getAllCategories();
+        if(allCategories.size() != 0) {
+            for(int i = 0;i < allCategories.size();i++) {
+                Object[] obj = {allCategories.get(i).getCategoryName(), allCategories.get(i).getWeight()};
+                categoryModel.addRow(obj);
+            }
+        }
         categoryTable = new JTable(categoryModel);
+
+        deleteStudentBtn = new JButton("Delete Student");
+        deleteStudentBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton source = (JButton) e.getSource();
+                int selected = studentTable.getSelectedRow();
+                if (selected != -1) {
+
+                    //remove from the List of classes
+                    int studentId = Integer.parseInt(studentModel.getValueAt(selected, 2).toString());
+                    Student targetStudent = course.getStudent(studentId);
+                    course.getAllStudents().remove(targetStudent);
+
+                    //remove the entry in the table
+                    studentModel.removeRow(studentTable.getSelectedRow());
+                    JOptionPane.showMessageDialog(null, "Selected student deleted successfully");
+
+                }
+                else{
+                    JOptionPane.showMessageDialog(source, "Please select a row.");
+                }
+            }
+        });
+
+        deleteCategoryBtn = new JButton("Delete Category");
+        deleteCategoryBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton source = (JButton) e.getSource();
+                int selected = categoryTable.getSelectedRow();
+                if (selected != -1) {
+
+                    //remove from the List of classes
+                    String categoryName = categoryModel.getValueAt(selected, 0).toString();
+                    Category targetcategory = course.getCategory(categoryName);
+                    course.getAllStudents().remove(targetcategory);
+
+                    //remove the entry in the table
+                    categoryModel.removeRow(categoryTable.getSelectedRow());
+                    JOptionPane.showMessageDialog(null, "Selected category deleted successfully");
+
+                }
+                else{
+                    JOptionPane.showMessageDialog(source, "Please select a row.");
+                }
+            }
+        });
+
+        modifyAssignmentsButton = new JButton("Modify Assignments");
+        modifyAssignmentsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JButton source = (JButton) actionEvent.getSource();
+                int selected = categoryTable.getSelectedRow();
+                if (selected != -1) {
+                    String categoryName = categoryModel.getValueAt(selected, 0).toString();
+                    Category currentCategory = course.getCategory(categoryName);
+                    new AssignmentFrame(gs, course, currentCategory);
+                    dispose();
+                }else {
+                    JOptionPane.showMessageDialog(source, "Please select a row.");
+                }
+            }
+        });
 
     }
 }
