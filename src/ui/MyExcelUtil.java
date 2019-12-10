@@ -167,7 +167,7 @@ public class MyExcelUtil {
         // get id
         cell = row.getCell(cellNum++);
         String id = convertCellValueToString(cell);
-        resultData.setSid(id);
+        resultData.setSid(Integer.parseInt(id));
         return resultData;
     }
 }
