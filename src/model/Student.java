@@ -58,7 +58,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return name.toString();
+        return name.toString() + " " + email + " " + sid;
     }
 
 }

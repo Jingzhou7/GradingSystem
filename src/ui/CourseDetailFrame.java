@@ -63,6 +63,9 @@ public class CourseDetailFrame extends JFrame{
                 System.out.println(excelFileName);
                 // read Excel
                 List<Student> readResult = MyExcelUtil.readExcel(excelFileName);
+                for (int i = 0;i < readResult.size();i++){
+                    System.out.println(readResult.get(i).toString());
+                }
             }
         });
 

@@ -164,6 +164,10 @@ public class MyExcelUtil {
         cell = row.getCell(cellNum++);
         String email = convertCellValueToString(cell);
         resultData.setEmail(email);
+        // get id
+        cell = row.getCell(cellNum++);
+        String id = convertCellValueToString(cell);
+        resultData.setSid(id);
         return resultData;
     }
 }
