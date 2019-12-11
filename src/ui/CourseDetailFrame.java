@@ -78,7 +78,7 @@ public class CourseDetailFrame extends JFrame{
         addStudentBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new AddStudentFrame();
+                new AddStudentFrame(gs, course);
                 dispose();
             }
         });
@@ -96,7 +96,7 @@ public class CourseDetailFrame extends JFrame{
         addCategoryBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddCategoryFrame();
+                new AddCategoryFrame(gs, course);
                 dispose();
             }
         });

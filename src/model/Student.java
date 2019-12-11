@@ -21,6 +21,14 @@ public class Student {
         grades = new ArrayList<Grade>();
     }
 
+    public Student(String fname, String lname, String mname, String email) {
+        name = new Name(fname, mname, lname);
+        this.email = email;
+        comments = new ArrayList<>();
+        bonusPoints = new ArrayList<>();
+        grade = new ArrayList<Grade>();
+    }
+
     public Student(Name name, String email, int sid) {
         this.name = name;
         this.email = email;

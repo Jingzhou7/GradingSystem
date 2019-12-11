@@ -108,6 +108,13 @@ public class Course {
         return true;
     }
 
+    public boolean addStudent(String fname, String lname, String mname, String email) {
+        Student newStudent = new Student(fname, lname, mname, email);
+        students.add(newStudent);
+        return true;
+    }
+
+
     public static void setCount() {
         ITSQLConn a = new ITSQLConn();
         count = a.getCourseIDStart("course");
