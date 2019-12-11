@@ -9,7 +9,7 @@ public class Student {
     private int sid;
     private ArrayList<String> comments;
     private ArrayList<Double> bonusPoints;
-    private ArrayList<Grade> grade;
+    private ArrayList<Grade> grades;
 
 
     public Student(Name name) {
@@ -18,7 +18,7 @@ public class Student {
         setSid(0);
         comments = new ArrayList<>();
         bonusPoints = new ArrayList<>();
-        grade = new ArrayList<Grade>();
+        grades = new ArrayList<Grade>();
     }
 
     public Student(Name name, String email, int sid) {
@@ -27,7 +27,7 @@ public class Student {
         this.sid = sid;
         comments = new ArrayList<>();
         bonusPoints = new ArrayList<>();
-        grade = new ArrayList<Grade>();
+        grades = new ArrayList<Grade>();
     }
 
     public Student(Name name, String email, ArrayList<String> comments, ArrayList<Double> bonusPoints, ArrayList<Grade> grades){
@@ -37,7 +37,7 @@ public class Student {
         count+=1;
         this.comments = comments;
         this.bonusPoints = bonusPoints;
-        this.grade = grades;
+        this.grades = grades;
     }
 
     public Student(Name name, String email, int sid, ArrayList<String> comments, ArrayList<Double> bonusPoints, ArrayList<Grade> grades){
@@ -46,7 +46,7 @@ public class Student {
         this.sid = sid;
         this.comments = comments;
         this.bonusPoints = bonusPoints;
-        this.grade = grades;
+        this.grades = grades;
     }
 
     public Name getName() {
@@ -75,14 +75,24 @@ public class Student {
         this.sid = sid;
     }
 
-    public ArrayList<Grade> getGrade() {
-        return grade;
+    public ArrayList<Grade> getGrades() {
+        return grades;
+    }
+
+    public Grade getGrade(Assignment assignment) {
+        Grade res = null;
+        for(Grade g : grades) {
+            if(g.getAssignment().equals(assignment)) {
+                res = g;
+            }
+        }
+        return res;
     }
 
     public void setGrade(int id, double rawscore) {
-        Grade g = grade.get(id);
+        Grade g = grades.get(id);
         g.setRawScore(rawscore);
-        grade.set(id, g);
+        grades.set(id, g);
     }
 
     @Override
