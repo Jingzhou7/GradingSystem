@@ -17,6 +17,18 @@ public class Name {
         this.lname = lname;
     }
 
+    public String getFname() {
+        return fname;
+    }
+
+    public String getMname() {
+        return mname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
     public void setFname(String fname) {
         this.fname = fname;
     }

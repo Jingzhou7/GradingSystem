@@ -45,6 +45,10 @@ public class Category {
 
     }
 
+    public static int getCount() {
+        return count;
+    }
+
     // getters and setters
     public double getWeight() {
         return weight;
@@ -68,9 +72,8 @@ public class Category {
         return res;
     }
 
-    public static void setCount() {
-        ITSQLConn a = new ITSQLConn();
-        count = a.getCourseIDStart("category");
+    public static void setCount(int c) {
+        count = c;
     }
 
     public List<Assignment> getAllAssignments() {
@@ -85,5 +88,9 @@ public class Category {
             }
         }
         return res;
+    }
+
+    public int getId() {
+        return id;
     }
 }

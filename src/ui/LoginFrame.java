@@ -66,7 +66,16 @@ public class LoginFrame extends JFrame {
                     JOptionPane.showMessageDialog(source, "Wrong username or password");
                 }
 
+            }
+        });
 
+        Runtime.getRuntime().addShutdownHook(new Thread()
+        {
+            @Override
+            public void run()
+            {
+                System.out.println("Saving...");
+                gs.save();
             }
         });
 

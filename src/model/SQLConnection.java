@@ -20,7 +20,7 @@ public class SQLConnection {
             e.printStackTrace();
         }try {
             conn = DriverManager.getConnection(URL, NAME, PASSWORD);
-            System.out.println("Successfully connected!");
+            //System.out.println("Successfully connected!");
 
         }catch (SQLException e){
             System.out.println("Failed to connect to mysql!");
