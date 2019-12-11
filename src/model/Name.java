@@ -43,7 +43,17 @@ public class Name {
 
     @Override
     public String toString() {
-        return (fname + " " + mname + " " + lname);
+        String[] name = new String[3];
+        name[0] = fname;
+        name[1] = mname;
+        name[2] = lname;
+        String realName = "";
+        for (int i = 0;i < 3;i++){
+            if (name[i] != null || !name[i].equals("")){
+                realName = realName + name[i] + " ";
+            }
+        }
+        return (realName);
     }
 
 }

@@ -113,7 +113,13 @@ public class Course {
         return true;
     }
 
+
     public static void setCount(int c) {
         count = c;
+
+    public boolean addStudent(String fname, String lname, String mname, String email) {
+        Student newStudent = new Student(fname, lname, mname, email);
+        students.add(newStudent);
+        return true;
     }
 }

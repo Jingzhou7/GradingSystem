@@ -3,7 +3,7 @@ package model;
 
 import java.sql.Date;
 
-public class Assignment {
+public class Assignment{
     private static int count = 0;
     private int id;
     private String assignmentName;
@@ -89,5 +89,10 @@ public class Assignment {
 
     public int getId() {
         return id;
+    }
+
+
+    public boolean equals(Assignment assignment) {
+        return assignment.getAssignmentName().equals(this.assignmentName);
     }
 }

@@ -1,5 +1,8 @@
 package ui;
 
+import GradingSystem.GradingSystem;
+import model.Course;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +13,7 @@ public class AddStudentFrame extends JFrame{
     private JTextField firstNameTextField;
     private JTextField lastNameTextField;
     private JTextField middleNameTextField;
-    private JTextField sectionTextField;
+    private JTextField emailTextField;
     private JButton clearAllBtn;
     private JButton confirmBtn;
     private JButton backBtn;
@@ -19,9 +22,9 @@ public class AddStudentFrame extends JFrame{
     private JLabel firstNameLbl;
     private JLabel lastNameLbl;
     private JLabel middleNameLbl;
-    private JLabel sectionLbl;
+    private JLabel emailLbl;
 
-    public AddStudentFrame() {
+    public AddStudentFrame(GradingSystem gs, Course course) {
         setName("Add student frame");
         setVisible(true);
 
@@ -30,37 +33,34 @@ public class AddStudentFrame extends JFrame{
         pack();
         setLocationRelativeTo(null);
 
-        addActiveComponent();
-    }
-
-    private void addActiveComponent() {
         clearAllBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 firstNameTextField.setText("");
                 lastNameTextField.setText("");
                 middleNameTextField.setText("");
-                sectionTextField.setText("");
-
+                emailTextField.setText("");
             }
         });
         confirmBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                String fname = firstNameTextField.getText();
+                String lname = lastNameTextField.getText();
+                String mname = middleNameTextField.getText();
+                String email = emailTextField.getText();
+                course.addStudent(fname, lname, mname, email);
+                new CourseDetailFrame(gs, course);
+                dispose();
             }
         });
         backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
-            }
-        });
-        backBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
+                new CourseDetailFrame(gs, course);
                 dispose();
             }
         });
     }
+
 }
