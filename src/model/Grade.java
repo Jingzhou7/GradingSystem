@@ -108,13 +108,6 @@ public class Grade {
         return gradeid;
     }
 
-    public double getRawScore() {
-        return rawScore;
-    }
-
-    public Assignment getAssignment(){
-        return assignment;
-
     public double getScaledScore() {
         return rawScore/assignment.getMaxPoint();
 

@@ -1042,7 +1042,7 @@ public class GradingSystem {
             //delete
             saveComments(s.getComments(), s.getId());
             saveBonusPoints(s.getBonusPoints(), s.getId());
-            saveGrades(s.getGrade(), s.getId());
+            saveGrades(s.getGrades(), s.getId());
         }
     }
 
@@ -1106,7 +1106,7 @@ public class GradingSystem {
         for (BonusPoints b: bpDescendants){
             addDeletedBonusPoints(b);
         }
-        ArrayList<Grade> gradeDescendants = s.getGrade();
+        ArrayList<Grade> gradeDescendants = s.getGrades();
         for (Grade g: gradeDescendants){
             addDeletedGrades(g);
         }

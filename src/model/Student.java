@@ -10,7 +10,7 @@ public class Student {
 
     private ArrayList<Comment> comments;
     private ArrayList<BonusPoints> bonusPoints;
-    private ArrayList<Grade> grade;
+    private ArrayList<Grade> grades;
 
 
     public Student(Name name) {
@@ -27,7 +27,7 @@ public class Student {
         this.email = email;
         comments = new ArrayList<>();
         bonusPoints = new ArrayList<>();
-        grade = new ArrayList<Grade>();
+        grades = new ArrayList<Grade>();
     }
 
     public Student(Name name, String email, int sid) {
