@@ -6,8 +6,9 @@ public class Section extends Course {
     private int sectionId;
 
     public Section(int sectionIndex, String courseName) {
-        super(sectionIndex, courseName);
+        super(courseName);
         setCourseName(courseName + " Section " + sectionId);
+        sectionId = sectionIndex;
     }
 
     public Section(String semester, String courseName, ArrayList<Category> categories, ArrayList<Student> students, int sid){
@@ -19,7 +20,6 @@ public class Section extends Course {
     public Section(int courseid, String semester, String courseName, ArrayList<Category> categories, ArrayList<Student> students, int sid) {
         super(courseid, semester, courseName, categories, students);
         this.sectionId = sid;
-        setCourseName(courseName + " Section " + sectionId);
     }
 
     public int getSectionId() {

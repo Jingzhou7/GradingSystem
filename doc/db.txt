@@ -63,13 +63,17 @@ CREATE TABLE `student`(
 );
 
 CREATE TABLE `bonuspoints`(
+                        `pointid` int(11),
                         `studentid` int(11),
-                        `points` double
+                        `points` double,
+                        primary key(`pointid`)
 );
 
 CREATE TABLE `studentcomments`(
+                        `commentid` int(11),
                         `studentid` int(11),
-                        `comment` varchar(45)
+                        `comment` varchar(45),
+                        primary key(`commentid`)
 );
 
 CREATE TABLE `grade`(

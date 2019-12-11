@@ -7,8 +7,8 @@ public class Student {
     private Name name;
     private String email;
     private int sid;
-    private ArrayList<String> comments;
-    private ArrayList<Double> bonusPoints;
+    private ArrayList<Comment> comments;
+    private ArrayList<BonusPoints> bonusPoints;
     private ArrayList<Grade> grade;
 
 
@@ -30,7 +30,7 @@ public class Student {
         grade = new ArrayList<Grade>();
     }
 
-    public Student(Name name, String email, ArrayList<String> comments, ArrayList<Double> bonusPoints, ArrayList<Grade> grades){
+    public Student(Name name, String email, ArrayList<Comment> comments, ArrayList<BonusPoints> bonusPoints, ArrayList<Grade> grades){
         this.name = name;
         this.email = email;
         this.sid = count;
@@ -40,13 +40,17 @@ public class Student {
         this.grade = grades;
     }
 
-    public Student(Name name, String email, int sid, ArrayList<String> comments, ArrayList<Double> bonusPoints, ArrayList<Grade> grades){
+    public Student(Name name, String email, int sid, ArrayList<Comment> comments, ArrayList<BonusPoints> bonusPoints, ArrayList<Grade> grades){
         this.name = name;
         this.email = email;
         this.sid = sid;
         this.comments = comments;
         this.bonusPoints = bonusPoints;
         this.grade = grades;
+    }
+
+    public static int getCount() {
+        return count;
     }
 
     public Name getName() {
@@ -90,9 +94,19 @@ public class Student {
         return name.toString() + " " + email + " " + sid;
     }
 
-    public static void setCount() {
-        ITSQLConn a = new ITSQLConn();
-        count = a.getCourseIDStart("student");
+    public static void setCount(int c) {
+        count = c;
     }
 
+    public int getId() {
+        return sid;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public ArrayList<BonusPoints> getBonusPoints(){
+        return bonusPoints;
+    }
 }

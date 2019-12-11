@@ -39,6 +39,10 @@ public class Assignment {
         this.maxPoint = maxPoint;
     }
 
+    public static int getCount() {
+        return count;
+    }
+
     public String getAssignmentName() {
         return assignmentName;
     }
@@ -79,8 +83,11 @@ public class Assignment {
         this.maxPoint = maxPoint;
     }
 
-    public static void setCount() {
-        ITSQLConn a = new ITSQLConn();
-        count = a.getCourseIDStart("assignment");
+    public static void setCount(int c) {
+        count = c;
+    }
+
+    public int getId() {
+        return id;
     }
 }

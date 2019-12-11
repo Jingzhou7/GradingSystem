@@ -37,6 +37,10 @@ public class Grade {
         this.gradeid = id;
     }
 
+    public static int getCount() {
+        return count;
+    }
+
     public double getBonusPoint() {
         return bonusPoint;
     }
@@ -80,12 +84,23 @@ public class Grade {
         else return "F";
     }
 
-    public static void setCount() {
-        ITSQLConn a = new ITSQLConn();
-        count = a.getCourseIDStart("grade");
+    public static void setCount(int c) {
+        count = c;
     }
 
     public void setRawScore(double rawscore) {
         this.rawScore = rawscore;
+    }
+
+    public int getId() {
+        return gradeid;
+    }
+
+    public double getRawScore() {
+        return rawScore;
+    }
+
+    public Assignment getAssignment(){
+        return assignment;
     }
 }
