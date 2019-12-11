@@ -7,9 +7,10 @@ public class Student {
     private Name name;
     private String email;
     private int sid;
-    private ArrayList<String> comments;
-    private ArrayList<Double> bonusPoints;
-    private ArrayList<Grade> grade;
+
+    private ArrayList<Comment> comments;
+    private ArrayList<BonusPoints> bonusPoints;
+    private ArrayList<Grade> grades;
 
 
     public Student(Name name) {
@@ -18,7 +19,7 @@ public class Student {
         setSid(0);
         comments = new ArrayList<>();
         bonusPoints = new ArrayList<>();
-        grade = new ArrayList<Grade>();
+        grades = new ArrayList<Grade>();
     }
 
     public Student(String fname, String lname, String mname, String email) {
@@ -26,7 +27,7 @@ public class Student {
         this.email = email;
         comments = new ArrayList<>();
         bonusPoints = new ArrayList<>();
-        grade = new ArrayList<Grade>();
+        grades = new ArrayList<Grade>();
     }
 
     public Student(Name name, String email, int sid) {
@@ -35,26 +36,30 @@ public class Student {
         this.sid = sid;
         comments = new ArrayList<>();
         bonusPoints = new ArrayList<>();
-        grade = new ArrayList<Grade>();
+        grades = new ArrayList<Grade>();
     }
 
-    public Student(Name name, String email, ArrayList<String> comments, ArrayList<Double> bonusPoints, ArrayList<Grade> grades){
+    public Student(Name name, String email, ArrayList<Comment> comments, ArrayList<BonusPoints> bonusPoints, ArrayList<Grade> grades){
         this.name = name;
         this.email = email;
         this.sid = count;
         count+=1;
         this.comments = comments;
         this.bonusPoints = bonusPoints;
-        this.grade = grades;
+        this.grades = grades;
     }
 
-    public Student(Name name, String email, int sid, ArrayList<String> comments, ArrayList<Double> bonusPoints, ArrayList<Grade> grades){
+    public Student(Name name, String email, int sid, ArrayList<Comment> comments, ArrayList<BonusPoints> bonusPoints, ArrayList<Grade> grades){
         this.name = name;
         this.email = email;
         this.sid = sid;
         this.comments = comments;
         this.bonusPoints = bonusPoints;
-        this.grade = grades;
+        this.grades = grades;
+    }
+
+    public static int getCount() {
+        return count;
     }
 
     public Name getName() {
@@ -83,14 +88,24 @@ public class Student {
         this.sid = sid;
     }
 
-    public ArrayList<Grade> getGrade() {
-        return grade;
+    public ArrayList<Grade> getGrades() {
+        return grades;
+    }
+
+    public Grade getGrade(Assignment assignment) {
+        Grade res = null;
+        for(Grade g : grades) {
+            if(g.getAssignment().equals(assignment)) {
+                res = g;
+            }
+        }
+        return res;
     }
 
     public void setGrade(int id, double rawscore) {
-        Grade g = grade.get(id);
+        Grade g = grades.get(id);
         g.setRawScore(rawscore);
-        grade.set(id, g);
+        grades.set(id, g);
     }
 
     @Override
@@ -98,9 +113,19 @@ public class Student {
         return name.toString() + " " + email + " " + sid;
     }
 
-    public static void setCount() {
-        ITSQLConn a = new ITSQLConn();
-        count = a.getCourseIDStart("student");
+    public static void setCount(int c) {
+        count = c;
     }
 
+    public int getId() {
+        return sid;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public ArrayList<BonusPoints> getBonusPoints(){
+        return bonusPoints;
+    }
 }

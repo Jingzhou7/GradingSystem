@@ -3,7 +3,7 @@ package model;
 
 import java.sql.Date;
 
-public class Assignment {
+public class Assignment{
     private static int count = 0;
     private int id;
     private String assignmentName;
@@ -37,6 +37,10 @@ public class Assignment {
         this.releaseDate = releaseDate;
         this.dueDate = dueDate;
         this.maxPoint = maxPoint;
+    }
+
+    public static int getCount() {
+        return count;
     }
 
     public String getAssignmentName() {
@@ -79,8 +83,16 @@ public class Assignment {
         this.maxPoint = maxPoint;
     }
 
-    public static void setCount() {
-        ITSQLConn a = new ITSQLConn();
-        count = a.getCourseIDStart("assignment");
+    public static void setCount(int c) {
+        count = c;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+
+    public boolean equals(Assignment assignment) {
+        return assignment.getAssignmentName().equals(this.assignmentName);
     }
 }

@@ -13,9 +13,10 @@ public class Course {
     private ArrayList<Student> students;
 
     //constructor
-    public Course(int courseIndex, String courseName) {
+    public Course(String courseName) {
 
-        setCourseIndex(courseIndex);
+        courseIndex = count;
+        count+=1;
         setSemester(CURRENT_SEMESTER);
         setCourseName(courseName);
         categories = new ArrayList<>();
@@ -41,6 +42,10 @@ public class Course {
         this.courseName = courseName;
         this.categories = categories;
         this.students = students;
+    }
+
+    public static int getCount() {
+        return count;
     }
 
     public int getCourseIndex() {
@@ -108,15 +113,14 @@ public class Course {
         return true;
     }
 
+
+    public static void setCount(int c) {
+        count = c;
+    }
+
     public boolean addStudent(String fname, String lname, String mname, String email) {
         Student newStudent = new Student(fname, lname, mname, email);
         students.add(newStudent);
         return true;
-    }
-
-
-    public static void setCount() {
-        ITSQLConn a = new ITSQLConn();
-        count = a.getCourseIDStart("course");
     }
 }
