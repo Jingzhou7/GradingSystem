@@ -7,13 +7,7 @@ public class Grade {
     private double rawScore;
     private double bonusPoint;
 
-    public Assignment getAssignment() {
-        return assignment;
-    }
 
-    public void setAssignment(Assignment assignment) {
-        this.assignment = assignment;
-    }
 
     private String letterGrade;
     private String comment;
@@ -46,6 +40,10 @@ public class Grade {
         this.gradeid = id;
     }
 
+    public static int getCount() {
+        return count;
+    }
+
     public double getBonusPoint() {
         return bonusPoint;
     }
@@ -70,6 +68,17 @@ public class Grade {
         this.comment = comment;
     }
 
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
+    }
+
+    public double getRawScore() {
+        return rawScore;
+    }
 
     //output letter grade based on the scaled score (out of 100)
     public static String scoreToLetterGrade(double score) {
@@ -90,20 +99,23 @@ public class Grade {
         else return "F";
     }
 
-    public static void setCount() {
-        ITSQLConn a = new ITSQLConn();
-        count = a.getCourseIDStart("grade");
+    public static void setCount(int c) {
+        count = c;
     }
 
     public void setRawScore(double rawscore) {
         this.rawScore = rawscore;
     }
 
+
     public double getRawScaledScore() {
         return rawScore/assignment.getMaxPoint();
     }
 
     public double getScaledScore() {
-        return rawScore/assignment.getMaxPoint()*assignment.getWeight();
+        return rawScore / assignment.getMaxPoint() * assignment.getWeight();
+    }
+    public int getId() {
+        return gradeid;
     }
 }

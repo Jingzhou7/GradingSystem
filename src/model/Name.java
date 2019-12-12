@@ -17,6 +17,18 @@ public class Name {
         this.lname = lname;
     }
 
+    public String getFname() {
+        return fname;
+    }
+
+    public String getMname() {
+        return mname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
     public void setFname(String fname) {
         this.fname = fname;
     }
@@ -31,7 +43,17 @@ public class Name {
 
     @Override
     public String toString() {
-        return (fname + " " + mname + " " + lname);
+        String[] name = new String[3];
+        name[0] = fname;
+        name[1] = mname;
+        name[2] = lname;
+        String realName = "";
+        for (int i = 0;i < 3;i++){
+            if (name[i] != null || !name[i].equals("")){
+                realName = realName + name[i] + " ";
+            }
+        }
+        return (realName);
     }
 
 }

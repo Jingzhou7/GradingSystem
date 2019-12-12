@@ -9,6 +9,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,9 @@ public class CourseDetailFrame extends JFrame{
     private JPanel ChoicePanel;
     private JTable categoryTable;
     private JButton modifyAssignmentsButton;
+    private JScrollPane studentScroll;
+    private JScrollPane categoryScroll;
+    private DefaultTableModel categoryModel;
 
 
     public CourseDetailFrame(GradingSystem gs, Course course) {
@@ -47,6 +52,31 @@ public class CourseDetailFrame extends JFrame{
         setLocationRelativeTo(null);
         addActiveComponent();
 
+        categoryScroll.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                double totalWeight = 0;
+                if (categoryTable.isEditing()){
+                    categoryTable.getCellEditor().stopCellEditing();
+                }
+                for (int i = 0;i < course.getAllCategories().size();i++){
+                    if (Double.parseDouble(categoryModel.getValueAt(i, 1).toString()) == 0){
+                        Object[] options ={ "ok" };
+                        JOptionPane.showOptionDialog(null, "The weight of category cannot be 0", "Fail",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                        break;
+                    }
+                }
+                for (int i = 0;i < course.getAllCategories().size();i++){
+                    course.getAllCategories().get(i).setCategoryName(categoryModel.getValueAt(i, 0).toString());
+                    course.getAllCategories().get(i).setWeight(Double.parseDouble(categoryModel.getValueAt(i, 1).toString()));
+                    totalWeight += Double.parseDouble(categoryModel.getValueAt(i, 1).toString());
+                }
+                if (totalWeight != 100){
+                    Object[] options ={ "ok" };
+                    JOptionPane.showOptionDialog(null, "The total weight of all categories is not up to 100%", "Fail",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                }
+            }
+        });
     }
 
     private void addActiveComponent() {
@@ -78,7 +108,7 @@ public class CourseDetailFrame extends JFrame{
         addStudentBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new AddStudentFrame();
+                new AddStudentFrame(gs, course);
                 dispose();
             }
         });
@@ -96,8 +126,9 @@ public class CourseDetailFrame extends JFrame{
         addCategoryBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddCategoryFrame();
-                dispose();
+                Object[] obj = {"please enter category name", 0};
+                categoryModel.addRow(obj);
+                course.addCategory("null");
             }
         });
 
@@ -106,7 +137,7 @@ public class CourseDetailFrame extends JFrame{
         modifyCategoryBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ModifyCategoryFrame();
+                new ModifyCategoryFrame(gs, course);
                 dispose();
             }
         });
@@ -132,10 +163,10 @@ public class CourseDetailFrame extends JFrame{
 
         String [] categoryHeader={"Category", "Weight(%)"};
 
-        DefaultTableModel categoryModel = new DefaultTableModel(categoryHeader, 0) {
+        categoryModel = new DefaultTableModel(categoryHeader, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false;
+                return true;
             }
         };
         ArrayList<Category> allCategories = course.getAllCategories();

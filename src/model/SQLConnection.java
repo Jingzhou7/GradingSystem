@@ -9,7 +9,7 @@ public class SQLConnection {
     private static final String URL="jdbc:mysql://localhost:3306/gradingsystem?useUnicode=true&characterEncoding=utf8";
 
     private static final String NAME="root";//username
-    private static final String PASSWORD="hd3d1337";//password
+    private static final String PASSWORD="xjz950724";//password
     public java.sql.Connection conn = null;
 
     public SQLConnection(){
@@ -20,7 +20,7 @@ public class SQLConnection {
             e.printStackTrace();
         }try {
             conn = DriverManager.getConnection(URL, NAME, PASSWORD);
-            System.out.println("Successfully connected!");
+            //System.out.println("Successfully connected!");
 
         }catch (SQLException e){
             System.out.println("Failed to connect to mysql!");
