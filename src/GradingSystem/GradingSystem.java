@@ -896,7 +896,7 @@ public class GradingSystem {
     }
 
     private boolean deleteAssignments(int id) {
-        String sql = "delete from assignemnt where assignmentid = " + id;
+        String sql = "delete from assignment where assignmentid = " + id;
         PreparedStatement pst = null;
         SQLConnection sc = new SQLConnection();
         try {
@@ -1006,7 +1006,7 @@ public class GradingSystem {
             if (temp == null){
                 insertCategory(c, cid);
             }
-            else if (c.getWeight() != temp.getWeight() || c.getCategoryName() != temp.getCategoryName()){
+            else if (c.getWeight() != temp.getWeight() || !c.getCategoryName().equals(temp.getCategoryName())){
                 updateCategory(c);
             }
 
@@ -1021,7 +1021,7 @@ public class GradingSystem {
             if(temp==null){
                 insertAssignment(a, cid);
             }
-            else if (a.getWeight() != temp.getWeight() || !a.getReleaseDate().equals(temp.getReleaseDate()) || !a.getDueDate().equals(temp.getDueDate()) || a.getMaxPoint() != temp.getMaxPoint() || a.getAssignmentName() != temp.getAssignmentName()){
+            else if (a.getWeight() != temp.getWeight() || !a.getReleaseDate().equals(temp.getReleaseDate()) || !a.getDueDate().equals(temp.getDueDate()) || a.getMaxPoint() != temp.getMaxPoint() || !a.getAssignmentName().equals(temp.getAssignmentName())){
                 updateAssignment(a);
             }
         }
@@ -1035,7 +1035,7 @@ public class GradingSystem {
             if (temp == null){
                 insertStudent(s, cid);
             }
-            else if (s!=temp){
+            else if (!s.getName().getFname().equals(temp.getName().getFname()) || !s.getName().getMname().equals(temp.getName().getMname()) || !s.getName().getLname().equals(temp.getName().getLname()) || !s.getEmail().equals(temp.getEmail())){
                 updateStudent(s);
             }
 
@@ -1052,7 +1052,7 @@ public class GradingSystem {
             if (temp == null){
                 insertGrade(g, id);
             }
-            else if (g!=temp){
+            else if (g.getRawScore() != temp.getRawScore() || g.getBonusPoint() != temp.getBonusPoint() || !g.getLetterGrade().equals(temp.getLetterGrade()) || !g.getComment().equals(temp.getComment())){
                 updateGrade(g);
             }
         }
@@ -1064,7 +1064,7 @@ public class GradingSystem {
             if (temp == null){
                 insertComment(c, id);
             }
-            else if (c!= temp){
+            else if (!c.getText().equals(temp.getText())){
                 updateComment(c);
             }
 
@@ -1079,7 +1079,7 @@ public class GradingSystem {
             if(temp == null){
                 insertBonusPoints(b, id);
             }
-            else if (b!= temp){
+            else if (b.getValue() != temp.getValue()){
                 updateBonusPoints(b);
             }
 
