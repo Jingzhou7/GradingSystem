@@ -5,19 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GradingSystem/GradingSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GradingSystem/GradingSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Assignment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Section.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Section.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AddClassFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AddCourseFrame.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AddClassFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AddCourseFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AssignmentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AssignmentFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/CommentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CommentFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/CourseDetailFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CourseDetailFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/CourseFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CourseFrame.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/CourseFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CourseFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/StudentGradeFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/StudentGradeFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Student.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,6 +86,7 @@
       <workItem from="1575591866923" duration="826000" />
       <workItem from="1575597218257" duration="113000" />
       <workItem from="1575597334288" duration="5374000" />
+      <workItem from="1576131372904" duration="574000" />
     </task>
     <servers />
   </component>

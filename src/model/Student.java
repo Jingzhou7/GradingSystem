@@ -11,7 +11,6 @@ public class Student {
     private ArrayList<Double> bonusPoints;
     private ArrayList<Grade> grade;
 
-
     public Student(Name name) {
         this.name = name;
         setEmail("cs@bu.edu");
