@@ -94,5 +94,29 @@ public class Student {
         ITSQLConn a = new ITSQLConn();
         count = a.getCourseIDStart("student");
     }
+    public Double getTotalScaledScore(){
+        double sum=0;
+        for(int i=0;i<grade.size();i++){
+            sum+=grade.get(i).getScaledScore();
+        }
+        return sum;
+    }
+    public Double getAllBonusPoints(){
+        double sum=0;
+        for(int i=0;i<grade.size();i++){
+            sum+=grade.get(i).getBonusPoint();
+        }
+        for(int i=0;i<bonusPoints.size();i++){
+            sum+=bonusPoints.get(i);
+        }
+        return sum;
+    }
 
+    public ArrayList<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<String> comments) {
+        this.comments = comments;
+    }
 }

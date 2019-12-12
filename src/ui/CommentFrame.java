@@ -2,24 +2,29 @@ package ui;
 
 import GradingSystem.GradingSystem;
 import model.Course;
+import model.Grade;
+import model.Student;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class CommentFrame extends JFrame{
     private GradingSystem gs;
     private Course course;
+    private Student student;
     private JButton backButton;
-    private JTable table1;
-    private JTable table2;
+    private JTable table;
+    private JTable assTable;
     private JPanel mainPanel;
 
-    public CommentFrame(GradingSystem gs, Course course) {
+    public CommentFrame(GradingSystem gs, Course course, Student student) {
         this.gs = gs;
         this.course = course;
+        this.student=student;
 
         setName("Comment");
         setVisible(true);
@@ -31,7 +36,7 @@ public class CommentFrame extends JFrame{
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new CourseDetailFrame(gs, course);
+                new StudentGradeFrame(gs, course);
                 dispose();
             }
         });
@@ -40,12 +45,35 @@ public class CommentFrame extends JFrame{
     private void createUIComponents() {
         // TODO: place custom component creation code here
         String [] header={"                                                     Overall Comment"};
-        String [][] data={{"Hardworking student"}};
-        DefaultTableModel model = new DefaultTableModel(data, header);
-        table1 = new JTable(data, header);
-        String [] header1={"Assignment","Comment"};
-        String [][] data1={{"HW1", "late submission"}};
-        DefaultTableModel model1 = new DefaultTableModel(data, header);
-        table2 = new JTable(data1, header1);
+        ArrayList<String> comments=student.getComments();
+        DefaultTableModel commentModel = new DefaultTableModel(header, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        if(comments.size()!=0){
+            for(int i=0;i<comments.size();i++){
+                Object[] obj={comments.get(i)};
+                commentModel.addRow(obj);
+            }
+        }
+        table=new JTable(commentModel);
+
+        String [] assHeader={"Assignment","Comment"};
+        DefaultTableModel assCommentModel = new DefaultTableModel(header, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        ArrayList<Grade> grades=student.getGrade();
+        if(grades.size()!=0){
+            for(int i=0;i<grades.size();i++){
+                Object[] obj={grades.get(i).getAssignment().getAssignmentName(),grades.get(i).getComment()};
+                assCommentModel.addRow(obj);
+            }
+        }
+        assTable=new JTable(assCommentModel);
     }
 }

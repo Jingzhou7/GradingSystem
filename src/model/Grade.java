@@ -6,6 +6,15 @@ public class Grade {
     private Assignment assignment;
     private double rawScore;
     private double bonusPoint;
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
+    }
+
     private String letterGrade;
     private String comment;
 
@@ -61,6 +70,7 @@ public class Grade {
         this.comment = comment;
     }
 
+
     //output letter grade based on the scaled score (out of 100)
     public static String scoreToLetterGrade(double score) {
         if(score > 100 || score < 60) return "Please make your score out of 100";
@@ -87,5 +97,13 @@ public class Grade {
 
     public void setRawScore(double rawscore) {
         this.rawScore = rawscore;
+    }
+
+    public double getRawScaledScore() {
+        return rawScore/assignment.getMaxPoint();
+    }
+
+    public double getScaledScore() {
+        return rawScore/assignment.getMaxPoint()*assignment.getWeight();
     }
 }
