@@ -113,6 +113,51 @@ public class GradingSystem {
         courses.add(newCourse);
         return true;
     }
+    public boolean addSection(String sectionName) {
+        //check existed sections, and increment the section id
+        int sectionCount = 0;
+        for(Course c : courses) {
+            if(c.getCourseName().contains(sectionName)) {
+                sectionCount+=1;
+            }
+        }
+        Course newSection = new Section(FALL_2019, sectionName, categories, new ArrayList<Student>(), sectionCount+1);
+        courses.add(newSection);
+        return true;
+    }
+
+    public boolean addCourseWithTemplete(String courseName, String courseTemplete) {
+        Course templeteCourse = new Course("tmp");
+        for(Course c : courses) {
+            if(c.getCourseName().equals(courseTemplete)) {
+                templeteCourse = c;
+                break;
+            }
+        }
+        ArrayList<Category> templeteCategories = templeteCourse.getAllCategories();
+        Course newCourse = new Course(FALL_2019, courseName, templeteCategories, new ArrayList<Student>());
+        courses.add(newCourse);
+        return true;
+    }
+
+    public boolean addSectionWithTemplete(String sectionName, String sectionTemplete) {
+        //check existed sections, and increment the section id
+        Section templeteSection = new Section(1, "tmp");
+        int sectionCount = 0;
+        for(Course c : courses) {
+            if(c.getCourseName().contains(sectionName)) {
+                sectionCount+=1;
+            }
+            if(c.getCourseName().contains(sectionTemplete)) {
+                templeteSection = (Section) c;
+            }
+        }
+        ArrayList<Category> templeteCategories = templeteSection.getAllCategories();
+        Course newSection = new Section(FALL_2019, sectionName, templeteCategories, new ArrayList<Student>(), sectionCount+1);
+        courses.add(newSection);
+        return true;
+    }
+
 
     public boolean removeCourse(Course oldCourse) {
         if(courses.contains(oldCourse)) {
@@ -1147,5 +1192,6 @@ public class GradingSystem {
     public void addDeletedGrades(Grade g){
         deletedGrades.add(g.getId());
     }
+
 
 }

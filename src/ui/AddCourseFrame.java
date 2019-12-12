@@ -40,10 +40,33 @@ public class AddCourseFrame extends JFrame {
                 //todo: confirm adding a class
                 // use the information filled to create a class object and add to the classes list
                 String courseName = classNameTF.getText();
+                boolean createSection = yesCheckBox.isSelected();
+                String templete = comboBox1.getSelectedItem().toString();
+                if(templete.equals("nah")) {
+                    if (!createSection) {
+                        gs.addCourse(courseName);
+                        dispose();
+                        new CourseFrame(gs);
+                    } else {
+                        gs.addSection(courseName);
+                        dispose();
+                        new CourseFrame(gs);
+                    }
 
-                gs.addCourse(courseName);
-                dispose();
-                new CourseFrame(gs);
+                } else {
+                    if (!createSection) {
+
+                        gs.addCourseWithTemplete(courseName, templete);
+                        dispose();
+                        new CourseFrame(gs);
+                    } else {
+                        gs.addSectionWithTemplete(courseName, templete);
+                        dispose();
+                        new CourseFrame(gs);
+                    }
+
+                }
+
 
             }
         });

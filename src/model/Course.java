@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Course {
@@ -123,4 +124,5 @@ public class Course {
         students.add(newStudent);
         return true;
     }
+
 }
