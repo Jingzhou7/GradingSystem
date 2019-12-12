@@ -9,7 +9,7 @@ public class SQLConnection {
     private static final String URL="jdbc:mysql://localhost:3306/gradingsystem?useUnicode=true&characterEncoding=utf8";
 
     private static final String NAME="root";//username
-    private static final String PASSWORD="hd3d1337";//password
+    private static final String PASSWORD="xjz950724";//password
     public java.sql.Connection conn = null;
 
     public SQLConnection(){

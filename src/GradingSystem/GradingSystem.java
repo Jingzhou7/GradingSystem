@@ -19,6 +19,7 @@ public class GradingSystem {
     public static final String SPRING_2018 = "Spring 2018";
     ArrayList<String> semesters;
     ArrayList<Course> courses;
+    ArrayList<Category> categories;
 
     private String USERNAME = "1";
     private String PASSWORD = "1";
@@ -60,13 +61,14 @@ public class GradingSystem {
         deletedCourses = new ArrayList<>();
         deletedGrades = new ArrayList<>();
         deletedStudents = new ArrayList<>();
+        importPreviousData();
     }
 
     private void importPreviousData() {
         ArrayList<Student> students = new ArrayList<>();
         students.add(new Student(new Name("Alice")));
         students.add(new Student(new Name("Bob")));
-        ArrayList<Category> categories = new ArrayList<>();
+        categories = new ArrayList<>();
         categories.add(new Category("Exam",50));
         categories.add(new Category("Participation",10));
         categories.add(new Category("Homework", 15));
@@ -107,8 +109,7 @@ public class GradingSystem {
     }
 
     public boolean addCourse(String courseName) {
-        int index = courses.size() + 1;
-        Course newCourse = new Course(courseName);
+        Course newCourse = new Course(FALL_2019, courseName, categories, new ArrayList<Student>());
         courses.add(newCourse);
         return true;
     }

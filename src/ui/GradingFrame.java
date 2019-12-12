@@ -11,6 +11,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class GradingFrame extends JFrame{
@@ -27,6 +29,8 @@ public class GradingFrame extends JFrame{
     private JButton button3;
     private JButton button4;
     private JComboBox comboBox1;
+    private JScrollPane gradeScroll;
+    private DefaultTableModel model;
 
 
     public GradingFrame(GradingSystem gs, Course course, Category category, Assignment currentAssignment) {
@@ -48,6 +52,31 @@ public class GradingFrame extends JFrame{
 
             }
         });
+        gradeScroll.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                double totalWeight = 0;
+                if (gradeTable.isEditing()){
+                    gradeTable.getCellEditor().stopCellEditing();
+                }
+                for (int i = 0;i < course.getAllCategories().size();i++){
+                    if (Double.parseDouble(model.getValueAt(i, 1).toString()) == 0){
+                        Object[] options ={ "ok" };
+                        JOptionPane.showOptionDialog(null, "The weight of category cannot be 0", "Fail",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                        break;
+                    }
+                }
+                for (int i = 0;i < course.getAllCategories().size();i++){
+                    course.getAllCategories().get(i).setCategoryName(model.getValueAt(i, 0).toString());
+                    course.getAllCategories().get(i).setWeight(Double.parseDouble(model.getValueAt(i, 1).toString()));
+                    totalWeight += Double.parseDouble(model.getValueAt(i, 1).toString());
+                }
+                if (totalWeight != 100){
+                    Object[] options ={ "ok" };
+                    JOptionPane.showOptionDialog(null, "The total weight of all categories is not up to 100%", "Fail",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                }
+            }
+        });
 
     }
 
@@ -57,10 +86,13 @@ public class GradingFrame extends JFrame{
         String [] header={"Student Name", "Student ID", "Raw Score", "Scaled score"};
 
         ArrayList<Student> allStudents = course.getAllStudents();
-        DefaultTableModel model = new DefaultTableModel(header, 0) {
+        model = new DefaultTableModel(header, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false;
+                if(column == 2) {
+                    return true;
+                } else
+                    return false;
             }
         };
 
@@ -72,13 +104,7 @@ public class GradingFrame extends JFrame{
         }
         gradeTable = new JTable(model);
 
-        editModeButton = new JButton("Edit Mode");
-        editModeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
 
-            }
-        });
 
 
     }
