@@ -28,13 +28,14 @@ public class CourseDetailFrame extends JFrame{
     private JButton deleteCategoryBtn;
     private JButton modifyCategoryBtn;
     private JTable studentTable;
-    private JComboBox comboBox1;
+    private JComboBox<String> courseComboBox;
     private JPanel ButtonPanel;
     private JPanel ChoicePanel;
     private JTable categoryTable;
     private JButton modifyAssignmentsButton;
     private JScrollPane studentScroll;
     private JScrollPane categoryScroll;
+    private JLabel courseLbl;
     private DefaultTableModel categoryModel;
 
 
@@ -43,7 +44,7 @@ public class CourseDetailFrame extends JFrame{
         this.course = course;
 
         setName("Course detail frame");
-
+        courseLbl.setText("Current Viewing Course: " + course.getCourseName());
         setVisible(true);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,6 +52,7 @@ public class CourseDetailFrame extends JFrame{
         pack();
         setLocationRelativeTo(null);
         addActiveComponent();
+
 
         categoryScroll.addMouseListener(new MouseAdapter() {
             @Override
@@ -113,8 +115,6 @@ public class CourseDetailFrame extends JFrame{
             }
         });
 
-
-
         viewGradesBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -132,8 +132,6 @@ public class CourseDetailFrame extends JFrame{
             }
         });
 
-
-
         modifyCategoryBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -141,6 +139,9 @@ public class CourseDetailFrame extends JFrame{
                 dispose();
             }
         });
+
+
+
     }
 
     private void createUIComponents() {
@@ -243,5 +244,28 @@ public class CourseDetailFrame extends JFrame{
             }
         });
 
+
+        ArrayList<Course> allCourses = gs.getAllCourses();
+        int len = allCourses.size();
+        String[] courseOptions = new String[len];
+        int index = 0;
+        for(Course c : allCourses) {
+            courseOptions[index++] = c.getCourseName();
+        }
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(courseOptions);
+
+        courseComboBox = new JComboBox<String>(comboBoxModel);
+
+        courseComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JComboBox comboBox = (JComboBox) actionEvent.getSource();
+
+                Object selected = comboBox.getSelectedItem();
+                System.out.println("Selected Item is " + selected);
+
+
+            }
+        });
     }
 }

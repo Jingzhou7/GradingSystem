@@ -21,10 +21,12 @@ public class CourseFrame extends JFrame {
     private JComboBox semesterCB;
     private JPanel ButtonPanel;
     private JPanel OptionPanel;
+    private JLabel greetingLbl;
 
     public CourseFrame(GradingSystem gs) {
 
         this.gs = gs;
+
         setName("All Courses");
         setContentPane(mainPanel);
         setVisible(true);

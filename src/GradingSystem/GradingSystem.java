@@ -1,5 +1,6 @@
 package GradingSystem;
 
+import db.SQLConnection;
 import model.*;
 import ui.LoginFrame;
 
@@ -20,6 +21,7 @@ public class GradingSystem {
     ArrayList<String> semesters;
     ArrayList<Course> courses;
     ArrayList<Category> categories;
+    ArrayList<Category> cats;
 
     private String USERNAME = "1";
     private String PASSWORD = "1";
@@ -61,28 +63,29 @@ public class GradingSystem {
         deletedCourses = new ArrayList<>();
         deletedGrades = new ArrayList<>();
         deletedStudents = new ArrayList<>();
-        importPreviousData();
+        //importPreviousData();
+        cats = new ArrayList<>();
+        cats.add(new Category("Exam",50));
+        cats.add(new Category("Participation",10));
+        cats.add(new Category("Homework", 15));
+        cats.add(new Category("Programing Assignment",25));
     }
 
     private void importPreviousData() {
-        ArrayList<Student> students = new ArrayList<>();
-        students.add(new Student(new Name("Alice")));
-        students.add(new Student(new Name("Bob")));
-        categories = new ArrayList<>();
-        categories.add(new Category("Exam",50));
-        categories.add(new Category("Participation",10));
-        categories.add(new Category("Homework", 15));
-        categories.add(new Category("Programing Assignment",25));
+//        ArrayList<Student> students = new ArrayList<>();
+//        students.add(new Student(new Name("Alice")));
+//        students.add(new Student(new Name("Bob")));
 
-        Course course1 = new Course(1, FALL_2019, "CS591", categories, students);
-        Course course2 = new Course(2, FALL_2019, "CS112 S1", categories, students);
-        Course course3 = new Course(3, FALL_2019, "CS112 S2", categories, students);
-        Course course4 = new Course(4, FALL_2019, "CS112 S3", categories, students);
 
-        courses.add(course1);
-        courses.add(course2);
-        courses.add(course3);
-        courses.add(course4);
+//        Course course1 = new Course(1, FALL_2019, "CS591", categories, students);
+//        Course course2 = new Course(2, FALL_2019, "CS112 S1", categories, students);
+//        Course course3 = new Course(3, FALL_2019, "CS112 S2", categories, students);
+//        Course course4 = new Course(4, FALL_2019, "CS112 S3", categories, students);
+
+//        courses.add(course1);
+//        courses.add(course2);
+//        courses.add(course3);
+//        courses.add(course4);
 
 
     }
@@ -103,13 +106,13 @@ public class GradingSystem {
 
     public boolean addCourse(String semester, String courseName, ArrayList<Category> categories, ArrayList<Student> students) {
         int index = courses.size() + 1;
-        Course newCourse = new Course(index, semester, courseName, categories, students);
+        Course newCourse = new Course(index, semester, courseName, cats, students);
         courses.add(newCourse);
         return true;
     }
 
     public boolean addCourse(String courseName) {
-        Course newCourse = new Course(FALL_2019, courseName, categories, new ArrayList<Student>());
+        Course newCourse = new Course(FALL_2019, courseName, cats, new ArrayList<Student>());
         courses.add(newCourse);
         return true;
     }

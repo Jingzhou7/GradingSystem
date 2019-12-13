@@ -25,8 +25,8 @@ public class AssignmentFrame extends JFrame{
     private JButton modifyWeightsButton;
     private JPanel ButtonPanel;
     private JPanel mainPanel;
-    private JComboBox comboBox1;
     private JPanel ChoicePanel;
+    private JLabel categoryLbl;
 
 
     public AssignmentFrame(GradingSystem gs, Course course, Category category) {
@@ -34,7 +34,7 @@ public class AssignmentFrame extends JFrame{
         this.course = course;
         this.category = category;
 
-
+        categoryLbl.setText("Current Viewing Category: " + category.getCategoryName());
         setName("Category");
         setVisible(true);
 

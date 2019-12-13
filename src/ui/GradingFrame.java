@@ -59,22 +59,7 @@ public class GradingFrame extends JFrame{
                 if (gradeTable.isEditing()){
                     gradeTable.getCellEditor().stopCellEditing();
                 }
-                for (int i = 0;i < course.getAllCategories().size();i++){
-                    if (Double.parseDouble(model.getValueAt(i, 1).toString()) == 0){
-                        Object[] options ={ "ok" };
-                        JOptionPane.showOptionDialog(null, "The weight of category cannot be 0", "Fail",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-                        break;
-                    }
-                }
-                for (int i = 0;i < course.getAllCategories().size();i++){
-                    course.getAllCategories().get(i).setCategoryName(model.getValueAt(i, 0).toString());
-                    course.getAllCategories().get(i).setWeight(Double.parseDouble(model.getValueAt(i, 1).toString()));
-                    totalWeight += Double.parseDouble(model.getValueAt(i, 1).toString());
-                }
-                if (totalWeight != 100){
-                    Object[] options ={ "ok" };
-                    JOptionPane.showOptionDialog(null, "The total weight of all categories is not up to 100%", "Fail",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-                }
+
             }
         });
 
