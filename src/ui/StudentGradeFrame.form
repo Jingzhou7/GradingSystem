@@ -23,7 +23,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="a93e5" class="javax.swing.JTable" binding="table1" custom-create="true" default-binding="true">
+          <component id="a93e5" class="javax.swing.JTable" binding="studentGradeTable" custom-create="true">
             <constraints/>
             <properties/>
           </component>
@@ -66,4 +66,7 @@
       </grid>
     </children>
   </grid>
+  <inspectionSuppressions>
+    <suppress inspection="NoLabelFor" id="3b27"/>
+  </inspectionSuppressions>
 </form>

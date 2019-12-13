@@ -7,8 +7,6 @@ public class Grade {
     private double rawScore;
     private double bonusPoint;
 
-
-
     private String letterGrade;
     private String comment;
 

@@ -34,7 +34,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="98dcb" class="javax.swing.JTable" binding="table1" custom-create="true" default-binding="true">
+          <component id="98dcb" class="javax.swing.JTable" binding="table" custom-create="true">
             <constraints/>
             <properties/>
           </component>
@@ -47,7 +47,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="951e5" class="javax.swing.JTable" binding="table2" custom-create="true" default-binding="true">
+          <component id="951e5" class="javax.swing.JTable" binding="assTable" custom-create="true">
             <constraints/>
             <properties/>
           </component>
@@ -55,4 +55,7 @@
       </scrollpane>
     </children>
   </grid>
+  <inspectionSuppressions>
+    <suppress inspection="NoLabelFor" id="6b101"/>
+  </inspectionSuppressions>
 </form>

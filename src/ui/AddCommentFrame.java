@@ -1,6 +1,7 @@
 package ui;
 
 import GradingSystem.GradingSystem;
+import model.Comment;
 import model.Course;
 import model.Student;
 
@@ -44,7 +45,7 @@ public class AddCommentFrame extends  JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String inp= commentTextfield.getText();
-                student.getComments().add(inp);
+                student.getComments().add(new Comment(inp));
             }
         });
     }

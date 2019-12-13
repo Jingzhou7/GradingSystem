@@ -1,6 +1,7 @@
 package ui;
 
 import GradingSystem.GradingSystem;
+import model.Comment;
 import model.Course;
 import model.Grade;
 import model.Student;
@@ -45,7 +46,7 @@ public class CommentFrame extends JFrame{
     private void createUIComponents() {
         // TODO: place custom component creation code here
         String [] header={"                                                     Overall Comment"};
-        ArrayList<String> comments=student.getComments();
+        ArrayList<Comment> comments=student.getComments();
         DefaultTableModel commentModel = new DefaultTableModel(header, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -54,7 +55,7 @@ public class CommentFrame extends JFrame{
         };
         if(comments.size()!=0){
             for(int i=0;i<comments.size();i++){
-                Object[] obj={comments.get(i)};
+                Object[] obj={comments.get(i).getText()};
                 commentModel.addRow(obj);
             }
         }
@@ -67,7 +68,7 @@ public class CommentFrame extends JFrame{
                 return false;
             }
         };
-        ArrayList<Grade> grades=student.getGrade();
+        ArrayList<Grade> grades=student.getGrades();
         if(grades.size()!=0){
             for(int i=0;i<grades.size();i++){
                 Object[] obj={grades.get(i).getAssignment().getAssignmentName(),grades.get(i).getComment()};
