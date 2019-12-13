@@ -45,7 +45,7 @@ public class AddCommentFrame extends  JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String inp= commentTextfield.getText();
-                student.getComments().add(new Comment(inp));
+                student.addComment(new Comment(inp));
             }
         });
     }
