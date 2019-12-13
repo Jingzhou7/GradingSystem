@@ -29,8 +29,6 @@ public class AddCourseFrame extends JFrame {
         pack();
         setLocationRelativeTo(null);
         addActiveComponent();
-
-
     }
 
     private void addActiveComponent() {
