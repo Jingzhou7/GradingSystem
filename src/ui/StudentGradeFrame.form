@@ -37,7 +37,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="773e" class="javax.swing.JButton" binding="ShowComment">
+          <component id="773e" class="javax.swing.JButton" binding="showComment" custom-create="true">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -45,7 +45,7 @@
               <text value="Show Comment"/>
             </properties>
           </component>
-          <component id="e3fa7" class="javax.swing.JButton" binding="AddComment">
+          <component id="e3fa7" class="javax.swing.JButton" binding="addComment">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>

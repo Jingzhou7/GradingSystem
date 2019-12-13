@@ -28,13 +28,14 @@ public class CourseDetailFrame extends JFrame{
     private JButton deleteCategoryBtn;
     private JButton modifyCategoryBtn;
     private JTable studentTable;
-    private JComboBox comboBox1;
+    private JComboBox<String> courseComboBox;
     private JPanel ButtonPanel;
     private JPanel ChoicePanel;
     private JTable categoryTable;
     private JButton modifyAssignmentsButton;
     private JScrollPane studentScroll;
     private JScrollPane categoryScroll;
+    private JLabel courseLbl;
     private DefaultTableModel categoryModel;
 
 
@@ -43,7 +44,7 @@ public class CourseDetailFrame extends JFrame{
         this.course = course;
 
         setName("Course detail frame");
-
+        courseLbl.setText("Current Viewing Course: " + course.getCourseName());
         setVisible(true);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,56 +52,68 @@ public class CourseDetailFrame extends JFrame{
         pack();
         setLocationRelativeTo(null);
         addActiveComponent();
+    }
 
-        categoryScroll.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseExited(MouseEvent e) {
-                double totalWeight = 0;
-                if (categoryTable.isEditing()){
-                    categoryTable.getCellEditor().stopCellEditing();
-                }
-                for (int i = 0;i < course.getAllCategories().size();i++){
-                    if (Double.parseDouble(categoryModel.getValueAt(i, 1).toString()) == 0){
-                        Object[] options ={ "ok" };
-                        JOptionPane.showOptionDialog(null, "The weight of category cannot be 0", "Fail",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-                        break;
-                    }
-                }
-                for (int i = 0;i < course.getAllCategories().size();i++){
-                    course.getAllCategories().get(i).setCategoryName(categoryModel.getValueAt(i, 0).toString());
-                    course.getAllCategories().get(i).setWeight(Double.parseDouble(categoryModel.getValueAt(i, 1).toString()));
-                    totalWeight += Double.parseDouble(categoryModel.getValueAt(i, 1).toString());
-                }
-                if (totalWeight != 100){
-                    Object[] options ={ "ok" };
-                    JOptionPane.showOptionDialog(null, "The total weight of all categories is not up to 100%", "Fail",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-                }
+
+    private boolean checkWeight(){
+        double totalWeight = 0;
+        boolean weightSave = true;
+        String msg = "";
+        if (categoryTable.isEditing()){
+            categoryTable.getCellEditor().stopCellEditing();
+        }
+        for (int i = 0;i < course.getAllCategories().size();i++){
+            if (Double.parseDouble(categoryModel.getValueAt(i, 1).toString()) == 0){
+                msg = msg + "The weight of category cannot be 0. ";
+                weightSave = false;
+                break;
+
             }
-        });
+        }
+        for (int i = 0;i < course.getAllCategories().size();i++){
+            course.getAllCategories().get(i).setCategoryName(categoryModel.getValueAt(i, 0).toString());
+            course.getAllCategories().get(i).setWeight(Double.parseDouble(categoryModel.getValueAt(i, 1).toString()));
+            totalWeight += Double.parseDouble(categoryModel.getValueAt(i, 1).toString());
+        }
+        if (totalWeight != 100){
+            msg = msg + "The total weight of all categories is not up to 100%";
+            weightSave = false;
+        }
+        if (!weightSave){
+            Object[] options ={ "ok" };
+            JOptionPane.showOptionDialog(null, msg, "Fail",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            return weightSave;
+        }
+
+        return weightSave;
     }
 
     private void addActiveComponent() {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new CourseFrame(gs);
-                dispose();
+                if (checkWeight()){
+                    new CourseFrame(gs);
+                    dispose();
+                }
             }
         });
 
         importStudentsBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser chooser = new JFileChooser();
-                chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-                chooser.showDialog(new JLabel(), "select");
-                File file = chooser.getSelectedFile();
-                String excelFileName = file.getAbsoluteFile().toString();
-                System.out.println(excelFileName);
-                // read Excel
-                List<Student> readResult = MyExcelUtil.readExcel(excelFileName);
-                for (int i = 0;i < readResult.size();i++){
-                    System.out.println(readResult.get(i).toString());
+                if (course.getAllStudents() != null) {
+                    JFileChooser chooser = new JFileChooser();
+                    chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+                    chooser.showDialog(new JLabel(), "select");
+                    File file = chooser.getSelectedFile();
+                    String excelFileName = file.getAbsoluteFile().toString();
+                    System.out.println(excelFileName);
+                    // read Excel
+                    List<Student> readResult = MyExcelUtil.readExcel(excelFileName);
+                    course.getAllStudents().addAll(readResult);
+                    new CourseDetailFrame(gs, course);
+                    dispose();
                 }
             }
         });
@@ -113,13 +126,13 @@ public class CourseDetailFrame extends JFrame{
             }
         });
 
-
-
         viewGradesBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new StudentGradeFrame(gs, course);
-                dispose();
+                if (checkWeight()){
+                    new StudentGradeFrame(gs, course);
+                    dispose();
+                }
             }
         });
 
@@ -132,8 +145,6 @@ public class CourseDetailFrame extends JFrame{
             }
         });
 
-
-
         modifyCategoryBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -141,6 +152,9 @@ public class CourseDetailFrame extends JFrame{
                 dispose();
             }
         });
+
+
+
     }
 
     private void createUIComponents() {
@@ -190,6 +204,7 @@ public class CourseDetailFrame extends JFrame{
                     int studentId = Integer.parseInt(studentModel.getValueAt(selected, 2).toString());
                     Student targetStudent = course.getStudent(studentId);
                     course.getAllStudents().remove(targetStudent);
+                    gs.addDeletedStudent(targetStudent);
 
                     //remove the entry in the table
                     studentModel.removeRow(studentTable.getSelectedRow());
@@ -214,7 +229,7 @@ public class CourseDetailFrame extends JFrame{
                     String categoryName = categoryModel.getValueAt(selected, 0).toString();
                     Category targetcategory = course.getCategory(categoryName);
                     course.getAllStudents().remove(targetcategory);
-
+                    gs.addDeletedCategory(targetcategory);
                     //remove the entry in the table
                     categoryModel.removeRow(categoryTable.getSelectedRow());
                     JOptionPane.showMessageDialog(null, "Selected category deleted successfully");
@@ -243,5 +258,28 @@ public class CourseDetailFrame extends JFrame{
             }
         });
 
+
+        ArrayList<Course> allCourses = gs.getAllCourses();
+        int len = allCourses.size();
+        String[] courseOptions = new String[len];
+        int index = 0;
+        for(Course c : allCourses) {
+            courseOptions[index++] = c.getCourseName();
+        }
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(courseOptions);
+
+        courseComboBox = new JComboBox<String>(comboBoxModel);
+
+        courseComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JComboBox comboBox = (JComboBox) actionEvent.getSource();
+
+                Object selected = comboBox.getSelectedItem();
+                System.out.println("Selected Item is " + selected);
+
+
+            }
+        });
     }
 }
