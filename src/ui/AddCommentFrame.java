@@ -31,6 +31,7 @@ public class AddCommentFrame extends  JFrame{
         pack();
         setLocationRelativeTo(null);
 
+        backBtn=new JButton("Back");
         backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -41,11 +42,18 @@ public class AddCommentFrame extends  JFrame{
         addActiveComponent();
     }
     private void addActiveComponent() {
+        confirmButton=new JButton("Confirm");
         confirmButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent actionEvent) {
+                JButton source = (JButton) actionEvent.getSource();
                 String inp= commentTextfield.getText();
-                student.addComment(new Comment(inp));
+                if(inp==""){
+                    JOptionPane.showMessageDialog(source, "The input is empty");
+                }
+                else {
+                    student.addComment(new Comment(inp));
+                }
             }
         });
     }

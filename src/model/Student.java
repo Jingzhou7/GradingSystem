@@ -12,6 +12,8 @@ public class Student {
     private ArrayList<BonusPoints> bonusPoints;
     private ArrayList<Grade> grades;
 
+    private boolean scoreUp;
+
     public Student(Name name) {
         this.name = name;
         setEmail("cs@bu.edu");
@@ -19,6 +21,7 @@ public class Student {
         comments = new ArrayList<>();
         bonusPoints = new ArrayList<>();
         grades = new ArrayList<Grade>();
+        scoreUp=false;
     }
 
     public Student(String fname, String lname, String mname, String email) {
@@ -27,6 +30,7 @@ public class Student {
         comments = new ArrayList<>();
         bonusPoints = new ArrayList<>();
         grades = new ArrayList<Grade>();
+        scoreUp=false;
     }
 
     public Student(Name name, String email, int sid) {
@@ -36,6 +40,7 @@ public class Student {
         comments = new ArrayList<>();
         bonusPoints = new ArrayList<>();
         grades = new ArrayList<Grade>();
+        scoreUp=false;
     }
 
     public Student(Name name, String email, ArrayList<Comment> comments, ArrayList<BonusPoints> bonusPoints, ArrayList<Grade> grades){
@@ -46,6 +51,7 @@ public class Student {
         this.comments = comments;
         this.bonusPoints = bonusPoints;
         this.grades = grades;
+        scoreUp=false;
     }
 
     public Student(Name name, String email, int sid, ArrayList<Comment> comments, ArrayList<BonusPoints> bonusPoints, ArrayList<Grade> grades){
@@ -149,6 +155,15 @@ public class Student {
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
     }
+
+    public boolean isScoreUp() {
+        return scoreUp;
+    }
+
+    public void setScoreUp(boolean scoreUp) {
+        this.scoreUp = scoreUp;
+    }
+
     public ArrayList<BonusPoints> getBonusPoints(){
         return bonusPoints;
     }

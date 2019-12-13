@@ -34,6 +34,8 @@ public class CommentFrame extends JFrame{
         setContentPane(mainPanel);
         pack();
         setLocationRelativeTo(null);
+
+        backButton=new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -53,6 +55,7 @@ public class CommentFrame extends JFrame{
                 return false;
             }
         };
+
         if(comments.size()!=0){
             for(int i=0;i<comments.size();i++){
                 Object[] obj={comments.get(i).getText()};
@@ -62,7 +65,7 @@ public class CommentFrame extends JFrame{
         table=new JTable(commentModel);
 
         String [] assHeader={"Assignment","Comment"};
-        DefaultTableModel assCommentModel = new DefaultTableModel(header, 0) {
+        DefaultTableModel assCommentModel = new DefaultTableModel(assHeader, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;

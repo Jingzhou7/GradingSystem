@@ -23,6 +23,8 @@ public class StudentGradeFrame extends JFrame{
     private JButton showComment;
     private JButton addComment;
     private JPanel ChoicePanel;
+    private JButton scoreButton;
+    DefaultTableModel studentGradeModel
 
     public StudentGradeFrame(GradingSystem gs, Course course) {
 
@@ -40,6 +42,7 @@ public class StudentGradeFrame extends JFrame{
         addActiveComponent();
     }
     public void addActiveComponent(){
+        backButton=new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -49,10 +52,8 @@ public class StudentGradeFrame extends JFrame{
         });
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
+    private DefaultTableModel getModel(ArrayList<Student> allStudents){
         String [] header={"Student ID","Name","Bonus Points", "Raw Scaled Points", "Final Grade"};
-        ArrayList<Student> allStudents = course.getAllStudents();
         DefaultTableModel studentGradeModel = new DefaultTableModel(header, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -60,11 +61,25 @@ public class StudentGradeFrame extends JFrame{
             }
         };
         if(allStudents.size()!=0){
+            String score;
             for(int i = 0;i < allStudents.size();i++) {
-                Object[] obj = {allStudents.get(i).getSid(),allStudents.get(i).getName(), allStudents.get(i).getAllBonusPoints(), allStudents.get(i).getTotalScaledScore(), Grade.scoreToLetterGrade(allStudents.get(i).getTotalScaledScore())};
+                if(allStudents.get(i).isScoreUp()){
+                    score=Grade.scoreUp(allStudents.get(i).getTotalScaledScore());
+                }
+                else{
+                    score=Grade.scoreToLetterGrade(allStudents.get(i).getTotalScaledScore());
+                }
+                Object[] obj = {allStudents.get(i).getSid(),allStudents.get(i).getName(), allStudents.get(i).getAllBonusPoints(), allStudents.get(i).getTotalScaledScore(), score};
                 studentGradeModel.addRow(obj);
             }
         }
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+
+        ArrayList<Student> allStudents = course.getAllStudents();
+        studentGradeModel=getModel(allStudents);
         studentGradeTable = new JTable(studentGradeModel);
 
         addComment=new JButton("Add Comment");
@@ -86,6 +101,7 @@ public class StudentGradeFrame extends JFrame{
                 }
             }
         });
+
         showComment=new JButton("Show Comment");
         showComment.addActionListener(new ActionListener() {
             @Override
@@ -98,6 +114,30 @@ public class StudentGradeFrame extends JFrame{
                     Student targetStudent = course.getStudent(studentId);
                     new CommentFrame(gs, course, targetStudent);
                     dispose();
+                }else {
+                    JOptionPane.showMessageDialog(source, "Please select a row.");
+                }
+            }
+        });
+
+        scoreButton=new JButton("Score Up");
+        scoreButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JButton source = (JButton) actionEvent.getSource();
+                int selected = studentGradeTable.getSelectedRow();
+                if (selected != -1) {
+                    //get the student that is added comment
+                    int studentId = Integer.parseInt(studentGradeModel.getValueAt(selected, 0).toString());
+                    Student targetStudent = course.getStudent(studentId);
+                    if(!targetStudent.isScoreUp()) {
+                        targetStudent.setScoreUp(true);
+                        studentGradeModel = getModel(allStudents);
+                        studentGradeTable = new JTable(studentGradeModel);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(source,"This student has been scored up.");
+                    }
                 }else {
                     JOptionPane.showMessageDialog(source, "Please select a row.");
                 }

@@ -103,9 +103,5 @@ public class GradingFrame extends JFrame{
             }
         }
         gradeTable = new JTable(model);
-
-
-
-
     }
 }
