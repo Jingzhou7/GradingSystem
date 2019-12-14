@@ -21,6 +21,8 @@ public class CommentFrame extends JFrame {
     private JTable table;
     private JTable assTable;
     private JPanel mainPanel;
+    private JButton deleteComment;
+    private JButton addComment;
 
     public CommentFrame(GradingSystem gs, Course course, Student student) {
         this.gs = gs;
@@ -43,6 +45,14 @@ public class CommentFrame extends JFrame {
                 dispose();
             }
         });
+        addComment.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddCommentFrame(gs,course,student);
+                dispose();
+            }
+        });
+
     }
 
     private void createUIComponents() {
@@ -79,6 +89,12 @@ public class CommentFrame extends JFrame {
             }
         }
         assTable = new JTable(assCommentModel);
-    }
 
+        deleteComment.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+    }
 }

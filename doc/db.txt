@@ -102,7 +102,7 @@ CREATE TABLE `grade`(
 );
 
 insert into login (username, password, numcourses, numcategories, numassignment, numstudent, numbonuspoints, numstudentcomments, numgrades) VALUES ('CPK', 'PASSWORD', 1, 1, 1, 1, 1, 1, 1);
-INSERT INTO `assignment` VALUES (1,1,40,NULL,NULL,NULL,'Midterm'),(2,1,60,NULL,NULL,NULL,'Final');
+INSERT INTO `assignment` VALUES (1,1,40,NULL,NULL,100,'Midterm'),(2,1,60,NULL,NULL,100,'Final');
 INSERT INTO `category` VALUES (1,1,50,'Exam'),(2,1,10,'Participation'),(3,1,15,'Homework'),(4,1,25,'Programing Assignment'),(5,2,50,'Exam'),(6,2,10,'Participation'),(7,2,15,'Homework'),(8,2,25,'Programing Assignment'),(9,3,50,'Exam'),(10,3,10,'Participation'),(11,3,15,'Homework'),(12,3,25,'Programing Assignment'),(13,4,50,'Exam'),(14,4,10,'Participation'),(15,4,15,'Homework'),(16,4,25,'Programing Assignment'),(17,2,50,'Exam'),(18,2,10,'Participation'),(19,2,15,'Homework'),(20,2,25,'Programing Assignment'),(21,4,50,'Exam'),(22,4,10,'Participation'),(23,4,15,'Homework'),(24,4,25,'Programing Assignment');
 INSERT INTO `course` VALUES (1,'Fall 2019','CS591',NULL),(2,'Fall 2019','CS112 S1',NULL),(3,'Fall 2019','CS100 S1',NULL),(4,'Fall 2019','CS100 S2',NULL);
 INSERT INTO `grade` VALUES (1,98,1,1,10,'A','no'),(2,70,1,2,0,'C','no');

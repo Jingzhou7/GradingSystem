@@ -130,6 +130,13 @@ public class Student {
         }
         return sum;
     }
+    public Double getTotalRawScore(){
+        double sum=0;
+        for(int i=0;i<grades.size();i++){
+            sum+=grades.get(i).getRawScore();
+        }
+        return sum;
+    }
     public Double getAllBonusPoints(){
         double sum=0;
         for(int i=0;i<grades.size();i++){

@@ -27,7 +27,7 @@ public class AddCommentFrame extends JFrame {
         this.course = course;
         this.student = student;
 
-        commentLabel=new JLabel("Comment");
+        //commentLabel=new JLabel("Comment");
         setName("Add Comment");
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,27 +43,27 @@ public class AddCommentFrame extends JFrame {
                 dispose();
             }
         });
-        addActiveComponent();
-    }
-
-    private void addActiveComponent() {
-        confirmButton = new JButton("Confirm");
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 JButton source = (JButton) actionEvent.getSource();
                 String inp = commentTextfield.getText();
-                if (inp == "") {
+                if (inp.equals("")||inp==null) {
                     JOptionPane.showMessageDialog(source, "The input is empty");
                 } else {
                     student.addComment(new Comment(inp));
+                    new StudentGradeFrame(gs,course);
+                    dispose();
                 }
             }
         });
     }
 
+
     private void createUIComponents() {
         // TODO: place custom component creation code here
+        //confirmButton = new JButton("Confirm");
+
     }
 
 }
