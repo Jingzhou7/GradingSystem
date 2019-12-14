@@ -27,7 +27,6 @@ public class CommentFrame extends JFrame {
         this.course = course;
         this.student = student;
 
-
         setName("Comment");
         setVisible(true);
 
@@ -36,7 +35,7 @@ public class CommentFrame extends JFrame {
         pack();
         setLocationRelativeTo(null);
 
-        backButton = new JButton("Back");
+        //backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

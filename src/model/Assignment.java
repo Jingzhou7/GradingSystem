@@ -17,7 +17,7 @@ public class Assignment{
         weight = 0;
         releaseDate = new Date(2019,1,1);
         dueDate = new Date(2019,10,10);
-        maxPoint = 0;
+        maxPoint = 100;
     }
 
     public Assignment(String assignmentName, double weight, Date releaseDate, Date dueDate, double maxPoint){
