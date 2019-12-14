@@ -106,16 +106,18 @@ public class CourseDetailFrame extends JFrame{
                     chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
                     chooser.showDialog(new JLabel(), "select");
                     File file = chooser.getSelectedFile();
-                    String excelFileName = file.getAbsoluteFile().toString();
-                    System.out.println(excelFileName);
-                    // read Excel
-                    List<Student> readResult = MyExcelUtil.readExcel(excelFileName);
-                    for (int i = 0;i < readResult.size();i++){
-                        System.out.println(readResult.get(i).toString());
+                    if (file != null) {
+                        String excelFileName = file.getAbsoluteFile().toString();
+                        System.out.println(excelFileName);
+                        // read Excel
+                        List<Student> readResult = MyExcelUtil.readExcel(excelFileName);
+                        for (int i = 0; i < readResult.size(); i++) {
+                            System.out.println(readResult.get(i).toString());
+                        }
+                        course.getAllStudents().addAll(readResult);
+                        new CourseDetailFrame(gs, course);
+                        dispose();
                     }
-                    course.getAllStudents().addAll(readResult);
-                    new CourseDetailFrame(gs, course);
-                    dispose();
                 }else {
                     JOptionPane.showMessageDialog(null, "There are students in this class already.");
                 }

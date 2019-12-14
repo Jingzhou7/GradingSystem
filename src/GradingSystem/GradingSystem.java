@@ -14,13 +14,10 @@ import java.util.List;
  */
 public class GradingSystem {
 
-    public static final String FALL_2019 = "Fall 2019";
-    public static final String SPRING_2019 = "Spring 2019";
-    public static final String FALL_2018 = "Fall 2018";
-    public static final String SPRING_2018 = "Spring 2018";
+    private String current_semester = "Fall 2019";
+
     ArrayList<String> semesters;
     ArrayList<Course> courses;
-    ArrayList<Category> categories;
     ArrayList<Category> cats;
 
     private String USERNAME = "1";
@@ -65,10 +62,10 @@ public class GradingSystem {
         deletedStudents = new ArrayList<>();
         //importPreviousData();
         cats = new ArrayList<>();
-        cats.add(new Category("Exam",50));
-        cats.add(new Category("Participation",10));
-        cats.add(new Category("Homework", 15));
-        cats.add(new Category("Programing Assignment",25));
+//        cats.add(new Category("Exam",50));
+//        cats.add(new Category("Participation",10));
+//        cats.add(new Category("Homework", 15));
+//        cats.add(new Category("Programing Assignment",25));
     }
 
     private void importPreviousData() {
@@ -104,6 +101,16 @@ public class GradingSystem {
         return courses;
     }
 
+    public ArrayList<Course> getCoursesBySemester(String semester) {
+        ArrayList<Course> res = new ArrayList<>();
+        for(Course c : courses) {
+            if(c.getSemester().equals(semester)) {
+                res.add(c);
+            }
+        }
+        return res;
+    }
+
     public boolean addCourse(String semester, String courseName, ArrayList<Category> categories, ArrayList<Student> students) {
         int index = courses.size() + 1;
         Course newCourse = new Course(index, semester, courseName, cats, students);
@@ -112,51 +119,64 @@ public class GradingSystem {
     }
 
     public boolean addCourse(String courseName) {
-        Course newCourse = new Course(FALL_2019, courseName, cats, new ArrayList<Student>());
+        Course newCourse = new Course(current_semester, courseName, new ArrayList<Category>(), new ArrayList<Student>());
         courses.add(newCourse);
         return true;
     }
     public boolean addSection(String sectionName) {
         //check existed sections, and increment the section id
-        int sectionCount = 0;
+        int id = 0;
         for(Course c : courses) {
             if(c.getCourseName().contains(sectionName)) {
-                sectionCount+=1;
+                if (c.getCourseIndex() + 1 > id) {
+                    id = c.getCourseIndex() + 1;
+                }
             }
         }
-        Course newSection = new Section(FALL_2019, sectionName, categories, new ArrayList<Student>(), sectionCount+1);
+        Course newSection = new Section(current_semester, sectionName, new ArrayList<Category>(), new ArrayList<Student>(), id);
         courses.add(newSection);
         return true;
     }
 
     public boolean addCourseWithTemplete(String courseName, String courseTemplete) {
-        Course templeteCourse = new Course("tmp");
+        //Course templeteCourse = new Course("tmp");
         for(Course c : courses) {
             if(c.getCourseName().equals(courseTemplete)) {
-                templeteCourse = c;
-                break;
+                ArrayList<Category> templeteCategories = c.getAllCategories();
+                ArrayList<Category> temp = new ArrayList<Category>();
+                for (Category cc:templeteCategories){
+                    ArrayList<Assignment> tempA = new ArrayList<Assignment>();
+                    for(Assignment a:cc.getAllAssignments()){
+                        Assignment copy = new Assignment(a.getAssignmentName(), a.getWeight(), a.getReleaseDate(), a.getDueDate(), a.getMaxPoint());
+                        tempA.add(copy);
+                    }
+                    Category copyC = new Category(cc.getCategoryName(), cc.getWeight(), tempA);
+                    temp.add(copyC);
+                }
+                Course newCourse = new Course(current_semester, courseName, temp, new ArrayList<Student>());
+                courses.add(newCourse);
+                return true;
             }
         }
-        ArrayList<Category> templeteCategories = templeteCourse.getAllCategories();
-        Course newCourse = new Course(FALL_2019, courseName, templeteCategories, new ArrayList<Student>());
-        courses.add(newCourse);
-        return true;
+        return false;
     }
 
     public boolean addSectionWithTemplete(String sectionName, String sectionTemplete) {
         //check existed sections, and increment the section id
-        Section templeteSection = new Section(1, "tmp");
-        int sectionCount = 0;
+        //Section templeteSection = new Section(1, "tmp");
+        ArrayList<Category> templeteCategories = new ArrayList<Category>();
+        int id = 0;
         for(Course c : courses) {
             if(c.getCourseName().contains(sectionName)) {
-                sectionCount+=1;
+                if (c.getCourseIndex() + 1 > id) {
+                    id = c.getCourseIndex() + 1;
+                }
             }
             if(c.getCourseName().contains(sectionTemplete)) {
-                templeteSection = (Section) c;
+                templeteCategories = c.getAllCategories();
             }
         }
-        ArrayList<Category> templeteCategories = templeteSection.getAllCategories();
-        Course newSection = new Section(FALL_2019, sectionName, templeteCategories, new ArrayList<Student>(), sectionCount+1);
+        Course newSection = new Section(current_semester, sectionName, templeteCategories, new ArrayList<Student>(), id);
         courses.add(newSection);
         return true;
     }
@@ -381,7 +401,7 @@ public class GradingSystem {
     }
 
     public Category getCategoryFromDB(int cid){
-        String sql = "select * from category where category = " + cid;
+        String sql = "select * from category where categoryid = " + cid;
         PreparedStatement pst = null;
         SQLConnection sc = new SQLConnection();
         Category a = null;
@@ -902,7 +922,7 @@ public class GradingSystem {
         int[] counts = {Course.getCount(), Category.getCount(), Assignment.getCount(), Student.getCount(), BonusPoints.getCount(), Comment.getCount(), Grade.getCount()};
 
         updateUser(PASSWORD, counts);
-        //delete();
+        delete();
         for (Course c : courses){
             Course temp = getCourseFromDB(c.getCourseIndex());
 
@@ -1138,13 +1158,30 @@ public class GradingSystem {
 
     public void addDeletedCourse(Course c){
         deletedCourses.add(c.getCourseIndex());
-        ArrayList<Category> descendents = c.getAllCategories();
-        for (Category ct: descendents){
-            addDeletedCategory(ct);
-        }
         ArrayList<Student> studentDescendent = c.getAllStudents();
         for (Student s: studentDescendent){
             addDeletedStudent(s);
+        }
+
+        if (!(c instanceof Section)) {
+            ArrayList<Category> descendents = c.getAllCategories();
+            for (Category ct : descendents) {
+                addDeletedCategory(ct);
+            }
+        }
+        else{
+            int count = 0;
+            for (Course cc:courses){
+                if (cc.getCourseName() == c.getCourseName()){
+                    count+=1;
+                }
+            }
+            if (count == 1){
+                ArrayList<Category> descendents = c.getAllCategories();
+                for (Category ct : descendents) {
+                    addDeletedCategory(ct);
+                }
+            }
         }
         // get all students and categories with this course and add
     }
@@ -1193,8 +1230,20 @@ public class GradingSystem {
     }
 
     public void addDeletedGrades(Grade g){
-        deletedGrades.add(g.getId());
+        if (!deletedGrades.contains(g.getId())) {
+            deletedGrades.add(g.getId());
+        }
     }
 
+    public String getCurrent_semester() {
+        return current_semester;
+    }
 
+    public void setCurrent_semester(String current_semester) {
+        this.current_semester = current_semester;
+    }
+
+    public void setPASSWORD(String PASSWORD) {
+        this.PASSWORD = PASSWORD;
+    }
 }
