@@ -23,6 +23,7 @@ public class Student {
         bonusPoints = new ArrayList<>();
         grades = new ArrayList<Grade>();
         scoreUp=false;
+
     }
 
     public Student(String fname, String lname, String mname, String email) {
@@ -52,7 +53,7 @@ public class Student {
         this.name = name;
         this.email = email;
         this.sid = sid;
-        this.count = sid;
+        count = sid;
         this.comments = comments;
         this.bonusPoints = bonusPoints;
         this.grades = grades;
@@ -161,5 +162,13 @@ public class Student {
 
     public ArrayList<BonusPoints> getBonusPoints(){
         return bonusPoints;
+    }
+
+    public Comment getLastComment() {
+        if(comments.size() == 0) return Comment.dummyComment;
+
+        int index = comments.size()-1;
+
+        return comments.get(index);
     }
 }

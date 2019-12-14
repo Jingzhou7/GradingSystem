@@ -1,6 +1,7 @@
 package model;
 
 public class Comment {
+    public static final Comment dummyComment = new Comment("");
     private int id;
     private static int count = 0;
     private String text;
@@ -35,4 +36,11 @@ public class Comment {
     public static void setCount(int c) {
         count = c;
     }
+
+    public boolean isEmptyComment() {
+        if(text.equals("")) return true;
+        else return false;
+    }
+
+
 }

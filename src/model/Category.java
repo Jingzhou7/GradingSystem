@@ -13,6 +13,8 @@ public class Category {
     public Category(String categoryName) {
         this.categoryName = categoryName;
         this.weight = 0;
+        this.id = count;
+        count+=1;
         assignments = new ArrayList<>();
         assignments.add(new Assignment(categoryName + " 1"));
         assignments.add(new Assignment(categoryName + " 2"));
@@ -22,6 +24,8 @@ public class Category {
     public Category(String name, double weight) {
         this.categoryName = name;
         this.weight = weight;
+        this.id = count;
+        count+=1;
         assignments = new ArrayList<>();
         assignments.add(new Assignment(categoryName + " 1"));
         assignments.add(new Assignment(categoryName + " 2"));
@@ -39,6 +43,7 @@ public class Category {
 
     public Category(int id, String name, double weight, List<Assignment> assignments) {
         this.id = id;
+        count+=1;
         this.categoryName = name;
         this.weight = weight;
         this.assignments = assignments;

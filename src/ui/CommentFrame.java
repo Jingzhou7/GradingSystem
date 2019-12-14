@@ -47,7 +47,7 @@ public class CommentFrame extends JFrame {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        String[] header = {"                                                     Overall Comment"};
+        String[] header = {"Overall Comment"};
         ArrayList<Comment> comments = student.getComments();
         DefaultTableModel commentModel = new DefaultTableModel(header, 0) {
             @Override

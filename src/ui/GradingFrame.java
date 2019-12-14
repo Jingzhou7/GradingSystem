@@ -101,7 +101,7 @@ public class GradingFrame extends JFrame {
             }
         }
         for (int i = 0; i < course.getAllStudents().size(); i++) {
-            course.getAllCategories().get(i).setCategoryName(model.getValueAt(i, 2).toString());
+
             double tmp = Double.parseDouble(model.getValueAt(i, 2).toString());
             double totalScore = assignment.getMaxPoint();
 
