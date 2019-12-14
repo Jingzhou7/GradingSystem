@@ -117,13 +117,15 @@ public class GradingSystem {
     }
     public boolean addSection(String sectionName) {
         //check existed sections, and increment the section id
-        int sectionCount = 0;
+        int id = 0;
         for(Course c : courses) {
             if(c.getCourseName().contains(sectionName)) {
-                sectionCount+=1;
+                if (c.getCourseIndex() + 1 > id) {
+                    id = c.getCourseIndex() + 1;
+                }
             }
         }
-        Course newSection = new Section(FALL_2019, sectionName, new ArrayList<Category>(), new ArrayList<Student>(), sectionCount+1);
+        Course newSection = new Section(FALL_2019, sectionName, new ArrayList<Category>(), new ArrayList<Student>(), id);
         courses.add(newSection);
         return true;
     }
@@ -133,7 +135,17 @@ public class GradingSystem {
         for(Course c : courses) {
             if(c.getCourseName().equals(courseTemplete)) {
                 ArrayList<Category> templeteCategories = c.getAllCategories();
-                Course newCourse = new Course(FALL_2019, courseName, templeteCategories, new ArrayList<Student>());
+                ArrayList<Category> temp = new ArrayList<Category>();
+                for (Category cc:templeteCategories){
+                    ArrayList<Assignment> tempA = new ArrayList<Assignment>();
+                    for(Assignment a:cc.getAllAssignments()){
+                        Assignment copy = new Assignment(a.getAssignmentName(), a.getWeight(), a.getReleaseDate(), a.getDueDate(), a.getMaxPoint());
+                        tempA.add(copy);
+                    }
+                    Category copyC = new Category(cc.getCategoryName(), cc.getWeight(), tempA);
+                    temp.add(copyC);
+                }
+                Course newCourse = new Course(FALL_2019, courseName, temp, new ArrayList<Student>());
                 courses.add(newCourse);
                 return true;
             }
@@ -145,16 +157,18 @@ public class GradingSystem {
         //check existed sections, and increment the section id
         //Section templeteSection = new Section(1, "tmp");
         ArrayList<Category> templeteCategories = new ArrayList<Category>();
-        int sectionCount = 0;
+        int id = 0;
         for(Course c : courses) {
             if(c.getCourseName().contains(sectionName)) {
-                sectionCount+=1;
+                if (c.getCourseIndex() + 1 > id) {
+                    id = c.getCourseIndex() + 1;
+                }
             }
             if(c.getCourseName().contains(sectionTemplete)) {
                 templeteCategories = c.getAllCategories();
             }
         }
-        Course newSection = new Section(FALL_2019, sectionName, templeteCategories, new ArrayList<Student>(), sectionCount+1);
+        Course newSection = new Section(FALL_2019, sectionName, templeteCategories, new ArrayList<Student>(), id);
         courses.add(newSection);
         return true;
     }
@@ -900,7 +914,7 @@ public class GradingSystem {
         int[] counts = {Course.getCount(), Category.getCount(), Assignment.getCount(), Student.getCount(), BonusPoints.getCount(), Comment.getCount(), Grade.getCount()};
 
         updateUser(PASSWORD, counts);
-        //delete();
+        delete();
         for (Course c : courses){
             Course temp = getCourseFromDB(c.getCourseIndex());
 
@@ -1136,13 +1150,30 @@ public class GradingSystem {
 
     public void addDeletedCourse(Course c){
         deletedCourses.add(c.getCourseIndex());
-        ArrayList<Category> descendents = c.getAllCategories();
-        for (Category ct: descendents){
-            addDeletedCategory(ct);
-        }
         ArrayList<Student> studentDescendent = c.getAllStudents();
         for (Student s: studentDescendent){
             addDeletedStudent(s);
+        }
+
+        if (!(c instanceof Section)) {
+            ArrayList<Category> descendents = c.getAllCategories();
+            for (Category ct : descendents) {
+                addDeletedCategory(ct);
+            }
+        }
+        else{
+            int count = 0;
+            for (Course cc:courses){
+                if (cc.getCourseName() == c.getCourseName()){
+                    count+=1;
+                }
+            }
+            if (count == 1){
+                ArrayList<Category> descendents = c.getAllCategories();
+                for (Category ct : descendents) {
+                    addDeletedCategory(ct);
+                }
+            }
         }
         // get all students and categories with this course and add
     }
@@ -1191,7 +1222,9 @@ public class GradingSystem {
     }
 
     public void addDeletedGrades(Grade g){
-        deletedGrades.add(g.getId());
+        if (!deletedGrades.contains(g.getId())) {
+            deletedGrades.add(g.getId());
+        }
     }
 
 

@@ -96,6 +96,7 @@ public class CourseFrame extends JFrame {
                     //remove from the List of classes
                     int courseIndex = Integer.parseInt(model.getValueAt(selected, 0).toString());
                     Course targetCourse = gs.getCourse(courseIndex);
+                    gs.addDeletedCourse(targetCourse);
                     gs.getAllCourses().remove(targetCourse);
 
                     //remove the entry in the table
