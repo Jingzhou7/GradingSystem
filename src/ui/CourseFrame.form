@@ -17,7 +17,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="82fec" class="javax.swing.JTable" binding="table1" custom-create="true" default-binding="true">
+          <component id="82fec" class="javax.swing.JTable" binding="courseTable" custom-create="true">
             <constraints/>
             <properties>
               <preferredScrollableViewportSize width="400" height="300"/>

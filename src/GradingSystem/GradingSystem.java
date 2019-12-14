@@ -101,6 +101,16 @@ public class GradingSystem {
         return courses;
     }
 
+    public ArrayList<Course> getCoursesBySemester(String semester) {
+        ArrayList<Course> res = new ArrayList<>();
+        for(Course c : courses) {
+            if(c.getSemester().equals(semester)) {
+                res.add(c);
+            }
+        }
+        return res;
+    }
+
     public boolean addCourse(String semester, String courseName, ArrayList<Category> categories, ArrayList<Student> students) {
         int index = courses.size() + 1;
         Course newCourse = new Course(index, semester, courseName, cats, students);
