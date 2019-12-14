@@ -4,6 +4,7 @@ import GradingSystem.GradingSystem;
 import model.Category;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -40,7 +41,7 @@ public class AddCourseFrame extends JFrame {
                 String courseName = classNameTF.getText();
                 boolean createSection = yesCheckBox.isSelected();
                 String templete = comboBox1.getSelectedItem().toString();
-                if(templete.equals("nah")) {
+                if (templete.equals("nah")) {
                     if (!createSection) {
                         gs.addCourse(courseName);
                         dispose();
@@ -78,7 +79,6 @@ public class AddCourseFrame extends JFrame {
         });
 
 
-
-
     }
+
 }

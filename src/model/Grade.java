@@ -34,8 +34,16 @@ public class Grade {
         this.comment = comment;
     }
 
-    public Grade(int id, Assignment a, double rawScore, double bonusp, String lettergrade, String comment) {
+    public Grade(int id, Assignment a, double rawScore, double bonusp, String letterGrade, String comment) {
         this.gradeid = id;
+        this.gradeid = count;
+        count+=1;
+        this.bonusPoint = bonusp;
+        this.letterGrade = letterGrade;
+        this.comment = comment;
+        this.assignment = a;
+        this.rawScore = rawScore;
+
     }
 
     public static int getCount() {
@@ -128,7 +136,7 @@ public class Grade {
     }
 
     public double getScaledScore() {
-        return rawScore / assignment.getMaxPoint() * assignment.getWeight()*100;
+        return rawScore / assignment.getMaxPoint() * 100;
     }
 
     public int getId() {

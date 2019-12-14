@@ -5,6 +5,7 @@ import model.Course;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -18,7 +19,6 @@ public class CourseFrame extends JFrame {
     private JButton removeClassButton;
     private JButton modifyButton;
     private JTable table1;
-    private JComboBox semesterCB;
     private JPanel ButtonPanel;
     private JPanel OptionPanel;
     private JLabel greetingLbl;
@@ -28,6 +28,7 @@ public class CourseFrame extends JFrame {
         this.gs = gs;
 
         setName("All Courses");
+
         setContentPane(mainPanel);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,13 +47,6 @@ public class CourseFrame extends JFrame {
             }
         });
 
-        semesterCB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                //todo: based on the selected item in the comboBox, reset the table
-
-            }
-        });
 
         addClassButton.addActionListener(new ActionListener() {
             @Override
@@ -64,15 +58,12 @@ public class CourseFrame extends JFrame {
         });
 
 
-
     }
-
-
 
 
     private void createUIComponents() {
 
-        String [] header={"Class ID", "Class Name", "Semester", "Student Count"};
+        String[] header = {"Class ID", "Class Name", "Semester", "Student Count"};
         ArrayList<Course> allCourses = gs.getAllCourses();
 
         DefaultTableModel model = new DefaultTableModel(header, 0) {
@@ -82,8 +73,8 @@ public class CourseFrame extends JFrame {
             }
         };
 
-        if(allCourses.size() != 0) {
-            for(int i = 0;i < allCourses.size();i++) {
+        if (allCourses.size() != 0) {
+            for (int i = 0; i < allCourses.size(); i++) {
                 Object[] obj = {allCourses.get(i).getCourseIndex(), allCourses.get(i).getCourseName(), allCourses.get(i).getSemester(), allCourses.get(i).getAllStudents().size()};
                 model.addRow(obj);
             }
@@ -111,8 +102,7 @@ public class CourseFrame extends JFrame {
                     model.removeRow(table1.getSelectedRow());
                     JOptionPane.showMessageDialog(null, "Selected row deleted successfully");
 
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(source, "Please select a row.");
                 }
             }
@@ -130,7 +120,7 @@ public class CourseFrame extends JFrame {
                     Course currentCourse = gs.getCourse(index);
                     new CourseDetailFrame(gs, currentCourse);
                     dispose();
-                }else {
+                } else {
                     JOptionPane.showMessageDialog(source, "Please select a row.");
                 }
             }
@@ -138,4 +128,5 @@ public class CourseFrame extends JFrame {
 
 
     }
+
 }
