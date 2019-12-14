@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a894943f-a954-4e6f-b970-7415ccb01a94" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/code.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/code.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/SQLConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/SQLConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Assignment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/AddCommentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AddCommentFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/CommentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CommentFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/StudentGradeFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/StudentGradeFrame.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/StudentGradeFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/StudentGradeFrame.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -111,6 +103,7 @@
       <workItem from="1576182926348" duration="4211000" />
       <workItem from="1576199075382" duration="12352000" />
       <workItem from="1576182926348" duration="4093000" />
+      <workItem from="1576307311050" duration="1028000" />
     </task>
     <servers />
   </component>

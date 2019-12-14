@@ -26,7 +26,7 @@ public class AddCommentFrame extends JFrame {
         this.gs = gs;
         this.course = course;
         this.student = student;
-        
+
         commentLabel=new JLabel("Comment");
         setName("Add Comment");
         setVisible(true);
