@@ -14,10 +14,8 @@ import java.util.List;
  */
 public class GradingSystem {
 
-    public static final String FALL_2019 = "Fall 2019";
-    public static final String SPRING_2019 = "Spring 2019";
-    public static final String FALL_2018 = "Fall 2018";
-    public static final String SPRING_2018 = "Spring 2018";
+    private String current_semester = "Fall 2019";
+
     ArrayList<String> semesters;
     ArrayList<Course> courses;
     ArrayList<Category> cats;
@@ -111,7 +109,7 @@ public class GradingSystem {
     }
 
     public boolean addCourse(String courseName) {
-        Course newCourse = new Course(FALL_2019, courseName, new ArrayList<Category>(), new ArrayList<Student>());
+        Course newCourse = new Course(current_semester, courseName, new ArrayList<Category>(), new ArrayList<Student>());
         courses.add(newCourse);
         return true;
     }
@@ -125,7 +123,7 @@ public class GradingSystem {
                 }
             }
         }
-        Course newSection = new Section(FALL_2019, sectionName, new ArrayList<Category>(), new ArrayList<Student>(), id);
+        Course newSection = new Section(current_semester, sectionName, new ArrayList<Category>(), new ArrayList<Student>(), id);
         courses.add(newSection);
         return true;
     }
@@ -145,7 +143,7 @@ public class GradingSystem {
                     Category copyC = new Category(cc.getCategoryName(), cc.getWeight(), tempA);
                     temp.add(copyC);
                 }
-                Course newCourse = new Course(FALL_2019, courseName, temp, new ArrayList<Student>());
+                Course newCourse = new Course(current_semester, courseName, temp, new ArrayList<Student>());
                 courses.add(newCourse);
                 return true;
             }
@@ -168,7 +166,7 @@ public class GradingSystem {
                 templeteCategories = c.getAllCategories();
             }
         }
-        Course newSection = new Section(FALL_2019, sectionName, templeteCategories, new ArrayList<Student>(), id);
+        Course newSection = new Section(current_semester, sectionName, templeteCategories, new ArrayList<Student>(), id);
         courses.add(newSection);
         return true;
     }
@@ -1227,5 +1225,15 @@ public class GradingSystem {
         }
     }
 
+    public String getCurrent_semester() {
+        return current_semester;
+    }
 
+    public void setCurrent_semester(String current_semester) {
+        this.current_semester = current_semester;
+    }
+
+    public void setPASSWORD(String PASSWORD) {
+        this.PASSWORD = PASSWORD;
+    }
 }
