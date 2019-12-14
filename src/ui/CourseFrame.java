@@ -22,6 +22,9 @@ public class CourseFrame extends JFrame {
     private JPanel ButtonPanel;
     private JPanel OptionPanel;
     private JLabel greetingLbl;
+    private JButton changePasswordButton;
+    private JButton changeSemesterButton;
+    private DefaultTableModel courseModel;
 
     public CourseFrame(GradingSystem gs) {
 
@@ -35,6 +38,7 @@ public class CourseFrame extends JFrame {
         pack();
         setLocationRelativeTo(null);
         addActiveComponent();
+
 
     }
 
@@ -57,6 +61,19 @@ public class CourseFrame extends JFrame {
             }
         });
 
+        changeSemesterButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+            }
+        });
+
+        changePasswordButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+            }
+        });
 
     }
 
@@ -65,8 +82,7 @@ public class CourseFrame extends JFrame {
 
         String[] header = {"Class ID", "Class Name", "Semester", "Student Count"};
         ArrayList<Course> allCourses = gs.getAllCourses();
-
-        DefaultTableModel model = new DefaultTableModel(header, 0) {
+        courseModel = new DefaultTableModel(header, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -76,12 +92,12 @@ public class CourseFrame extends JFrame {
         if (allCourses.size() != 0) {
             for (int i = 0; i < allCourses.size(); i++) {
                 Object[] obj = {allCourses.get(i).getCourseIndex(), allCourses.get(i).getCourseName(), allCourses.get(i).getSemester(), allCourses.get(i).getAllStudents().size()};
-                model.addRow(obj);
+                courseModel.addRow(obj);
             }
         }
 
 
-        table1 = new JTable(model);
+        table1 = new JTable(courseModel);
 
 
         removeClassButton = new JButton("Remove Class");
@@ -94,13 +110,13 @@ public class CourseFrame extends JFrame {
                 if (selected != -1) {
 
                     //remove from the List of classes
-                    int courseIndex = Integer.parseInt(model.getValueAt(selected, 0).toString());
+                    int courseIndex = Integer.parseInt(courseModel.getValueAt(selected, 0).toString());
                     Course targetCourse = gs.getCourse(courseIndex);
                     gs.addDeletedCourse(targetCourse);
                     gs.getAllCourses().remove(targetCourse);
 
                     //remove the entry in the table
-                    model.removeRow(table1.getSelectedRow());
+                    courseModel.removeRow(table1.getSelectedRow());
                     JOptionPane.showMessageDialog(null, "Selected row deleted successfully");
 
                 } else {
@@ -117,7 +133,7 @@ public class CourseFrame extends JFrame {
                 JButton source = (JButton) actionEvent.getSource();
                 int selected = table1.getSelectedRow();
                 if (selected != -1) {
-                    int index = (int) model.getValueAt(selected, 0);
+                    int index = (int) courseModel.getValueAt(selected, 0);
                     Course currentCourse = gs.getCourse(index);
                     new CourseDetailFrame(gs, currentCourse);
                     dispose();
