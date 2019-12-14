@@ -38,7 +38,6 @@ public class CourseFrame extends JFrame {
         setLocationRelativeTo(null);
         addActiveComponent();
 
-
     }
 
     private void addActiveComponent() {
@@ -63,14 +62,25 @@ public class CourseFrame extends JFrame {
         changeSemesterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                JButton source = (JButton) actionEvent.getSource();
+                String name = JOptionPane.showInputDialog(source, "Set Semester: ");
+                if (name != null) {
+                    gs.setCurrent_semester(name);
+                }
 
+                new CourseFrame(gs);
+                dispose();
             }
         });
 
         changePasswordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                JButton source = (JButton) actionEvent.getSource();
+                String name = JOptionPane.showInputDialog(source, "Set Password: ");
+                if (name != null) {
+                    gs.setPASSWORD(name);
+                }
             }
         });
 
@@ -88,10 +98,12 @@ public class CourseFrame extends JFrame {
             }
         };
 
+
         if (currentSemesterCourses.size() != 0) {
             for (int i = 0; i < currentSemesterCourses.size(); i++) {
                 Object[] obj = {currentSemesterCourses.get(i).getCourseIndex(), currentSemesterCourses.get(i).getCourseName(), currentSemesterCourses.get(i).getSemester(), currentSemesterCourses.get(i).getAllStudents().size()};
                 courseModel.addRow(obj);
+
             }
         }
 
