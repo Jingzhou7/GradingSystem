@@ -20,7 +20,6 @@ public class GradingSystem {
     public static final String SPRING_2018 = "Spring 2018";
     ArrayList<String> semesters;
     ArrayList<Course> courses;
-    ArrayList<Category> categories;
     ArrayList<Category> cats;
 
     private String USERNAME = "1";
@@ -65,10 +64,10 @@ public class GradingSystem {
         deletedStudents = new ArrayList<>();
         //importPreviousData();
         cats = new ArrayList<>();
-        cats.add(new Category("Exam",50));
-        cats.add(new Category("Participation",10));
-        cats.add(new Category("Homework", 15));
-        cats.add(new Category("Programing Assignment",25));
+//        cats.add(new Category("Exam",50));
+//        cats.add(new Category("Participation",10));
+//        cats.add(new Category("Homework", 15));
+//        cats.add(new Category("Programing Assignment",25));
     }
 
     private void importPreviousData() {
@@ -112,7 +111,7 @@ public class GradingSystem {
     }
 
     public boolean addCourse(String courseName) {
-        Course newCourse = new Course(FALL_2019, courseName, cats, new ArrayList<Student>());
+        Course newCourse = new Course(FALL_2019, courseName, new ArrayList<Category>(), new ArrayList<Student>());
         courses.add(newCourse);
         return true;
     }
@@ -124,38 +123,37 @@ public class GradingSystem {
                 sectionCount+=1;
             }
         }
-        Course newSection = new Section(FALL_2019, sectionName, categories, new ArrayList<Student>(), sectionCount+1);
+        Course newSection = new Section(FALL_2019, sectionName, new ArrayList<Category>(), new ArrayList<Student>(), sectionCount+1);
         courses.add(newSection);
         return true;
     }
 
     public boolean addCourseWithTemplete(String courseName, String courseTemplete) {
-        Course templeteCourse = new Course("tmp");
+        //Course templeteCourse = new Course("tmp");
         for(Course c : courses) {
             if(c.getCourseName().equals(courseTemplete)) {
-                templeteCourse = c;
-                break;
+                ArrayList<Category> templeteCategories = c.getAllCategories();
+                Course newCourse = new Course(FALL_2019, courseName, templeteCategories, new ArrayList<Student>());
+                courses.add(newCourse);
+                return true;
             }
         }
-        ArrayList<Category> templeteCategories = templeteCourse.getAllCategories();
-        Course newCourse = new Course(FALL_2019, courseName, templeteCategories, new ArrayList<Student>());
-        courses.add(newCourse);
-        return true;
+        return false;
     }
 
     public boolean addSectionWithTemplete(String sectionName, String sectionTemplete) {
         //check existed sections, and increment the section id
-        Section templeteSection = new Section(1, "tmp");
+        //Section templeteSection = new Section(1, "tmp");
+        ArrayList<Category> templeteCategories = new ArrayList<Category>();
         int sectionCount = 0;
         for(Course c : courses) {
             if(c.getCourseName().contains(sectionName)) {
                 sectionCount+=1;
             }
             if(c.getCourseName().contains(sectionTemplete)) {
-                templeteSection = (Section) c;
+                templeteCategories = c.getAllCategories();
             }
         }
-        ArrayList<Category> templeteCategories = templeteSection.getAllCategories();
         Course newSection = new Section(FALL_2019, sectionName, templeteCategories, new ArrayList<Student>(), sectionCount+1);
         courses.add(newSection);
         return true;
@@ -381,7 +379,7 @@ public class GradingSystem {
     }
 
     public Category getCategoryFromDB(int cid){
-        String sql = "select * from category where category = " + cid;
+        String sql = "select * from category where categoryid = " + cid;
         PreparedStatement pst = null;
         SQLConnection sc = new SQLConnection();
         Category a = null;

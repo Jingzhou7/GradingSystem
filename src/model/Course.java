@@ -15,7 +15,7 @@ public class Course {
 
     //constructor
     public Course(String courseName) {
-
+        //System.out.println("count: " + count);
         courseIndex = count;
         count+=1;
         setSemester(CURRENT_SEMESTER);
@@ -29,6 +29,7 @@ public class Course {
 
 
     public Course(int courseIndex, String semester, String courseName, ArrayList<Category> categories, ArrayList<Student> students) {
+        //System.out.println("count: " + count);
         this.courseIndex = courseIndex;
         this.semester = semester;
         this.courseName = courseName;
@@ -37,6 +38,7 @@ public class Course {
     }
 
     public Course(String semester, String courseName, ArrayList<Category> categories, ArrayList<Student> students){
+        //System.out.println("count: " + count);
         this.courseIndex = count;
         count+=1;
         this.semester = semester;

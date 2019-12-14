@@ -41,12 +41,14 @@ public class AddCourseFrame extends JFrame {
                 String courseName = classNameTF.getText();
                 boolean createSection = yesCheckBox.isSelected();
                 String templete = comboBox1.getSelectedItem().toString();
-                if (templete.equals("nah")) {
+                if (templete.equals("Nah")) {
                     if (!createSection) {
+                        //System.out.println("nah + !section");
                         gs.addCourse(courseName);
                         dispose();
                         new CourseFrame(gs);
                     } else {
+                        //System.out.println("nah + section");
                         gs.addSection(courseName);
                         dispose();
                         new CourseFrame(gs);
@@ -54,11 +56,12 @@ public class AddCourseFrame extends JFrame {
 
                 } else {
                     if (!createSection) {
-
+                        //System.out.println("not nah + !section");
                         gs.addCourseWithTemplete(courseName, templete);
                         dispose();
                         new CourseFrame(gs);
                     } else {
+                        //System.out.println("not nah + section");
                         gs.addSectionWithTemplete(courseName, templete);
                         dispose();
                         new CourseFrame(gs);
