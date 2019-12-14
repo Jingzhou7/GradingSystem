@@ -17,7 +17,8 @@ public class Student {
     public Student(Name name) {
         this.name = name;
         setEmail("cs@bu.edu");
-        setSid(0);
+        this.sid = count;
+        count+=1;
         comments = new ArrayList<>();
         bonusPoints = new ArrayList<>();
         grades = new ArrayList<Grade>();
@@ -26,6 +27,8 @@ public class Student {
 
     public Student(String fname, String lname, String mname, String email) {
         name = new Name(fname, mname, lname);
+        this.sid = count;
+        count+=1;
         this.email = email;
         comments = new ArrayList<>();
         bonusPoints = new ArrayList<>();
@@ -33,15 +36,6 @@ public class Student {
         scoreUp=false;
     }
 
-    public Student(Name name, String email, int sid) {
-        this.name = name;
-        this.email = email;
-        this.sid = sid;
-        comments = new ArrayList<>();
-        bonusPoints = new ArrayList<>();
-        grades = new ArrayList<Grade>();
-        scoreUp=false;
-    }
 
     public Student(Name name, String email, ArrayList<Comment> comments, ArrayList<BonusPoints> bonusPoints, ArrayList<Grade> grades){
         this.name = name;
@@ -58,6 +52,7 @@ public class Student {
         this.name = name;
         this.email = email;
         this.sid = sid;
+        this.count = sid;
         this.comments = comments;
         this.bonusPoints = bonusPoints;
         this.grades = grades;
