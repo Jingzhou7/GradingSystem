@@ -4,10 +4,11 @@ import GradingSystem.GradingSystem;
 import model.Course;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddCategoryFrame extends JFrame{
+public class AddCategoryFrame extends JFrame {
     private JPanel mainPanel;
     private JTextField categoryNameTextField;
     private JButton confirmBtn;
@@ -16,7 +17,7 @@ public class AddCategoryFrame extends JFrame{
     private JPanel checkPanel;
     private JLabel categoryNameLbl;
 
-    public AddCategoryFrame(GradingSystem gs, Course course){
+    public AddCategoryFrame(GradingSystem gs, Course course) {
         setName("Add category");
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

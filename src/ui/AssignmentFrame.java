@@ -8,11 +8,12 @@ import model.Student;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class AssignmentFrame extends JFrame{
+public class AssignmentFrame extends JFrame {
     private GradingSystem gs;
     private Course course;
     private Category category;
@@ -33,6 +34,7 @@ public class AssignmentFrame extends JFrame{
         this.gs = gs;
         this.course = course;
         this.category = category;
+
 
         categoryLbl.setText("Current Viewing Category: " + category.getCategoryName());
         setName("Category");
@@ -74,8 +76,7 @@ public class AssignmentFrame extends JFrame{
     private void createUIComponents() {
 
 
-
-        String [] assignmentHeader={"Assignment Name","Weight%", "Release Date", "Due Date", "Total Score"};
+        String[] assignmentHeader = {"Assignment Name", "Weight%", "Release Date", "Due Date", "Total Score"};
         List<Assignment> allAssignments = category.getAllAssignments();
         DefaultTableModel assignmentModel = new DefaultTableModel(assignmentHeader, 0) {
             @Override
@@ -84,8 +85,8 @@ public class AssignmentFrame extends JFrame{
             }
         };
 
-        if(allAssignments.size() != 0) {
-            for(int i = 0;i < allAssignments.size();i++) {
+        if (allAssignments.size() != 0) {
+            for (int i = 0; i < allAssignments.size(); i++) {
                 Object[] obj = {allAssignments.get(i).getAssignmentName(), allAssignments.get(i).getWeight(), allAssignments.get(i).getReleaseDate(), allAssignments.get(i).getDueDate(), allAssignments.get(i).getMaxPoint()};
                 assignmentModel.addRow(obj);
             }
@@ -109,8 +110,7 @@ public class AssignmentFrame extends JFrame{
                     assignmentModel.removeRow(assignmentTable.getSelectedRow());
                     JOptionPane.showMessageDialog(null, "Selected assignment deleted successfully");
 
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(source, "Please select a row.");
                 }
             }
@@ -127,11 +127,12 @@ public class AssignmentFrame extends JFrame{
                     Assignment currentAssignment = category.getAssignment(assignmentName);
                     new GradingFrame(gs, course, category, currentAssignment);
                     dispose();
-                }else {
+                } else {
                     JOptionPane.showMessageDialog(source, "Please select a row.");
                 }
             }
         });
 
     }
+
 }

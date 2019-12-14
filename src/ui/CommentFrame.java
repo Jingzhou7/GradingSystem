@@ -13,7 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class CommentFrame extends JFrame{
+public class CommentFrame extends JFrame {
     private GradingSystem gs;
     private Course course;
     private Student student;
@@ -25,7 +25,8 @@ public class CommentFrame extends JFrame{
     public CommentFrame(GradingSystem gs, Course course, Student student) {
         this.gs = gs;
         this.course = course;
-        this.student=student;
+        this.student = student;
+
 
         setName("Comment");
         setVisible(true);
@@ -35,7 +36,7 @@ public class CommentFrame extends JFrame{
         pack();
         setLocationRelativeTo(null);
 
-        backButton=new JButton("Back");
+        backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -47,8 +48,8 @@ public class CommentFrame extends JFrame{
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        String [] header={"                                                     Overall Comment"};
-        ArrayList<Comment> comments=student.getComments();
+        String[] header = {"                                                     Overall Comment"};
+        ArrayList<Comment> comments = student.getComments();
         DefaultTableModel commentModel = new DefaultTableModel(header, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -56,28 +57,29 @@ public class CommentFrame extends JFrame{
             }
         };
 
-        if(comments.size()!=0){
-            for(int i=0;i<comments.size();i++){
-                Object[] obj={comments.get(i).getText()};
+        if (comments.size() != 0) {
+            for (int i = 0; i < comments.size(); i++) {
+                Object[] obj = {comments.get(i).getText()};
                 commentModel.addRow(obj);
             }
         }
-        table=new JTable(commentModel);
+        table = new JTable(commentModel);
 
-        String [] assHeader={"Assignment","Comment"};
+        String[] assHeader = {"Assignment", "Comment"};
         DefaultTableModel assCommentModel = new DefaultTableModel(assHeader, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        ArrayList<Grade> grades=student.getGrades();
-        if(grades.size()!=0){
-            for(int i=0;i<grades.size();i++){
-                Object[] obj={grades.get(i).getAssignment().getAssignmentName(),grades.get(i).getComment()};
+        ArrayList<Grade> grades = student.getGrades();
+        if (grades.size() != 0) {
+            for (int i = 0; i < grades.size(); i++) {
+                Object[] obj = {grades.get(i).getAssignment().getAssignmentName(), grades.get(i).getComment()};
                 assCommentModel.addRow(obj);
             }
         }
-        assTable=new JTable(assCommentModel);
+        assTable = new JTable(assCommentModel);
     }
+
 }

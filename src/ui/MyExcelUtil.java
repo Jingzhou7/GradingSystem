@@ -147,7 +147,6 @@ public class MyExcelUtil {
 
     private static Student convertRowToData(Row row) {
         Student resultData = new Student(new Name(""));
-
         Cell cell;
         int cellNum = 0;
         // get first name
@@ -164,10 +163,6 @@ public class MyExcelUtil {
         cell = row.getCell(cellNum++);
         String email = convertCellValueToString(cell);
         resultData.setEmail(email);
-        // get id
-        cell = row.getCell(cellNum++);
-        String id = convertCellValueToString(cell);
-        resultData.setSid(Integer.parseInt(id));
         return resultData;
     }
 }

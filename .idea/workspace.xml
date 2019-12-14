@@ -2,7 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a894943f-a954-4e6f-b970-7415ccb01a94" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/code.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/code.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Grade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Grade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AddCategoryFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AddCategoryFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AddCommentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AddCommentFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AddCourseFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AddCourseFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AddStudentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AddStudentFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AssignmentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AssignmentFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/CommentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CommentFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/CourseDetailFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CourseDetailFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/CourseFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CourseFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/GradingFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/GradingFrame.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/GradingFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/GradingFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/LoginFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/ModifyCategoryFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ModifyCategoryFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/StudentGradeFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/StudentGradeFrame.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +55,7 @@
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+    <property name="settings.editor.selected.configurable" value="project.propGUI" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">

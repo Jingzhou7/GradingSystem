@@ -53,8 +53,7 @@ public class LoginFrame extends JFrame {
         this.btnSignIn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                //todo: check the user input
-                // go to the next page or deny access
+
                 JButton source = (JButton) actionEvent.getSource();
                 String name = tfName.getText();
                 String pwd = new String(pfPwd.getPassword());
