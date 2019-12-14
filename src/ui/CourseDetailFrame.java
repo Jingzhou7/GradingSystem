@@ -102,7 +102,7 @@ public class CourseDetailFrame extends JFrame{
         importStudentsBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (course.getAllStudents() != null) {
+                if (course.getAllStudents() == null || course.getAllStudents().size() == 0) {
                     JFileChooser chooser = new JFileChooser();
                     chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
                     chooser.showDialog(new JLabel(), "select");
@@ -111,9 +111,14 @@ public class CourseDetailFrame extends JFrame{
                     System.out.println(excelFileName);
                     // read Excel
                     List<Student> readResult = MyExcelUtil.readExcel(excelFileName);
+                    for (int i = 0;i < readResult.size();i++){
+                        System.out.println(readResult.get(i).toString());
+                    }
                     course.getAllStudents().addAll(readResult);
                     new CourseDetailFrame(gs, course);
                     dispose();
+                }else {
+                    JOptionPane.showMessageDialog(null, "There are students in this class already.");
                 }
             }
         });
@@ -228,7 +233,7 @@ public class CourseDetailFrame extends JFrame{
                     //remove from the List of classes
                     String categoryName = categoryModel.getValueAt(selected, 0).toString();
                     Category targetcategory = course.getCategory(categoryName);
-                    course.getAllStudents().remove(targetcategory);
+                    course.getAllCategories().remove(targetcategory);
                     gs.addDeletedCategory(targetcategory);
                     //remove the entry in the table
                     categoryModel.removeRow(categoryTable.getSelectedRow());
@@ -245,15 +250,17 @@ public class CourseDetailFrame extends JFrame{
         modifyAssignmentsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                JButton source = (JButton) actionEvent.getSource();
-                int selected = categoryTable.getSelectedRow();
-                if (selected != -1) {
-                    String categoryName = categoryModel.getValueAt(selected, 0).toString();
-                    Category currentCategory = course.getCategory(categoryName);
-                    new AssignmentFrame(gs, course, currentCategory);
-                    dispose();
-                }else {
-                    JOptionPane.showMessageDialog(source, "Please select a row.");
+                if (checkWeight()){
+                    JButton source = (JButton) actionEvent.getSource();
+                    int selected = categoryTable.getSelectedRow();
+                    if (selected != -1) {
+                        String categoryName = categoryModel.getValueAt(selected, 0).toString();
+                        Category currentCategory = course.getCategory(categoryName);
+                        new AssignmentFrame(gs, course, currentCategory);
+                        dispose();
+                    }else {
+                        JOptionPane.showMessageDialog(source, "Please select a row.");
+                    }
                 }
             }
         });
@@ -266,20 +273,5 @@ public class CourseDetailFrame extends JFrame{
         for(Course c : allCourses) {
             courseOptions[index++] = c.getCourseName();
         }
-        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(courseOptions);
-
-        courseComboBox = new JComboBox<String>(comboBoxModel);
-
-        courseComboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                JComboBox comboBox = (JComboBox) actionEvent.getSource();
-
-                Object selected = comboBox.getSelectedItem();
-                System.out.println("Selected Item is " + selected);
-
-
-            }
-        });
     }
 }

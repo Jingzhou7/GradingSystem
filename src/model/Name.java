@@ -49,7 +49,7 @@ public class Name {
         name[2] = lname;
         String realName = "";
         for (int i = 0;i < 3;i++){
-            if (name[i] != null || !name[i].equals("")){
+            if (name[i] != null && !(name[i].trim().equals(""))){
                 realName = realName + name[i] + " ";
             }
         }
