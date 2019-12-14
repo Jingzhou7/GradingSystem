@@ -39,7 +39,6 @@ public class CourseFrame extends JFrame {
         setLocationRelativeTo(null);
         addActiveComponent();
 
-
     }
 
     private void addActiveComponent() {
@@ -64,14 +63,25 @@ public class CourseFrame extends JFrame {
         changeSemesterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                JButton source = (JButton) actionEvent.getSource();
+                String name = JOptionPane.showInputDialog(source, "Set Semester: ");
+                if (name != null) {
+                    gs.setCurrent_semester(name);
+                }
 
+                new CourseFrame(gs);
+                dispose();
             }
         });
 
         changePasswordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                JButton source = (JButton) actionEvent.getSource();
+                String name = JOptionPane.showInputDialog(source, "Set Password: ");
+                if (name != null) {
+                    gs.setPASSWORD(name);
+                }
             }
         });
 
@@ -89,10 +99,14 @@ public class CourseFrame extends JFrame {
             }
         };
 
+        //System.out.println(gs.getCurrent_semester());
+
         if (allCourses.size() != 0) {
             for (int i = 0; i < allCourses.size(); i++) {
                 Object[] obj = {allCourses.get(i).getCourseIndex(), allCourses.get(i).getCourseName(), allCourses.get(i).getSemester(), allCourses.get(i).getAllStudents().size()};
-                courseModel.addRow(obj);
+                if (allCourses.get(i).getSemester().equals(gs.getCurrent_semester())) {
+                    courseModel.addRow(obj);
+                }
             }
         }
 
