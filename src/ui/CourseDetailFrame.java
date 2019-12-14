@@ -26,7 +26,6 @@ public class CourseDetailFrame extends JFrame{
     private JButton viewGradesBtn;
     private JButton addCategoryBtn;
     private JButton deleteCategoryBtn;
-    private JButton modifyCategoryBtn;
     private JTable studentTable;
     private JComboBox<String> courseComboBox;
     private JPanel ButtonPanel;
@@ -149,17 +148,6 @@ public class CourseDetailFrame extends JFrame{
                 course.addCategory("null");
             }
         });
-
-        modifyCategoryBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ModifyCategoryFrame(gs, course);
-                dispose();
-            }
-        });
-
-
-
     }
 
     private void createUIComponents() {
