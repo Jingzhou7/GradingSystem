@@ -7,6 +7,11 @@ cs591 GradingSystem design
 @author Peiqing Lu
 
 
+todo list
+
+https://docs.google.com/document/d/1mgEf2AK1szkYdus1EMB7hU8MYkbUadfl0TtThfksoh4/edit?usp=sharing
+
+
 This is a Grading system designed specifically to substitute the excel grading sheets.
 
 The advantages of our system includes:
