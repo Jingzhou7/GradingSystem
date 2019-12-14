@@ -6,19 +6,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Grade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Grade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AddCategoryFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AddCategoryFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/SQLConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/SQLConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Assignment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/AddCommentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AddCommentFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AddCourseFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AddCourseFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AddStudentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AddStudentFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AssignmentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AssignmentFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/CommentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CommentFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/CourseDetailFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CourseDetailFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/CourseFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CourseFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/GradingFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/GradingFrame.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/GradingFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/GradingFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/LoginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/ModifyCategoryFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ModifyCategoryFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/StudentGradeFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/StudentGradeFrame.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/StudentGradeFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/StudentGradeFrame.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,6 +18,20 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -40,6 +46,7 @@
   <component name="ProjectId" id="1TuQEegsI3ROF1g8ZaTJLkolkAJ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -52,10 +59,10 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="project.propGUI" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">

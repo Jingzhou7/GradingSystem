@@ -39,12 +39,8 @@ public class StudentGradeFrame extends JFrame {
         setContentPane(mainPanel);
         pack();
         setLocationRelativeTo(null);
-
+        //backButton = new JButton("Back");
         addActiveComponent();
-    }
-
-    public void addActiveComponent() {
-        backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -52,6 +48,10 @@ public class StudentGradeFrame extends JFrame {
                 dispose();
             }
         });
+    }
+    private void addActiveComponent() {
+        ArrayList<Student> allStudents = course.getAllStudents();
+
     }
 
     private DefaultTableModel getModel(ArrayList<Student> allStudents) {
@@ -84,27 +84,8 @@ public class StudentGradeFrame extends JFrame {
         studentGradeModel = getModel(allStudents);
         studentGradeTable = new JTable(studentGradeModel);
 
-        addComment = new JButton("Add Comment");
+        addComment=new JButton("Add Comment");
         addComment.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JButton source = (JButton) e.getSource();
-                int selected = studentGradeTable.getSelectedRow();
-                if (selected != -1) {
-
-                    //get the student that is added comment
-                    int studentId = Integer.parseInt(studentGradeModel.getValueAt(selected, 0).toString());
-                    Student targetStudent = course.getStudent(studentId);
-                    new AddCommentFrame(gs, course, targetStudent);
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(source, "Please select a row.");
-                }
-            }
-        });
-
-        showComment = new JButton("Show Comment");
-        showComment.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 JButton source = (JButton) actionEvent.getSource();
@@ -113,7 +94,7 @@ public class StudentGradeFrame extends JFrame {
                     //get the student that is added comment
                     int studentId = Integer.parseInt(studentGradeModel.getValueAt(selected, 0).toString());
                     Student targetStudent = course.getStudent(studentId);
-                    new CommentFrame(gs, course, targetStudent);
+                    AddCommentFrame acf=new AddCommentFrame(gs, course, targetStudent);
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(source, "Please select a row.");
@@ -143,6 +124,26 @@ public class StudentGradeFrame extends JFrame {
                 }
             }
         });
+
+        showComment = new JButton("Show Comment");
+        showComment.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JButton source = (JButton) actionEvent.getSource();
+                int selected = studentGradeTable.getSelectedRow();
+                if (selected != -1) {
+                    //get the student that is shown comment
+                    int studentId = Integer.parseInt(studentGradeModel.getValueAt(selected, 0).toString());
+                    Student targetStudent = course.getStudent(studentId);
+                    new CommentFrame(gs, course, targetStudent);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(source, "Please select a row.");
+                }
+            }
+        });
+
+
     }
 
 }

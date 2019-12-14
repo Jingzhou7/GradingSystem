@@ -26,7 +26,8 @@ public class AddCommentFrame extends JFrame {
         this.gs = gs;
         this.course = course;
         this.student = student;
-
+        
+        commentLabel=new JLabel("Comment");
         setName("Add Comment");
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,7 +35,7 @@ public class AddCommentFrame extends JFrame {
         pack();
         setLocationRelativeTo(null);
 
-        backBtn = new JButton("Back");
+        //backBtn = new JButton("Back");
         backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

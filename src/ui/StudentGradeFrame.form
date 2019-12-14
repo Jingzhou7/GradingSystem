@@ -45,20 +45,20 @@
               <text value="Show Comment"/>
             </properties>
           </component>
-          <component id="e3fa7" class="javax.swing.JButton" binding="addComment">
+          <component id="cfc0f" class="javax.swing.JButton" binding="scoreButton" custom-create="true">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Add Comment"/>
+              <text value="Score Up"/>
             </properties>
           </component>
-          <component id="cfc0f" class="javax.swing.JButton" binding="scoreButton">
+          <component id="97970" class="javax.swing.JButton" binding="addComment" custom-create="true">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Score Up"/>
+              <text value="Add Comment"/>
             </properties>
           </component>
         </children>

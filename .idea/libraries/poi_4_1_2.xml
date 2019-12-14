@@ -13,9 +13,9 @@
       <root url="file://$USER_HOME$/Downloads/poi-4.1.1/docs/apidocs/dev" />
     </JAVADOC>
     <SOURCES />
+    <jarDirectory url="file://$USER_HOME$/Desktop/poi-4.1 2.1" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/poi-4.1.1" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/../poi-4.1.1" recursive="false" />
-    <jarDirectory url="file://$USER_HOME$/Desktop/poi-4.1 2.1" recursive="false" />
     <jarDirectory url="file://$USER_HOME$/Downloads/poi-4.1.1" recursive="false" />
   </library>
 </component>
