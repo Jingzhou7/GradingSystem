@@ -109,7 +109,7 @@ public class GradingFrame extends JFrame {
                 } else {
                     double totalScore = assignment.getMaxPoint();
                     Grade g = course.getAllStudents().get(i).getGrade(assignment);
-                    course.getAllStudents().get(i).getGrades().add(g);
+
                     if (g == null) {
                         g = new Grade(assignment);
                         if (tmp >= 0) {
@@ -117,12 +117,14 @@ public class GradingFrame extends JFrame {
                         } else {
                             g.setRawScore(totalScore + tmp);
                         }
+                        course.getAllStudents().get(i).getGrades().add(g);
                     } else {
                         if (tmp >= 0) {
                             g.setRawScore(tmp);
                         } else {
                             g.setRawScore(totalScore + tmp);
                         }
+                        course.getAllStudents().get(i).getGrades().add(g);
                     }
                 }
             }
