@@ -1,10 +1,7 @@
 package ui;
 
 import GradingSystem.GradingSystem;
-import model.Comment;
-import model.Course;
-import model.Grade;
-import model.Student;
+import model.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -90,10 +87,29 @@ public class CommentFrame extends JFrame {
         }
         assTable = new JTable(assCommentModel);
 
+        deleteComment=new JButton("Delete");
         deleteComment.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                JButton source=(JButton)e.getSource();
+                int selected=table.getSelectedRow();
+                int assSelected=assTable.getSelectedRow();
+                if(selected==-1&&assSelected==-1){
+                    JOptionPane.showMessageDialog(source, "Please select a row.");
+                }
+                else{
+                    if(selected!=-1){
+                        String comment= commentModel.getValueAt(selected, 0).toString();
+                        student.deleteComment(comment);
+                        commentModel.removeRow(selected);
+                    }
+                    else{
+                        String assignmentName = assCommentModel.getValueAt(assSelected, 0).toString();
+                        String comment=assCommentModel.getValueAt(assSelected, 1).toString();
+                        student.deleteAssComment(assignmentName,comment);
+                        assCommentModel.removeRow(assSelected);
+                    }
+                }
             }
         });
     }
