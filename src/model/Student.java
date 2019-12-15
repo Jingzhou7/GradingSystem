@@ -11,6 +11,7 @@ public class Student {
     private ArrayList<Comment> comments;
     private ArrayList<BonusPoints> bonusPoints;
     private ArrayList<Grade> grades;
+    private double totalScoreWeighted = 0;
 
     private boolean scoreUp;
 
@@ -53,10 +54,18 @@ public class Student {
         this.name = name;
         this.email = email;
         this.sid = sid;
-        count = sid;
+        count = sid+1;
         this.comments = comments;
         this.bonusPoints = bonusPoints;
         this.grades = grades;
+    }
+
+    public double getTotalScoreWeighted() {
+        return totalScoreWeighted;
+    }
+
+    public void setTotalScoreWeighted(double totalScoreWeighted) {
+        this.totalScoreWeighted = totalScoreWeighted;
     }
 
     public static int getCount() {
@@ -144,20 +153,30 @@ public class Student {
     }
 
 
-    public Double getTotalScaledScore(){
-        double sum=0;
-        for(int i=0;i<grades.size();i++){
-            sum+=grades.get(i).getScaledScore();
+    public double getRawTotalScore() {
+        //this raw total score is the same shown on blackboard
+        double res = 0;
+
+        for(Grade g : grades) {
+            res += g.getRawScore();
         }
-        return sum;
+
+        return res;
     }
-    public Double getTotalRawScore(){
-        double sum=0;
-        for(int i=0;i<grades.size();i++){
-            sum+=grades.get(i).getRawScore();
-        }
-        return sum;
-    }
+
+//    public double getWeightedTotalScore() {
+//
+//        double sum=0;
+//        for(Grade g : grades) {
+//            double ss = g.getScaledScore();
+//            Assignment a = g.getAssignment();
+//            double w = a.getWeight();
+//            double weightedScore = ss*w/100;
+//
+//        }
+//        return sum;
+//    }
+
     public Double getAllBonusPoints(){
         double sum=0;
         for(int i=0;i<grades.size();i++){
@@ -198,5 +217,30 @@ public class Student {
         int index = comments.size()-1;
 
         return comments.get(index);
+    }
+
+    //output letter grade based on the scaled score (out of 100)
+    public String scoreToLetterGrade() {
+        if(totalScoreWeighted > 100 || totalScoreWeighted < 0) return "Please make your score out of 100";
+
+        if(totalScoreWeighted > 97) return "A+";
+        else if (totalScoreWeighted > 93) return "A";
+        else if (totalScoreWeighted > 90) return "A-";
+        else if (totalScoreWeighted > 87) return "B+";
+        else if (totalScoreWeighted > 83) return "B";
+        else if (totalScoreWeighted > 80) return "B-";
+        else if (totalScoreWeighted > 77) return "C+";
+        else if (totalScoreWeighted > 73) return "C";
+        else if (totalScoreWeighted > 70) return "C-";
+        else if (totalScoreWeighted > 67) return "D+";
+        else if (totalScoreWeighted > 63) return "D";
+        else if (totalScoreWeighted > 60) return "D-";
+        else return "F";
+    }
+
+    public int bumpUpScoreBy(int bumpUpScore) {
+        int res = bumpUpScore;
+        setTotalScoreWeighted(totalScoreWeighted + bumpUpScore);
+        return res;
     }
 }

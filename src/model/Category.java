@@ -104,4 +104,12 @@ public class Category {
     }
 
 
+    public boolean containsAssignment(Assignment assignment) {
+        for(Assignment a : assignments) {
+            if(a.equals(assignment)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

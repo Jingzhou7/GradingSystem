@@ -6,7 +6,6 @@ public class Grade {
     private Assignment assignment;
     private double rawScore;
     private double bonusPoint;
-
     private String letterGrade;
     private String comment;
 
@@ -86,53 +85,13 @@ public class Grade {
         return rawScore;
     }
 
-    //output letter grade based on the scaled score (out of 100)
-    public static String scoreToLetterGrade(double score) {
-        if(score > 100 || score < 60) return "Please make your score out of 100";
 
-        if(score > 97) return "A+";
-        else if (score > 93) return "A";
-        else if (score > 90) return "A-";
-        else if (score > 87) return "B+";
-        else if (score > 83) return "B";
-        else if (score > 80) return "B-";
-        else if (score > 77) return "C+";
-        else if (score > 73) return "C";
-        else if (score > 70) return "C-";
-        else if (score > 67) return "D+";
-        else if (score > 63) return "D";
-        else if (score > 60) return "D-";
-        else return "F";
-    }
-
-    public static String scoreUp(double score) {
-        if(score > 100 || score < 60) return "Please make your score out of 100";
-
-        if(score > 97) return "A+";
-        else if (score > 93) return "A+";
-        else if (score > 90) return "A";
-        else if (score > 87) return "A-";
-        else if (score > 83) return "B+";
-        else if (score > 80) return "B";
-        else if (score > 77) return "B-";
-        else if (score > 73) return "C+";
-        else if (score > 70) return "C";
-        else if (score > 67) return "C-";
-        else if (score > 63) return "D+";
-        else if (score > 60) return "D";
-        else return "D-";
-    }
     public static void setCount(int c) {
         count = c;
     }
 
     public void setRawScore(double rawscore) {
         this.rawScore = rawscore;
-    }
-
-
-    public double getRawScaledScore() {
-        return rawScore/assignment.getMaxPoint()*100;
     }
 
     public double getScaledScore() {
