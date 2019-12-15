@@ -82,18 +82,22 @@ public class Student {
         this.name.setLname(lname);
         this.name.setMname(mname);
     }
-    public void deleteComment(String comment){
+    public int deleteComment(String comment){
         Comment t=null;
+        int id=-1;
         for(int i=0;i<comments.size();i++){
             t=comments.get(i);
             if(t.getText().equals(comment)){
+                id=t.getId();
                 break;
             }
         }
         comments.remove(t);
+        return id;
     }
-    public void deleteAssComment(String assName,String comment){
+    public int deleteAssComment(String assName,String comment){
         Grade g=null;
+        int id=-1;
         for(int i=0;i<grades.size();i++){
             if(grades.get(i).getAssignment().getAssignmentName().equals(assName)&&grades.get(i).getComment().equals(comment)){
                 g=grades.get(i);
@@ -101,6 +105,7 @@ public class Student {
                 break;
             }
         }
+        return id;
     }
 
 

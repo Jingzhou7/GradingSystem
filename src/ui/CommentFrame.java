@@ -66,7 +66,8 @@ public class CommentFrame extends JFrame {
         if (comments.size() != 0) {
             for (int i = 0; i < comments.size(); i++) {
                 Object[] obj = {comments.get(i).getText()};
-                commentModel.addRow(obj);
+                if(comments.get(i).getText()!=null&&comments.get(i).getText()!="")
+                    commentModel.addRow(obj);
             }
         }
         table = new JTable(commentModel);
@@ -82,7 +83,8 @@ public class CommentFrame extends JFrame {
         if (grades.size() != 0) {
             for (int i = 0; i < grades.size(); i++) {
                 Object[] obj = {grades.get(i).getAssignment().getAssignmentName(), grades.get(i).getComment()};
-                assCommentModel.addRow(obj);
+                if(grades.get(i).getComment()!=null&&grades.get(i).getComment()!="")
+                    assCommentModel.addRow(obj);
             }
         }
         assTable = new JTable(assCommentModel);
@@ -99,8 +101,10 @@ public class CommentFrame extends JFrame {
                 } else {
                     if (selected != -1) {
                         String comment = commentModel.getValueAt(selected, 0).toString();
-                        student.deleteComment(comment);
+                        int id=student.deleteComment(comment);
                         commentModel.removeRow(selected);
+                        if(id!=-1)
+                            gs.deleteComments(id);
                     } else {
                         String assignmentName = assCommentModel.getValueAt(assSelected, 0).toString();
                         String comment = assCommentModel.getValueAt(assSelected, 1).toString();
