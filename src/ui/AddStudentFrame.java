@@ -62,6 +62,17 @@ public class AddStudentFrame extends JFrame {
                 dispose();
             }
         });
+
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                System.out.println("Saving from AddStudentFrame");
+                gs.save();
+                System.exit(0);
+            }
+        });
     }
+
+
 
 }
