@@ -100,9 +100,7 @@ public class GradingFrame extends JFrame {
         }
 
         for (int i = 0; i < course.getAllStudents().size(); i++) {
-            if (model.getValueAt(i, 2) == null) {
-                continue;
-            } else {
+            if (model.getValueAt(i, 2) != null) {
                 double tmp = Double.parseDouble(model.getValueAt(i, 2).toString());
                 if (tmp > assignment.getMaxPoint() || tmp < (0 - assignment.getMaxPoint())) {
                     msg = msg + "score exceeds total score of the assignment";
