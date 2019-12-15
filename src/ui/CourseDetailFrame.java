@@ -8,15 +8,12 @@ import model.Student;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseDetailFrame extends JFrame{
+public class CourseDetailFrame extends JFrame {
     private GradingSystem gs;
     private Course course;
     private JPanel mainPanel;
@@ -44,6 +41,7 @@ public class CourseDetailFrame extends JFrame{
         this.gs = gs;
         this.course = course;
 
+
         setName("Course detail frame");
         courseLbl.setText("Current Viewing Course: " + course.getCourseName());
         setVisible(true);
@@ -57,11 +55,11 @@ public class CourseDetailFrame extends JFrame{
     }
 
 
-    private boolean checkWeight(){
+    private boolean checkWeight() {
         double totalWeight = 0;
         boolean weightSave = true;
         String msg = "";
-        if (categoryTable.isEditing()){
+        if (categoryTable.isEditing()) {
             categoryTable.getCellEditor().stopCellEditing();
         }
         try {
@@ -111,7 +109,7 @@ public class CourseDetailFrame extends JFrame{
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (checkWeight()){
+                if (checkWeight()) {
                     new CourseFrame(gs);
                     dispose();
                 }
@@ -138,7 +136,7 @@ public class CourseDetailFrame extends JFrame{
                         new CourseDetailFrame(gs, course);
                         dispose();
                     }
-                }else {
+                } else {
                     JOptionPane.showMessageDialog(null, "There are students in this class already.");
                 }
             }
@@ -155,7 +153,7 @@ public class CourseDetailFrame extends JFrame{
         viewGradesBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (checkWeight()){
+                if (checkWeight()) {
                     course.setWeightedTotalScoreForAll();
                     new StudentGradeFrame(gs, course);
                     dispose();
@@ -168,15 +166,15 @@ public class CourseDetailFrame extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 Object[] obj = {"please enter category name", 0};
                 categoryModel.addRow(obj);
-                course.addCategory("please enter category name");
+                course.addCategory("Name");
             }
         });
 
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+            public void windowClosing(WindowEvent windowEvent) {
                 System.out.println("Saving from CourseDetailFrame");
-                if (checkWeight()){
+                if (checkWeight()) {
                     gs.save();
                     System.exit(0);
                 }
@@ -186,7 +184,7 @@ public class CourseDetailFrame extends JFrame{
     }
 
     private void createUIComponents() {
-        String [] studentHeader={"Student name", "Email", "Student ID"};
+        String[] studentHeader = {"Student name", "Email", "Student ID"};
         ArrayList<Student> allStudents = course.getAllStudents();
         DefaultTableModel studentModel = new DefaultTableModel(studentHeader, 0) {
             @Override
@@ -195,15 +193,15 @@ public class CourseDetailFrame extends JFrame{
             }
         };
 
-        if(allStudents.size() != 0) {
-            for(int i = 0;i < allStudents.size();i++) {
+        if (allStudents.size() != 0) {
+            for (int i = 0; i < allStudents.size(); i++) {
                 Object[] obj = {allStudents.get(i).getName(), allStudents.get(i).getEmail(), allStudents.get(i).getSid()};
                 studentModel.addRow(obj);
             }
         }
         studentTable = new JTable(studentModel);
 
-        String [] categoryHeader={"Category", "Weight(%)"};
+        String[] categoryHeader = {"Category", "Weight(%)"};
 
         categoryModel = new DefaultTableModel(categoryHeader, 0) {
             @Override
@@ -212,8 +210,8 @@ public class CourseDetailFrame extends JFrame{
             }
         };
         ArrayList<Category> allCategories = course.getAllCategories();
-        if(allCategories.size() != 0) {
-            for(int i = 0;i < allCategories.size();i++) {
+        if (allCategories.size() != 0) {
+            for (int i = 0; i < allCategories.size(); i++) {
                 Object[] obj = {allCategories.get(i).getCategoryName(), allCategories.get(i).getWeight()};
                 categoryModel.addRow(obj);
             }
@@ -238,8 +236,7 @@ public class CourseDetailFrame extends JFrame{
                     studentModel.removeRow(studentTable.getSelectedRow());
                     JOptionPane.showMessageDialog(null, "Selected student deleted successfully");
 
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(source, "Please select a row.");
                 }
             }
@@ -269,8 +266,7 @@ public class CourseDetailFrame extends JFrame{
                     categoryModel.removeRow(categoryTable.getSelectedRow());
                     JOptionPane.showMessageDialog(null, "Selected category deleted successfully");
 
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(source, "Please select a row.");
                 }
             }
@@ -280,7 +276,7 @@ public class CourseDetailFrame extends JFrame{
         modifyAssignmentsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (checkWeight()){
+                if (checkWeight()) {
                     JButton source = (JButton) actionEvent.getSource();
                     int selected = categoryTable.getSelectedRow();
                     if (selected != -1) {
@@ -290,7 +286,7 @@ public class CourseDetailFrame extends JFrame{
                             new AssignmentFrame(gs, course, currentCategory);
                             dispose();
                         }
-                    }else {
+                    } else {
                         JOptionPane.showMessageDialog(source, "Please select a row.");
                     }
                 }
@@ -302,7 +298,7 @@ public class CourseDetailFrame extends JFrame{
         int len = allCourses.size();
         String[] courseOptions = new String[len];
         int index = 0;
-        for(Course c : allCourses) {
+        for (Course c : allCourses) {
             courseOptions[index++] = c.getCourseName();
         }
     }

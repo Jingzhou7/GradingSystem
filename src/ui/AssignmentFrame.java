@@ -11,8 +11,11 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class AssignmentFrame extends JFrame {
@@ -37,6 +40,7 @@ public class AssignmentFrame extends JFrame {
         this.gs = gs;
         this.course = course;
         this.category = category;
+
 
 
         categoryLbl.setText("Current Viewing Category: " + category.getCategoryName());
@@ -81,11 +85,11 @@ public class AssignmentFrame extends JFrame {
             }
         });
 
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+            public void windowClosing(WindowEvent windowEvent) {
                 System.out.println("Saving from AssignmentFrame");
-                if (checkVals()){
+                if (checkVals()) {
                     gs.save();
                     System.exit(0);
                 }
@@ -94,12 +98,12 @@ public class AssignmentFrame extends JFrame {
         });
     }
 
-    private boolean checkVals(){
+    private boolean checkVals() {
 
         double totalWeight = 0;
         boolean weightSave = true;
         String msg = "";
-        if (assignmentTable.isEditing()){
+        if (assignmentTable.isEditing()) {
             assignmentTable.getCellEditor().stopCellEditing();
         }
         if (assignmentModel.getRowCount() != 0) {
@@ -126,7 +130,7 @@ public class AssignmentFrame extends JFrame {
                             category.getAllAssignments().get(i).setWeight(Double.parseDouble(assignmentModel.getValueAt(i, 1).toString()));
                             String rd = assignmentModel.getValueAt(i, 2).toString();
                             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                            java.util.Date parsed = null;
+                            Date parsed = null;
                             parsed = format.parse(rd);
                             java.sql.Date sql = new java.sql.Date(parsed.getTime());
                             System.out.println(sql);

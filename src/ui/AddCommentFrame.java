@@ -48,11 +48,11 @@ public class AddCommentFrame extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 JButton source = (JButton) actionEvent.getSource();
                 String inp = commentTextfield.getText();
-                if (inp.equals("")||inp==null) {
+                if (inp.equals("") || inp == null) {
                     JOptionPane.showMessageDialog(source, "The input is empty");
                 } else {
                     student.addComment(new Comment(inp));
-                    new StudentGradeFrame(gs,course);
+                    new StudentGradeFrame(gs, course);
                     dispose();
                 }
             }

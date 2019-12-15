@@ -7,12 +7,12 @@ public class BonusPoints {
 
     public BonusPoints(int id, double d){
         this.id = id;
+        count++;
         this.value = d;
     }
 
     public BonusPoints(double d){
-        this.id = count;
-        count+=1;
+        this.id = ++count;
         this.value = d;
     }
 

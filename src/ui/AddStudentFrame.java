@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class AddStudentFrame extends JFrame {
 
@@ -50,7 +52,7 @@ public class AddStudentFrame extends JFrame {
                 String lname = lastNameTextField.getText();
                 String mname = middleNameTextField.getText();
                 String email = emailTextField.getText();
-                course.addStudent(fname, lname, mname, email);
+                course.addStudent(fname, mname, lname, email);
                 new CourseDetailFrame(gs, course);
                 dispose();
             }
@@ -63,16 +65,15 @@ public class AddStudentFrame extends JFrame {
             }
         });
 
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+            public void windowClosing(WindowEvent windowEvent) {
                 System.out.println("Saving from AddStudentFrame");
                 gs.save();
                 System.exit(0);
             }
         });
     }
-
 
 
 }

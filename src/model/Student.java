@@ -17,46 +17,47 @@ public class Student {
 
     public Student(Name name) {
         this.name = name;
-        setEmail("cs@bu.edu");
-        this.sid = count;
-        count+=1;
+        this.email = "cs@bu.edu";
+        this.sid = ++count;
         comments = new ArrayList<>();
         bonusPoints = new ArrayList<>();
-        grades = new ArrayList<Grade>();
+        grades = new ArrayList<>();
         scoreUp=false;
 
     }
 
-    public Student(String fname, String lname, String mname, String email) {
-        name = new Name(fname, mname, lname);
-        this.sid = count;
-        count+=1;
-        this.email = email;
-        comments = new ArrayList<>();
-        bonusPoints = new ArrayList<>();
-        grades = new ArrayList<Grade>();
-        scoreUp=false;
-    }
 
-
-    public Student(Name name, String email, ArrayList<Comment> comments, ArrayList<BonusPoints> bonusPoints, ArrayList<Grade> grades){
-        this.name = name;
-        this.email = email;
-        this.sid = count;
-        count+=1;
-        this.comments = comments;
-        this.bonusPoints = bonusPoints;
-        this.grades = grades;
-        scoreUp=false;
-    }
 
     public Student(Name name, String email, int sid, ArrayList<Comment> comments, ArrayList<BonusPoints> bonusPoints, ArrayList<Grade> grades){
         this.name = name;
         this.email = email;
         this.sid = sid;
-        count = sid+1;
+        count++;
         this.comments = comments;
         this.bonusPoints = bonusPoints;
+        this.grades = grades;
+    }
+
+//    private void initLists() {
+//        if(comments.size() == 0) {
+//            comments.add(Comment.dummyComment);
+//        }
+//        if(bonusPoints.size() == 0) {
+//            bonusPoints.add(new BonusPoints(0));
+//        }
+//        if(grades.size() == 0) {
+//
+//
+//
+//
+//
+//
+//            grades.add(new Grade());
+//        }
+//    }
+
+
+    public void setGrades(ArrayList<Grade> grades) {
         this.grades = grades;
     }
 
@@ -125,12 +126,15 @@ public class Student {
 
     public Grade getGrade(Assignment assignment) {
         Grade res = null;
-        for(Grade g : grades) {
-            if(g.getAssignment().equals(assignment)) {
-                res = g;
+        if(grades.size() == 0) return res;
+        else {
+            for (Grade g : grades) {
+                if (g.getAssignment().getAssignmentName().equals(assignment.getAssignmentName())) {
+                    res = g;
+                }
             }
+            return res;
         }
-        return res;
     }
 
     public void setGrade(int id, double rawscore) {

@@ -1,18 +1,12 @@
 package ui;
 
 import GradingSystem.GradingSystem;
-import model.Assignment;
-import model.Category;
-import model.Course;
-import model.Student;
+import model.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class GradingFrame extends JFrame {
@@ -24,10 +18,7 @@ public class GradingFrame extends JFrame {
     private JPanel mainPanel;
     private JButton backButton;
     private JTable gradeTable;
-    private JButton button1;
     private JButton editModeButton;
-    private JButton button3;
-    private JButton button4;
     private JScrollPane gradeScroll;
     private JLabel assignmentLbl;
     private DefaultTableModel model;
@@ -38,6 +29,7 @@ public class GradingFrame extends JFrame {
         this.course = course;
         this.category = category;
         this.assignment = currentAssignment;
+
         assignmentLbl.setText(currentAssignment.getAssignmentName() + "(Total Score: " + currentAssignment.getMaxPoint() + ")");
         setName("View Grades");
         setContentPane(mainPanel);
@@ -50,16 +42,16 @@ public class GradingFrame extends JFrame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(checkScore()) {
+                if (checkScore()) {
                     AssignmentFrame a = new AssignmentFrame(gs, course, category);
                     dispose();
                 }
             }
         });
 
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+            public void windowClosing(WindowEvent windowEvent) {
                 System.out.println("Saving from GradingFrame");
                 gs.save();
                 System.exit(0);
@@ -84,13 +76,18 @@ public class GradingFrame extends JFrame {
         };
 
         if (allStudents.size() != 0) {
-            for (int i = 0; i < allStudents.size(); i++) {
-                Object[] obj = {allStudents.get(i).getName(), allStudents.get(i).getSid(), allStudents.get(i).getGrade(assignment).getRawScore(), allStudents.get(i).getGrade(assignment).getScaledScore()};
-                model.addRow(obj);
+            for (Student s : allStudents) {
+                Grade g = s.getGrade(assignment);
+                if (g == null) {
+                    Object[] obj = {s.getName(), s.getSid()};
+                    model.addRow(obj);
+                } else {
+                    Object[] obj = {s.getName(), s.getSid(), s.getGrade(assignment).getRawScore(), s.getGrade(assignment).getScaledScore()};
+                    model.addRow(obj);
+                }
             }
         }
         gradeTable = new JTable(model);
-
 
 
     }
@@ -101,25 +98,36 @@ public class GradingFrame extends JFrame {
         if (gradeTable.isEditing()) {
             gradeTable.getCellEditor().stopCellEditing();
         }
-        for (int i = 0; i < course.getAllStudents().size(); i++) {
-            double tmp = Double.parseDouble(model.getValueAt(i, 2).toString());
-            if (tmp > assignment.getMaxPoint() || tmp < (0 - assignment.getMaxPoint())) {
-                msg = msg + "score exceeds total score of the assignment";
-                scoreSave = false;
-                break;
-            }
-        }
-        for (int i = 0; i < course.getAllStudents().size(); i++) {
 
-            double tmp = Double.parseDouble(model.getValueAt(i, 2).toString());
-            double totalScore = assignment.getMaxPoint();
-
-            if(tmp >= 0) {
-                course.getAllStudents().get(i).getGrade(assignment).setRawScore(tmp);
+        for (int i = 0; i < course.getAllStudents().size(); i++) {
+            if (model.getValueAt(i, 2) == null) {
+                continue;
             } else {
-                course.getAllStudents().get(i).getGrade(assignment).setRawScore(totalScore + tmp);
+                double tmp = Double.parseDouble(model.getValueAt(i, 2).toString());
+                if (tmp > assignment.getMaxPoint() || tmp < (0 - assignment.getMaxPoint())) {
+                    msg = msg + "score exceeds total score of the assignment";
+                    scoreSave = false;
+                    break;
+                } else {
+                    double totalScore = assignment.getMaxPoint();
+                    Grade g = course.getAllStudents().get(i).getGrade(assignment);
+                    course.getAllStudents().get(i).getGrades().add(g);
+                    if (g == null) {
+                        g = new Grade(assignment);
+                        if (tmp >= 0) {
+                            g.setRawScore(tmp);
+                        } else {
+                            g.setRawScore(totalScore + tmp);
+                        }
+                    } else {
+                        if (tmp >= 0) {
+                            g.setRawScore(tmp);
+                        } else {
+                            g.setRawScore(totalScore + tmp);
+                        }
+                    }
+                }
             }
-
         }
 
         if (!scoreSave) {

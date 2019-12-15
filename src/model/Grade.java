@@ -10,27 +10,14 @@ public class Grade {
     private String comment;
 
 
-    public Grade() {
-
-        setBonusPoint(0);
-        setComment(null);
-        setLetterGrade(null);
-    }
-
-    public Grade(Assignment assignment, double rawScore) {
+    public Grade(Assignment assignment) {
+        this.gradeid = ++count;
         this.assignment = assignment;
-        this.rawScore = rawScore;
-        setBonusPoint(0);
-        setComment(null);
-        setLetterGrade(null);
-    }
+        this.rawScore = 0;
+        this.bonusPoint = 0;
+        this.letterGrade = "";
+        this.comment = "";
 
-    public Grade(Assignment a, double rawScore, double bonusp, String letterGrade, String comment){
-        this.gradeid = count;
-        count+=1;
-        this.bonusPoint = bonusp;
-        this.letterGrade = letterGrade;
-        this.comment = comment;
     }
 
     public Grade(int id, Assignment a, double rawScore, double bonusp, String letterGrade, String comment) {

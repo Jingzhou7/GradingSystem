@@ -13,41 +13,39 @@ public class Category {
     public Category(String categoryName) {
         this.categoryName = categoryName;
         this.weight = 0;
-        this.id = count;
-        count+=1;
+        this.id = ++count;
         assignments = new ArrayList<>();
-//        assignments.add(new Assignment(categoryName + " 1"));
-//        assignments.add(new Assignment(categoryName + " 2"));
-//        assignments.add(new Assignment(categoryName + " 3"));
-//        assignments.add(new Assignment(categoryName + " 4"));
+        initLists();
     }
-    public Category(String name, double weight) {
-        this.categoryName = name;
-        this.weight = weight;
-        this.id = count;
-        count+=1;
-        assignments = new ArrayList<>();
-        assignments.add(new Assignment(categoryName + " 1"));
-        assignments.add(new Assignment(categoryName + " 2"));
-        assignments.add(new Assignment(categoryName + " 3"));
-        assignments.add(new Assignment(categoryName + " 4"));
-    }
+
     // constructor
     public Category(String name, double weight, ArrayList<Assignment> assignments){
-        this.id = count;
-        count+=1;
+        this.id = ++count;
         this.categoryName = name;
         this.weight = weight;
         this.assignments = assignments;
+        if(assignments.size() == 0) {
+            initLists();
+        }
     }
 
     public Category(int id, String name, double weight, List<Assignment> assignments) {
         this.id = id;
-        count+=1;
+        count++;
         this.categoryName = name;
         this.weight = weight;
         this.assignments = assignments;
+        initLists();
 
+
+    }
+
+    private void initLists(){
+        if(assignments.size() == 0) {
+            Assignment newAssignment = new Assignment(categoryName + " 1");
+            newAssignment.setWeight(100);
+            assignments.add(newAssignment);
+        }
     }
 
     public static int getCount() {
@@ -73,7 +71,7 @@ public class Category {
 
     //methods
     public Category addCategory(String name) {
-        Category res = new Category(name, 0);
+        Category res = new Category(name);
         return res;
     }
 

@@ -13,27 +13,17 @@ public class Assignment{
     private double maxPoint;  // set the max score of the assignment for score calculation
 
     public Assignment(String assignmentName) {
-        this.id = count;
-        count+=1;
+        this.id = ++count;
         this.assignmentName = assignmentName;
         weight = 0;
-        releaseDate = new Date(2019,1,1);
-        dueDate = new Date(2019,10,10);
+        releaseDate = new Date(119,1,1);
+        dueDate = new Date(119,2,2);
         maxPoint = 100;
-    }
-
-    public Assignment(String assignmentName, double weight, Date releaseDate, Date dueDate, double maxPoint){
-        this.id = count;
-        count+=1;
-        this.assignmentName = assignmentName;
-        this.weight = weight;
-        this.releaseDate = releaseDate;
-        this.dueDate = dueDate;
-        this.maxPoint = maxPoint;
     }
 
     public Assignment(int id, String assignmentName, double weight, Date releaseDate, Date dueDate, double maxPoint) {
         this.id = id;
+        count++;
         this.assignmentName = assignmentName;
         this.weight = weight;
         this.releaseDate = releaseDate;

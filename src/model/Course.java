@@ -1,6 +1,5 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -27,39 +26,57 @@ public class Course {
 
     //constructor
     public Course(String courseName) {
-        //System.out.println("count: " + count);
-        courseIndex = count;
-        count+=1;
-        setSemester(CURRENT_SEMESTER);
-        setCourseName(courseName);
+        courseIndex = ++count;
+        this.semester = CURRENT_SEMESTER;
+        this.courseName = courseName;
         categories = new ArrayList<>();
         students = new ArrayList<>();
-        categories.add(new Category("Exam", 50));
-        categories.add(new Category("Programming Assignment",30));
-        categories.add(new Category("Participation",20));
-        calculateStatictics();
+        initLists();
+        calculateStatistics();
     }
 
 
     public Course(int courseIndex, String semester, String courseName, ArrayList<Category> categories, ArrayList<Student> students) {
         //System.out.println("count: " + count);
         this.courseIndex = courseIndex;
+        count++;
         this.semester = semester;
         this.courseName = courseName;
         this.categories = categories;
         this.students = students;
-        calculateStatictics();
+        initLists();
+        calculateStatistics();
     }
 
     public Course(String semester, String courseName, ArrayList<Category> categories, ArrayList<Student> students){
         //System.out.println("count: " + count);
-        this.courseIndex = count;
-        count+=1;
+        this.courseIndex = ++count;
         this.semester = semester;
         this.courseName = courseName;
         this.categories = categories;
         this.students = students;
-        calculateStatictics();
+        initLists();
+        calculateStatistics();
+    }
+
+    private void initLists(){
+        if(categories.size() == 0) {
+            Category newCategory = new Category("Exam");
+            newCategory.setWeight(100);
+            categories.add(newCategory);
+        }
+        if(students.size() == 0) {
+            Student newStudent = new Student(new Name("Alice"));
+            ArrayList<Grade> dummyGrades = new ArrayList<>();
+            for(Category c : categories) {
+                for(Assignment a : c.getAllAssignments()) {
+                    Grade dummyGrade = new Grade(a);
+                    dummyGrades.add(dummyGrade);
+                }
+            }
+            newStudent.setGrades(dummyGrades);
+            students.add(newStudent);
+        }
     }
 
     public static int getCount() {
@@ -145,8 +162,11 @@ public class Course {
         count = c;
     }
 
-    public boolean addStudent(String fname, String lname, String mname, String email) {
-        Student newStudent = new Student(fname, lname, mname, email);
+    public boolean addStudent(String fname, String mname, String lname, String email) {
+        Name newName = new Name(fname, mname, lname);
+        Student newStudent = new Student(newName);
+        newStudent.setEmail(email);
+
         students.add(newStudent);
         return true;
     }
@@ -198,16 +218,17 @@ public class Course {
         this.low = low;
     }
 
-    public void calculateStatictics() {
+    public void calculateStatistics() {
         //initialize statistics and update alongside
         int studentCount = students.size();
-        if(studentCount == 0) {
+        if (studentCount == 0) {
             setHigh(0);
             setLow(0);
             setMean(0);
             setMedian(0);
             setStandard_deviation(0);
         } else {
+            System.out.println("");
             double totalScore = 0;
             double avg;
             double med;
@@ -226,12 +247,12 @@ public class Course {
 
 
             Arrays.sort(allTotalScores);
-            if (studentCount / 2 != 0) {
+            if (studentCount % 2 == 1) {
                 //studentCount is odd
-                med = allTotalScores[(studentCount + 1) / 2];
+                med = allTotalScores[(studentCount - 1) / 2];
             } else {
                 //studentCount is even
-                med = (allTotalScores[studentCount / 2] + allTotalScores[studentCount / 2 + 1]) / 2;
+                med = (allTotalScores[studentCount / 2] + allTotalScores[studentCount / 2 - 1]) / 2;
             }
 
             avg = totalScore / studentCount;

@@ -5,8 +5,11 @@ import model.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class StudentGradeFrame extends JFrame {
@@ -29,6 +32,7 @@ public class StudentGradeFrame extends JFrame {
         this.gs = gs;
         this.course = course;
 
+
         setName("Student grade frame");
         setVisible(true);
 
@@ -47,17 +51,18 @@ public class StudentGradeFrame extends JFrame {
             }
         });
     }
+
     private void addActiveComponent() {
         ArrayList<Student> allStudents = course.getAllStudents();
 
     }
 
     private DefaultTableModel getModel(ArrayList<Student> allStudents) {
-        String[] header = {"Student ID", "Name", "Bonus Points", "Raw Score", "Weighted Score","Final Grade", "Write Comment"};
+        String[] header = {"Student ID", "Name", "Bonus Points", "Raw Score", "Weighted Score", "Final Grade", "Write Comment"};
         DefaultTableModel studentGradeModel = new DefaultTableModel(header, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                if(column == 5) return true;
+                if (column == 6) return true;
                 else return false;
             }
         };
@@ -78,7 +83,7 @@ public class StudentGradeFrame extends JFrame {
         studentGradeModel = getModel(allStudents);
         studentGradeTable = new JTable(studentGradeModel);
 
-        addComment=new JButton("Add Comment");
+        addComment = new JButton("Add Comment");
         addComment.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -86,9 +91,10 @@ public class StudentGradeFrame extends JFrame {
                 int selected = studentGradeTable.getSelectedRow();
                 if (selected != -1) {
                     //get the student that is added comment
+                    save();
                     int studentId = Integer.parseInt(studentGradeModel.getValueAt(selected, 0).toString());
                     Student targetStudent = course.getStudent(studentId);
-                    AddCommentFrame acf=new AddCommentFrame(gs, course, targetStudent);
+                    AddCommentFrame acf = new AddCommentFrame(gs, course, targetStudent);
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(source, "Please select a row.");
@@ -104,7 +110,7 @@ public class StudentGradeFrame extends JFrame {
                 int selected = studentGradeTable.getSelectedRow();
                 if (selected != -1) {
                     //get the student that is added comment
-                    if(textField1.getText().equals(""))
+                    if (textField1.getText().equals(""))
                         JOptionPane.showMessageDialog(source, "Please enter the amount you want to bump.");
 
                     int studentId = Integer.parseInt(studentGradeModel.getValueAt(selected, 0).toString());
@@ -113,8 +119,8 @@ public class StudentGradeFrame extends JFrame {
                         targetStudent.setScoreUp(true);
                         studentGradeModel.removeRow(selected);
                         int plusScore = targetStudent.bumpUpScoreBy(2);
-                        Object[] obj={targetStudent.getSid(),targetStudent.getName(),targetStudent.getAllBonusPoints(),targetStudent.getRawTotalScore(),targetStudent.getTotalScoreWeighted(),targetStudent.scoreToLetterGrade(),targetStudent.getLastComment().getText()};
-                        studentGradeModel.insertRow(selected,obj);
+                        Object[] obj = {targetStudent.getSid(), targetStudent.getName(), targetStudent.getAllBonusPoints(), targetStudent.getRawTotalScore(), targetStudent.getTotalScoreWeighted(), targetStudent.scoreToLetterGrade(), targetStudent.getLastComment().getText()};
+                        studentGradeModel.insertRow(selected, obj);
                     } else {
                         JOptionPane.showMessageDialog(source, "This student has been scored up.");
                     }
@@ -143,9 +149,9 @@ public class StudentGradeFrame extends JFrame {
             }
         });
 
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+            public void windowClosing(WindowEvent windowEvent) {
                 System.out.println("Saving from AssignmentFrame");
                 save();
                 gs.save();
@@ -154,24 +160,24 @@ public class StudentGradeFrame extends JFrame {
         });
     }
 
-    private void save(){
-        if (studentGradeTable.isEditing()){
+    private void save() {
+        if (studentGradeTable.isEditing()) {
             studentGradeTable.getCellEditor().stopCellEditing();
         }
 
-        for (int i = 0; i < course.getAllStudents().size(); i++){
+        for (int i = 0; i < course.getAllStudents().size(); i++) {
             String text = studentGradeModel.getValueAt(i, 6).toString();
             ArrayList<Comment> allComments = course.getAllStudents().get(i).getComments();
 
             boolean commentExist = false;
-            for(Comment c : allComments) {
-                if(c.getText().equals(text)) {
+            for (Comment c : allComments) {
+                if (c.getText().equals(text)) {
                     commentExist = true;
                 }
             }
-            if(!commentExist) {
+            if (!commentExist) {
                 Comment tmpComment = new Comment(text);
-                if(!tmpComment.isEmptyComment())
+                if (!tmpComment.isEmptyComment())
                     course.getAllStudents().get(i).addComment(tmpComment);
             }
 

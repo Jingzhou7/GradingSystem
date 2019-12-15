@@ -147,7 +147,11 @@ public class GradingSystem {
                 for (Category cc:templeteCategories){
                     ArrayList<Assignment> tempA = new ArrayList<Assignment>();
                     for(Assignment a:cc.getAllAssignments()){
-                        Assignment copy = new Assignment(a.getAssignmentName(), a.getWeight(), a.getReleaseDate(), a.getDueDate(), a.getMaxPoint());
+                        Assignment copy = new Assignment(a.getAssignmentName());
+                        copy.setWeight(a.getWeight());
+                        copy.setReleaseDate(a.getReleaseDate());
+                        copy.setDueDate(a.getDueDate());
+                        copy.setMaxPoint(a.getMaxPoint());
                         tempA.add(copy);
                     }
                     Category copyC = new Category(cc.getCategoryName(), cc.getWeight(), tempA);
@@ -290,12 +294,12 @@ public class GradingSystem {
                 ArrayList<Category> categories = getCategories(id);
                 ArrayList<Student> students = getStudents(id);
                 Integer sid = (Integer) rs.getObject("sectionid");
-                Course a = null;
+
                 if (sid == null)
-                    a = new Course(id, semester, name, categories, students);
+                    all.add(new Course(id, semester, name, categories, students));
                 else
-                    a = new Section(id, semester, name, categories, students, sid);
-                all.add(a);
+                    all.add(new Section(id, semester, name, categories, students, sid));
+
             }
             sc.close();
         }catch (Exception e) {
