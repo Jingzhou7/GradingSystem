@@ -79,6 +79,15 @@ public class Course {
         return categories;
     }
 
+    public boolean removeCategory(Category c){
+        if (categories.contains(c)){
+            categories.remove(c);
+            return true;
+        }
+
+        return false;
+    }
+
     public Category getCategory(String categoryName) {
         Category res = null;
         for(Category c : categories) {

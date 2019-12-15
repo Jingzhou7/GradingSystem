@@ -16,10 +16,10 @@ public class Category {
         this.id = count;
         count+=1;
         assignments = new ArrayList<>();
-        assignments.add(new Assignment(categoryName + " 1"));
-        assignments.add(new Assignment(categoryName + " 2"));
-        assignments.add(new Assignment(categoryName + " 3"));
-        assignments.add(new Assignment(categoryName + " 4"));
+//        assignments.add(new Assignment(categoryName + " 1"));
+//        assignments.add(new Assignment(categoryName + " 2"));
+//        assignments.add(new Assignment(categoryName + " 3"));
+//        assignments.add(new Assignment(categoryName + " 4"));
     }
     public Category(String name, double weight) {
         this.categoryName = name;
@@ -95,7 +95,13 @@ public class Category {
         return res;
     }
 
+    public void addAssignment(Assignment a){
+        assignments.add(a);
+    }
+
     public int getId() {
         return id;
     }
+
+
 }

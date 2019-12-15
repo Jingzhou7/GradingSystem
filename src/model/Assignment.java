@@ -13,6 +13,8 @@ public class Assignment{
     private double maxPoint;  // set the max score of the assignment for score calculation
 
     public Assignment(String assignmentName) {
+        this.id = count;
+        count+=1;
         this.assignmentName = assignmentName;
         weight = 0;
         releaseDate = new Date(2019,1,1);

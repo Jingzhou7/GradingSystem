@@ -7,6 +7,7 @@ import model.Student;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -39,6 +40,7 @@ public class CourseDetailFrame extends JFrame{
 
 
     public CourseDetailFrame(GradingSystem gs, Course course) {
+
         this.gs = gs;
         this.course = course;
 
@@ -46,11 +48,12 @@ public class CourseDetailFrame extends JFrame{
         courseLbl.setText("Current Viewing Course: " + course.getCourseName());
         setVisible(true);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setContentPane(mainPanel);
         pack();
         setLocationRelativeTo(null);
         addActiveComponent();
+
     }
 
 
@@ -61,27 +64,44 @@ public class CourseDetailFrame extends JFrame{
         if (categoryTable.isEditing()){
             categoryTable.getCellEditor().stopCellEditing();
         }
-        for (int i = 0;i < course.getAllCategories().size();i++){
-            if (Double.parseDouble(categoryModel.getValueAt(i, 1).toString()) == 0){
-                msg = msg + "The weight of category cannot be 0. ";
-                weightSave = false;
-                break;
+        try {
+            //System.out.println(course.getAllCategories().size());
+            if (categoryModel.getRowCount() != 0) {
+                for (int i = 0; i < course.getAllCategories().size(); i++) {
+                    if (Double.parseDouble(categoryModel.getValueAt(i, 1).toString()) <= 0) {
+                        msg = msg + "The weight of category cannot be 0. ";
+                        weightSave = false;
+                        break;
 
+                    }
+                }
+                if (weightSave) {
+                    for (int i = 0; i < course.getAllCategories().size(); i++) {
+                        totalWeight += Double.parseDouble(categoryModel.getValueAt(i, 1).toString());
+                    }
+                    if (totalWeight != 100) {
+                        msg = msg + "The total weight of all categories is not up to 100%";
+                        weightSave = false;
+                        Object[] options = {"ok"};
+                        JOptionPane.showOptionDialog(null, msg, "Fail", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+                    } else {
+                        for (int i = 0; i < course.getAllCategories().size(); i++) {
+                            course.getAllCategories().get(i).setCategoryName(categoryModel.getValueAt(i, 0).toString());
+                            course.getAllCategories().get(i).setWeight(Double.parseDouble(categoryModel.getValueAt(i, 1).toString()));
+                        }
+                    }
+                } else {
+                    Object[] options = {"ok"};
+                    JOptionPane.showOptionDialog(null, msg, "Fail", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                }
             }
-        }
-        for (int i = 0;i < course.getAllCategories().size();i++){
-            course.getAllCategories().get(i).setCategoryName(categoryModel.getValueAt(i, 0).toString());
-            course.getAllCategories().get(i).setWeight(Double.parseDouble(categoryModel.getValueAt(i, 1).toString()));
-            totalWeight += Double.parseDouble(categoryModel.getValueAt(i, 1).toString());
-        }
-        if (totalWeight != 100){
-            msg = msg + "The total weight of all categories is not up to 100%";
+        } catch (NumberFormatException e) {
             weightSave = false;
-        }
-        if (!weightSave){
-            Object[] options ={ "ok" };
-            JOptionPane.showOptionDialog(null, msg, "Fail",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-            return weightSave;
+            //e.printStackTrace();
+        } catch (HeadlessException e) {
+            weightSave = false;
+            //e.printStackTrace();
         }
 
         return weightSave;
@@ -147,7 +167,19 @@ public class CourseDetailFrame extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 Object[] obj = {"please enter category name", 0};
                 categoryModel.addRow(obj);
-                course.addCategory("null");
+                course.addCategory("please enter category name");
+            }
+        });
+
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                System.out.println("Saving from CourseDetailFrame");
+                if (checkWeight()){
+                    gs.save();
+                    System.exit(0);
+                }
+
             }
         });
     }
@@ -222,9 +254,16 @@ public class CourseDetailFrame extends JFrame{
 
                     //remove from the List of classes
                     String categoryName = categoryModel.getValueAt(selected, 0).toString();
+                    //System.out.println(categoryName);
                     Category targetcategory = course.getCategory(categoryName);
-                    course.getAllCategories().remove(targetcategory);
-                    gs.addDeletedCategory(targetcategory);
+                    boolean c = course.removeCategory(targetcategory);
+                    //System.out.println(c);
+                    //System.out.println(course.getAllCategories().size());
+
+                    if (targetcategory != null) {
+                        gs.addDeletedCategory(targetcategory);
+                    }
+
                     //remove the entry in the table
                     categoryModel.removeRow(categoryTable.getSelectedRow());
                     JOptionPane.showMessageDialog(null, "Selected category deleted successfully");
@@ -246,8 +285,10 @@ public class CourseDetailFrame extends JFrame{
                     if (selected != -1) {
                         String categoryName = categoryModel.getValueAt(selected, 0).toString();
                         Category currentCategory = course.getCategory(categoryName);
-                        new AssignmentFrame(gs, course, currentCategory);
-                        dispose();
+                        if (currentCategory != null) {
+                            new AssignmentFrame(gs, course, currentCategory);
+                            dispose();
+                        }
                     }else {
                         JOptionPane.showMessageDialog(source, "Please select a row.");
                     }
@@ -264,4 +305,6 @@ public class CourseDetailFrame extends JFrame{
             courseOptions[index++] = c.getCourseName();
         }
     }
+
+
 }

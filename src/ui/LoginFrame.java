@@ -68,12 +68,10 @@ public class LoginFrame extends JFrame {
             }
         });
 
-        Runtime.getRuntime().addShutdownHook(new Thread()
-        {
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
-            public void run()
-            {
-                System.out.println("Saving...");
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                System.out.println("Saving from LoginFrame");
                 gs.save();
             }
         });

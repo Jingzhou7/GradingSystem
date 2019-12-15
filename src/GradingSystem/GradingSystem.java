@@ -532,8 +532,8 @@ public class GradingSystem {
     }
 
     public boolean updateAssignment(Assignment a){
-        String sql = "update assignment set weight = " + a.getWeight() + ", releasedate = " + a.getReleaseDate() + ",duedate = " + a.getDueDate()  + ", maxpoints = " + a.getMaxPoint() + ", name = '" + a.getAssignmentName() + "' where assignmentid = " + a.getId();
-        //System.out.println(sql);
+        String sql = "update assignment set weight = " + a.getWeight() + ", releasedate = '" + a.getReleaseDate() + "', duedate = '" + a.getDueDate()  + "', maxpoints = " + a.getMaxPoint() + ", name = '" + a.getAssignmentName() + "' where assignmentid = " + a.getId();
+        System.out.println(sql);
         PreparedStatement pst = null;
         SQLConnection sc = new SQLConnection();
         try {
