@@ -98,4 +98,14 @@ public class Category {
     public int getId() {
         return id;
     }
+
+
+    public boolean containsAssignment(Assignment assignment) {
+        for(Assignment a : assignments) {
+            if(a.equals(assignment)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

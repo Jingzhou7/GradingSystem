@@ -90,7 +90,7 @@ public class CourseFrame extends JFrame {
     private void createUIComponents() {
 
         String[] header = {"Class ID", "Class Name", "Semester", "Student Count"};
-        ArrayList<Course> currentSemesterCourses = gs.getCoursesBySemester(Course.CURRENT_SEMESTER);
+        ArrayList<Course> currentSemesterCourses = gs.getCoursesBySemester(gs.getCurrent_semester());
         courseModel = new DefaultTableModel(header, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {

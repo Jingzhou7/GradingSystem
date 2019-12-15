@@ -136,6 +136,7 @@ public class CourseDetailFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (checkWeight()){
+                    course.setWeightedTotalScoreForAll();
                     new StudentGradeFrame(gs, course);
                     dispose();
                 }

@@ -5,7 +5,6 @@ import model.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,6 +21,7 @@ public class StudentGradeFrame extends JFrame {
     private JButton addComment;
     private JPanel ChoicePanel;
     private JButton scoreButton;
+    private JTextField textField1;
     DefaultTableModel studentGradeModel;
 
     public StudentGradeFrame(GradingSystem gs, Course course) {
@@ -53,7 +53,7 @@ public class StudentGradeFrame extends JFrame {
     }
 
     private DefaultTableModel getModel(ArrayList<Student> allStudents) {
-        String[] header = {"Student ID", "Name", "Bonus Points", "Scaled Points", "Raw Scores","Final Grade", "Write Comment"};
+        String[] header = {"Student ID", "Name", "Bonus Points", "Raw Score", "Weighted Score","Final Grade", "Write Comment"};
         DefaultTableModel studentGradeModel = new DefaultTableModel(header, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -62,14 +62,9 @@ public class StudentGradeFrame extends JFrame {
             }
         };
         if (allStudents.size() != 0) {
-            String score;
+
             for (int i = 0; i < allStudents.size(); i++) {
-                if (allStudents.get(i).isScoreUp()) {
-                    score = Grade.scoreUp(allStudents.get(i).getTotalScaledScore());
-                } else {
-                    score = Grade.scoreToLetterGrade(allStudents.get(i).getTotalScaledScore());
-                }
-                Object[] obj = {allStudents.get(i).getSid(), allStudents.get(i).getName(), allStudents.get(i).getAllBonusPoints(), allStudents.get(i).getTotalScaledScore(), allStudents.get(i).getTotalRawScore(), score, allStudents.get(i).getLastComment().getText()};
+                Object[] obj = {allStudents.get(i).getSid(), allStudents.get(i).getName(), allStudents.get(i).getAllBonusPoints(), allStudents.get(i).getRawTotalScore(), allStudents.get(i).getTotalScoreWeighted(), allStudents.get(i).scoreToLetterGrade(), allStudents.get(i).getLastComment().getText()};
                 studentGradeModel.addRow(obj);
             }
         }
@@ -109,18 +104,16 @@ public class StudentGradeFrame extends JFrame {
                 int selected = studentGradeTable.getSelectedRow();
                 if (selected != -1) {
                     //get the student that is added comment
+                    if(textField1.getText().equals(""))
+                        JOptionPane.showMessageDialog(source, "Please enter the amount you want to bump.");
+
                     int studentId = Integer.parseInt(studentGradeModel.getValueAt(selected, 0).toString());
                     Student targetStudent = course.getStudent(studentId);
                     if (!targetStudent.isScoreUp()) {
                         targetStudent.setScoreUp(true);
                         studentGradeModel.removeRow(selected);
-                        String score;
-                        if (targetStudent.isScoreUp()) {
-                            score = Grade.scoreUp(targetStudent.getTotalScaledScore());
-                        } else {
-                            score = Grade.scoreToLetterGrade(targetStudent.getTotalScaledScore());
-                        }
-                        Object[] obj={targetStudent.getSid(),targetStudent.getName(),targetStudent.getAllBonusPoints(),targetStudent.getTotalScaledScore(),targetStudent.getTotalRawScore(),score,targetStudent.getLastComment().getText()};
+                        int plusScore = targetStudent.bumpUpScoreBy(2);
+                        Object[] obj={targetStudent.getSid(),targetStudent.getName(),targetStudent.getAllBonusPoints(),targetStudent.getRawTotalScore(),targetStudent.getTotalScoreWeighted(),targetStudent.scoreToLetterGrade(),targetStudent.getLastComment().getText()};
                         studentGradeModel.insertRow(selected,obj);
                     } else {
                         JOptionPane.showMessageDialog(source, "This student has been scored up.");
