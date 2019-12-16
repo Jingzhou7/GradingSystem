@@ -12,6 +12,7 @@ public class Student {
     private ArrayList<BonusPoints> bonusPoints;
     private ArrayList<Grade> grades;
     private double totalScoreWeighted = 0;
+    private double rawTotalScore = 0;
 
     private boolean scoreUp;
 
@@ -23,6 +24,7 @@ public class Student {
         bonusPoints = new ArrayList<>();
         grades = new ArrayList<>();
         scoreUp=false;
+        setRawTotalScore();
 
     }
 
@@ -36,29 +38,14 @@ public class Student {
         this.comments = comments;
         this.bonusPoints = bonusPoints;
         this.grades = grades;
+        setRawTotalScore();
     }
 
-//    private void initLists() {
-//        if(comments.size() == 0) {
-//            comments.add(Comment.dummyComment);
-//        }
-//        if(bonusPoints.size() == 0) {
-//            bonusPoints.add(new BonusPoints(0));
-//        }
-//        if(grades.size() == 0) {
-//
-//
-//
-//
-//
-//
-//            grades.add(new Grade());
-//        }
-//    }
 
 
     public void setGrades(ArrayList<Grade> grades) {
         this.grades = grades;
+        setRawTotalScore();
     }
 
     public double getTotalScoreWeighted() {
@@ -140,11 +127,6 @@ public class Student {
         }
     }
 
-    public void setGrade(int id, double rawscore) {
-        Grade g = grades.get(id);
-        g.setRawScore(rawscore);
-        grades.set(id, g);
-    }
 
     @Override
     public String toString() {
@@ -161,17 +143,24 @@ public class Student {
 
 
     public double getRawTotalScore() {
-        //this raw total score is the same shown on blackboard
-        double res = 0;
-
+        System.out.println(name + " has: ");
         for(Grade g : grades) {
-            res += g.getRawScore();
+            System.out.println(g.getAssignment().getAssignmentName() + " has score : " + g.getRawScore());
         }
 
-        return res;
+        return rawTotalScore;
     }
 
-//    public double getWeightedTotalScore() {
+    public void setRawTotalScore() {
+        double rawTotal = 0;
+        if(grades.size() != 0) {
+            for(Grade g : grades) {
+                rawTotal += g.getRawScore();
+            }
+        }
+        this.rawTotalScore = rawTotal;
+    }
+    //    public double getWeightedTotalScore() {
 //
 //        double sum=0;
 //        for(Grade g : grades) {

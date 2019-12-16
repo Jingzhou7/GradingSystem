@@ -75,6 +75,7 @@ public class StudentGradeFrame extends JFrame {
             for (int i = 0; i < allStudents.size(); i++) {
                 Object[] obj = {allStudents.get(i).getSid(), allStudents.get(i).getName(), allStudents.get(i).getAllBonusPoints(), allStudents.get(i).getRawTotalScore(), allStudents.get(i).getTotalScoreWeighted(), allStudents.get(i).scoreToLetterGrade(), allStudents.get(i).getLastComment().getText()};
                 studentGradeModel.addRow(obj);
+                System.out.println(allStudents.get(i).getName() + " has raw score: " + allStudents.get(i).getRawTotalScore());
             }
         }
         return studentGradeModel;
@@ -173,11 +174,25 @@ public class StudentGradeFrame extends JFrame {
         for (int i = 0; i < course.getAllStudents().size(); i++) {
             String text = studentGradeModel.getValueAt(i, 6).toString();
             ArrayList<Comment> allComments = course.getAllStudents().get(i).getComments();
+            ArrayList<BonusPoints> allBonusPoints = course.getAllStudents().get(i).getBonusPoints();
             double bp = 0;
             if(studentGradeModel.getValueAt(i, 2) != null) {
                 bp = Double.parseDouble(studentGradeModel.getValueAt(i, 2).toString());
-                course.getAllStudents().get(i).getBonusPoints().add(new BonusPoints(bp));
+                boolean bonusExist = false;
+                for (BonusPoints bonusPoints : allBonusPoints) {
+                    if (bonusPoints.getValue() == bp) {
+                        bonusExist = true;
+                    }
+                }
+                if (!bonusExist) {
+                    course.getAllStudents().get(i).getBonusPoints().add(new BonusPoints(bp));
+                }
+
             }
+
+
+
+
             boolean commentExist = false;
             for (Comment c : allComments) {
                 if (c.getText().equals(text)) {
