@@ -93,17 +93,16 @@ public class Student {
         comments.remove(t);
         return t;
     }
-    public int deleteAssComment(String assName,String comment){
+    public Grade deleteAssComment(String assName,String comment){
         Grade g=null;
-        int id=-1;
         for(int i=0;i<grades.size();i++){
             if(grades.get(i).getAssignment().getAssignmentName().equals(assName)&&grades.get(i).getComment().equals(comment)){
                 g=grades.get(i);
-                g.setComment(null);
+                g.setComment("");
                 break;
             }
         }
-        return id;
+        return g;
     }
 
 
