@@ -12,7 +12,7 @@ public class Student {
     private ArrayList<BonusPoints> bonusPoints;
     private ArrayList<Grade> grades;
     private double totalScoreWeighted = 0;
-    private double rawTotalScore = 0;
+
 
     private boolean scoreUp;
 
@@ -24,7 +24,7 @@ public class Student {
         bonusPoints = new ArrayList<>();
         grades = new ArrayList<>();
         scoreUp=false;
-        setRawTotalScore();
+
 
     }
 
@@ -38,14 +38,14 @@ public class Student {
         this.comments = comments;
         this.bonusPoints = bonusPoints;
         this.grades = grades;
-        setRawTotalScore();
+
     }
 
 
 
     public void setGrades(ArrayList<Grade> grades) {
         this.grades = grades;
-        setRawTotalScore();
+
     }
 
     public double getTotalScoreWeighted() {
@@ -143,22 +143,15 @@ public class Student {
 
 
     public double getRawTotalScore() {
-        System.out.println(name + " has: ");
-        for(Grade g : grades) {
-            System.out.println(g.getAssignment().getAssignmentName() + " has score : " + g.getRawScore());
-        }
-
-        return rawTotalScore;
-    }
-
-    public void setRawTotalScore() {
         double rawTotal = 0;
+        System.out.println(name + " has: ");
         if(grades.size() != 0) {
             for(Grade g : grades) {
+                System.out.println(g.getAssignment().getAssignmentName() + " has score : " + g.getRawScore());
                 rawTotal += g.getRawScore();
             }
         }
-        this.rawTotalScore = rawTotal;
+        return rawTotal;
     }
     //    public double getWeightedTotalScore() {
 //
@@ -234,9 +227,36 @@ public class Student {
         else return "F";
     }
 
-    public int bumpUpScoreBy(int bumpUpScore) {
-        int res = bumpUpScore;
-        setTotalScoreWeighted(totalScoreWeighted + bumpUpScore);
+    public double bumpUpScoreBy(double bumpUpScore) {
+        double res = bumpUpScore;
+        if(totalScoreWeighted + bumpUpScore > 100) {
+            setTotalScoreWeighted(100);
+            res = 100 - totalScoreWeighted;
+        }
+        else {
+            setTotalScoreWeighted(totalScoreWeighted + bumpUpScore);
+        }
         return res;
+    }
+
+    public String bumpUpGrade() {
+        setScoreUp(true);
+        String letterGrade = scoreToLetterGrade();
+        switch(letterGrade) {
+            case "A+" :
+            case "A" :
+                return "A+";
+            case "A-": return "A";
+            case "B+": return "A-";
+            case "B": return "B+";
+            case "B-": return "B";
+            case "C+": return "B-";
+            case "C": return "C+";
+            case "C-": return "C";
+            case "D+": return "C-";
+            case "D": return "D+";
+            case "D-": return "D";
+            default: return "D-";
+        }
     }
 }

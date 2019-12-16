@@ -5,7 +5,6 @@ import model.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -23,9 +22,10 @@ public class StudentGradeFrame extends JFrame {
     private JButton showComment;
     private JButton addComment;
     private JPanel ChoicePanel;
-    private JButton scoreButton;
+    private JButton curveButton;
     private JTextField textField1;
     private JLabel statsLbl;
+    private JButton bumpUpGradeButton;
     DefaultTableModel studentGradeModel;
 
     public StudentGradeFrame(GradingSystem gs, Course course) {
@@ -45,6 +45,7 @@ public class StudentGradeFrame extends JFrame {
         addActiveComponent();
 
         statsLbl.setText(course.outputStats());
+
     }
 
     private void addActiveComponent() {
@@ -107,25 +108,42 @@ public class StudentGradeFrame extends JFrame {
             }
         });
 
-        scoreButton = new JButton("Score Up");
-        scoreButton.addActionListener(new ActionListener() {
+        curveButton = new JButton("Curve Up By: ");
+        curveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JButton source = (JButton) actionEvent.getSource();
+                if (textField1.getText().equals(""))
+                    JOptionPane.showMessageDialog(source, "Please enter the score you want to curve up.");
+                double bumpScore = Double.parseDouble(textField1.getText());
+
+                for(Student targetStudent : allStudents) {
+                    targetStudent.bumpUpScoreBy(bumpScore);
+                    studentGradeModel.fireTableDataChanged();
+
+                }
+
+
+            }
+        });
+        bumpUpGradeButton = new JButton("Bump Up Grade");
+        bumpUpGradeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 JButton source = (JButton) actionEvent.getSource();
                 int selected = studentGradeTable.getSelectedRow();
                 if (selected != -1) {
                     //get the student that is added comment
-                    if (textField1.getText().equals(""))
-                        JOptionPane.showMessageDialog(source, "Please enter the amount you want to bump.");
-                    int bumpScore = Integer.parseInt(textField1.getText());
+
                     int studentId = Integer.parseInt(studentGradeModel.getValueAt(selected, 0).toString());
                     Student targetStudent = course.getStudent(studentId);
                     if (!targetStudent.isScoreUp()) {
                         targetStudent.setScoreUp(true);
+
                         studentGradeModel.removeRow(selected);
-                        int plusScore = targetStudent.bumpUpScoreBy(bumpScore);
+
                         //check if plusScore is too large. at most maxScore- highScore
-                        Object[] obj = {targetStudent.getSid(), targetStudent.getName(), targetStudent.getAllBonusPoints(), targetStudent.getRawTotalScore(), targetStudent.getTotalScoreWeighted(), targetStudent.scoreToLetterGrade(), targetStudent.getLastComment().getText()};
+                        Object[] obj = {targetStudent.getSid(), targetStudent.getName(), targetStudent.getAllBonusPoints(), targetStudent.getRawTotalScore(), targetStudent.getTotalScoreWeighted(), targetStudent.bumpUpGrade(), targetStudent.getLastComment().getText()};
                         studentGradeModel.insertRow(selected, obj);
                     } else {
                         JOptionPane.showMessageDialog(source, "This student has been scored up.");
