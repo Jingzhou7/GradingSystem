@@ -254,9 +254,7 @@ public class CourseDetailFrame extends JFrame {
                     String categoryName = categoryModel.getValueAt(selected, 0).toString();
                     //System.out.println(categoryName);
                     Category targetcategory = course.getCategory(categoryName);
-                    boolean c = course.removeCategory(targetcategory);
-                    //System.out.println(c);
-                    //System.out.println(course.getAllCategories().size());
+                    course.getAllCategories().remove(targetcategory);
 
                     if (targetcategory != null) {
                         gs.addDeletedCategory(targetcategory);
