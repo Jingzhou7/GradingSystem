@@ -13,6 +13,7 @@ public class Student {
     private ArrayList<Grade> grades;
     private double totalScoreWeighted = 0;
 
+
     private boolean scoreUp;
 
     public Student(Name name) {
@@ -23,6 +24,7 @@ public class Student {
         bonusPoints = new ArrayList<>();
         grades = new ArrayList<>();
         scoreUp=false;
+
 
     }
 
@@ -36,29 +38,14 @@ public class Student {
         this.comments = comments;
         this.bonusPoints = bonusPoints;
         this.grades = grades;
+
     }
 
-//    private void initLists() {
-//        if(comments.size() == 0) {
-//            comments.add(Comment.dummyComment);
-//        }
-//        if(bonusPoints.size() == 0) {
-//            bonusPoints.add(new BonusPoints(0));
-//        }
-//        if(grades.size() == 0) {
-//
-//
-//
-//
-//
-//
-//            grades.add(new Grade());
-//        }
-//    }
 
 
     public void setGrades(ArrayList<Grade> grades) {
         this.grades = grades;
+
     }
 
     public double getTotalScoreWeighted() {
@@ -139,11 +126,6 @@ public class Student {
         }
     }
 
-    public void setGrade(int id, double rawscore) {
-        Grade g = grades.get(id);
-        g.setRawScore(rawscore);
-        grades.set(id, g);
-    }
 
     @Override
     public String toString() {
@@ -160,17 +142,17 @@ public class Student {
 
 
     public double getRawTotalScore() {
-        //this raw total score is the same shown on blackboard
-        double res = 0;
-
-        for(Grade g : grades) {
-            res += g.getRawScore();
+        double rawTotal = 0;
+        System.out.println(name + " has: ");
+        if(grades.size() != 0) {
+            for(Grade g : grades) {
+                System.out.println(g.getAssignment().getAssignmentName() + " has score : " + g.getRawScore());
+                rawTotal += g.getRawScore();
+            }
         }
-
-        return res;
+        return rawTotal;
     }
-
-//    public double getWeightedTotalScore() {
+    //    public double getWeightedTotalScore() {
 //
 //        double sum=0;
 //        for(Grade g : grades) {
@@ -244,9 +226,36 @@ public class Student {
         else return "F";
     }
 
-    public int bumpUpScoreBy(int bumpUpScore) {
-        int res = bumpUpScore;
-        setTotalScoreWeighted(totalScoreWeighted + bumpUpScore);
+    public double bumpUpScoreBy(double bumpUpScore) {
+        double res = bumpUpScore;
+        if(totalScoreWeighted + bumpUpScore > 100) {
+            setTotalScoreWeighted(100);
+            res = 100 - totalScoreWeighted;
+        }
+        else {
+            setTotalScoreWeighted(totalScoreWeighted + bumpUpScore);
+        }
         return res;
+    }
+
+    public String bumpUpGrade() {
+        setScoreUp(true);
+        String letterGrade = scoreToLetterGrade();
+        switch(letterGrade) {
+            case "A+" :
+            case "A" :
+                return "A+";
+            case "A-": return "A";
+            case "B+": return "A-";
+            case "B": return "B+";
+            case "B-": return "B";
+            case "C+": return "B-";
+            case "C": return "C+";
+            case "C-": return "C";
+            case "D+": return "C-";
+            case "D": return "D+";
+            case "D-": return "D";
+            default: return "D-";
+        }
     }
 }

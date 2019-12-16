@@ -33,6 +33,7 @@ public class Course {
         students = new ArrayList<>();
         initLists();
         calculateStatistics();
+
     }
 
 
@@ -46,6 +47,7 @@ public class Course {
         this.students = students;
         initLists();
         calculateStatistics();
+
     }
 
     public Course(String semester, String courseName, ArrayList<Category> categories, ArrayList<Student> students){
@@ -57,6 +59,7 @@ public class Course {
         this.students = students;
         initLists();
         calculateStatistics();
+        
     }
 
     private void initLists(){
@@ -295,6 +298,63 @@ public class Course {
             }
 
             s.setTotalScoreWeighted(score);
+        }
+    }
+
+    public void setStatsForAllAssignments() {
+        if(categories.size() == 0) return;
+
+        for(Category c : categories) {
+            if(c.getAllAssignments().size() != 0) {
+                for (Assignment a : c.getAllAssignments()) {
+
+                    double totalScore = 0;
+                    double avg;
+                    double med;
+                    double highScore = 0;
+                    double lowScore = a.getMaxPoint();
+                    double sd = 0;
+                    int studentCount = students.size();
+                    double[] allTotalScores = new double[studentCount];
+                    for(int i = 0; i < studentCount; i++) {
+                        if(students.get(i).getGrade(a) != null) {
+                            double tmp = students.get(i).getGrade(a).getRawScore();
+                            totalScore += tmp;
+                            if (tmp > highScore) highScore = tmp;
+                            if (tmp < lowScore) lowScore = tmp;
+                            allTotalScores[i] = tmp;
+                        }
+                    }
+                    Arrays.sort(allTotalScores);
+                    if (studentCount % 2 == 1) {
+                        //studentCount is odd
+                        med = allTotalScores[(studentCount - 1) / 2];
+                    } else {
+                        //studentCount is even
+                        med = (allTotalScores[studentCount / 2] + allTotalScores[studentCount / 2 - 1]) / 2;
+                    }
+
+                    avg = totalScore / studentCount;
+
+                    for (double d : allTotalScores) {
+                        sd += Math.pow(d - avg, 2);
+                    }
+                    sd = Math.sqrt(sd / studentCount);
+
+
+
+                    a.setHigh(highScore);
+                    a.setLow(lowScore);
+                    a.setMean(avg);
+                    a.setMedian(med);
+                    a.setStandard_deviation(sd);
+
+
+
+
+
+                }
+            }
         }
     }
 

@@ -218,6 +218,7 @@ public class AssignmentFrame extends JFrame {
                 int selected = assignmentTable.getSelectedRow();
                 if (checkVals()) {
                     if (selected != -1) {
+                        course.setStatsForAllAssignments();
                         String assignmentName = assignmentModel.getValueAt(selected, 0).toString();
                         Assignment currentAssignment = category.getAssignment(assignmentName);
                         new GradingFrame(gs, course, category, currentAssignment);

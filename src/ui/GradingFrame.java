@@ -21,6 +21,7 @@ public class GradingFrame extends JFrame {
     private JButton editModeButton;
     private JScrollPane gradeScroll;
     private JLabel assignmentLbl;
+    private JLabel statsLbl;
     private DefaultTableModel model;
 
 
@@ -38,6 +39,7 @@ public class GradingFrame extends JFrame {
         pack();
         setLocationRelativeTo(null);
 
+        statsLbl.setText(assignment.outputStats());
 
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -130,7 +132,6 @@ public class GradingFrame extends JFrame {
                             g.setRawScore(totalScore + tmp);
                         }
                         g.setComment(com);
-                        course.getAllStudents().get(i).getGrades().add(g);
                     }
                 }
             }
