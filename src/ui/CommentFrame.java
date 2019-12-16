@@ -101,10 +101,10 @@ public class CommentFrame extends JFrame {
                 } else {
                     if (selected != -1) {
                         String comment = commentModel.getValueAt(selected, 0).toString();
-                        int id=student.deleteComment(comment);
+                        Comment com=student.deleteComment(comment);
                         commentModel.removeRow(selected);
-                        if(id!=-1)
-                            gs.deleteComments(id);
+                        if(com!=null)
+                            gs.addDeletedComments(com);
                     } else {
                         String assignmentName = assCommentModel.getValueAt(assSelected, 0).toString();
                         String comment = assCommentModel.getValueAt(assSelected, 1).toString();

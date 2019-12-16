@@ -1028,7 +1028,7 @@ public class GradingSystem {
         }
     }
 
-    public boolean deleteComments(int id) {
+    private boolean deleteComments(int id) {
         String sql = "delete from studentcomments where commentid = " + id;
         PreparedStatement pst = null;
         SQLConnection sc = new SQLConnection();
