@@ -116,14 +116,16 @@ public class StudentGradeFrame extends JFrame {
                 if (textField1.getText().equals(""))
                     JOptionPane.showMessageDialog(source, "Please enter the score you want to curve up.");
                 double bumpScore = Double.parseDouble(textField1.getText());
+                while(studentGradeModel.getRowCount()!=0){
+                    studentGradeModel.removeRow(0);
+                }
 
                 for(Student targetStudent : allStudents) {
                     targetStudent.bumpUpScoreBy(bumpScore);
-                    studentGradeModel.fireTableDataChanged();
-
+                    //studentGradeModel.fireTableDataChanged();
+                    Object[] obj = {targetStudent.getSid(), targetStudent.getName(), targetStudent.getAllBonusPoints(), targetStudent.getRawTotalScore(), targetStudent.getTotalScoreWeighted(), targetStudent.scoreToLetterGrade(), targetStudent.getLastComment().getText()};
+                    studentGradeModel.addRow(obj);
                 }
-
-
             }
         });
         bumpUpGradeButton = new JButton("Bump Up Grade");
