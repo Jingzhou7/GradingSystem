@@ -6,10 +6,8 @@ cs591 GradingSystem design
 @author Kaijia You
 @author Peiqing Lu
 
+run Main() of the program, it will give you the starting point of the program, which is the LoginFrame for user to log in.
 
-todo list
-
-https://docs.google.com/document/d/1mgEf2AK1szkYdus1EMB7hU8MYkbUadfl0TtThfksoh4/edit?usp=sharing
 
 
 This is a Grading system designed specifically to substitute the excel grading sheets.

@@ -1,3 +1,71 @@
 Grading System for CS591
 
-Class design analysis
+Jingzhou Xue U10828768 jxue@bu.edu
+
+Documentation
+
+Overview:
+This document introduces our Grading System in detail. It contains our utmost purpose to develop this system, the prospected functionality and our detailed object design along with a UML diagram that helps you understand the structure.
+
+Scope:
+This grading system is aimed to be a better option for our professor to grade for all courses taught by her. She was using the good old excel as her grading tool. While excel offers ultimate flexibility on its entries, it is not so intelligent and good looking. Also, our customer doesn't like the fact that she have to build every course from a scratch excel sheet.It is extremely undesired when she wanted to create courses of same structure as she has to do redundant duplicated work.
+As a result, we have developed our grading system with the specific purpose to replace excel as our professor's go-to grading option. Though it is very hard for us to beat excel in flexibility, our focus is more on the user experience --- how to make every task easy to do.
+
+Functionality:
+We expect our program to be straightforward and easy to use. That is to say, with the minimal learning curve, user can get used to our system and appreciate its usability.
+
+
+Goals:
+First of all, we want this system to be password protected. We make a loginFrame for user to login. In the future, we would like this system to work for other professors also.
+Secondly, we want to make adding course easier for user. Now adding a course only takes a course name, whether or not it is a section and whether or not to use an existing template. If section is checked, section id will be automatically assigned based on existing same name sections. If template is chosen, we put the same categories into the new course or section. It automatically gets all categories along with all its assignments and weight arrangements.
+Then, we want to save the effort of calculating statistics for the course or for an assignment. So we simply show this information on the bottom of the frame just as the user wants to see it.
+Most important thing for a grading system is for sure the functionality to grade. With our grading system, it is never been easier to grade. User usually has a score sheet for every assignment. She could find the specific assignment and directly input scores for all students What's more impressive is that user would never need to calculate the weighted score or total score. They are all done by the system. The system allows the user to modify final grades only by bumping up one grade for selected student (with bonus points) or curve the final weighted score for all students.
+Future goals: differentiate the status of students (grad vs undergrad). In the current version, we didn't include this feature since our designated user doesn't encounter the situation which needs to differentiate student status. In the future where our users teach a 400/600 level course, we need different grading scheme for different students.
+
+
+Object Diagram
+
+
+Object Justification
+1. Class Course
+    Course object is one of the most important Object in our Grading System. Our entire system is based on different courses. All students, categories and assignments lie inside this course object
+
+2. Class Section extends Course
+    Section is a Course with some section ID. everything else is the same as a course. Section ID automatically increments. All sections of same course share the same list of categories. As a result, modifying one section affects all sections in the meantime.
+
+3. Class Student
+    Student object is a very general student. It has all student information including name, email and all the grades. It can be generally reused in other student related projects. Student is one core element in a course.
+
+4. Class Category
+    Category object is basically what defines a class except its students. It contains detailed information on assignments and their weights. As a result, it is serving as the template for a class. To import a template for a new class is essentially using the designated class's categories. Also, same course different section share the same template so they will update altogether.
+
+5. Class Assignment
+    Assignment object is the specific assignment lies under a specific category. It has statistic information set by the course with the students' grades. It is a very general assignment that can be reused easily.
+
+6. Class Grade
+    Grade object is a specific grade for a student on an assignment. That is to say, for every student, he or she should has a grade for every assignment in their registered course or section. The user input fields of Grade are only rawScores and comments. All others are calculated with the rawScore.
+
+7. Class Comment
+    Comment object creates comment both for a specific student and for a specific grade on an assignment. User can comment on a student's grade on an specific assignment or generally on a student overall performance.
+
+8. Class BonusPoints
+    Just like Comment, it is a unweighted extra credit which can both be given on a grade for a assignment and on a student for his overall performance.
+
+9. Class Name
+    Name is a reused class from previous assignments. It is generally good to use when creating an object with name (best for human with first mid and last names.
+
+10. Class GradingSystem
+    GradingSystem provides the starting point of our system. It holds all information of existing courses in different semesters. It is password protected login required.
+
+11. Class Main
+    creates a GradingSystem object and run.
+
+12. GUI Classes
+    The naming of GUI classes is very straightforward.
+    First frame is LoginFrame. After login, it goes into the CourseFrame which shows all courses in selected semester. Default semester is current semester. In this frame, user can add/delete a course, switch semester to see previous courses, choose a course and modify its details.
+    Select a course and click on modify button, it will advance to the CourseDetailFrame of your chosen course. Here you can modify everything in the course including but not limited to add/delete a student/category, import a list of pre-existing students (only allowed when the course is empty), view final grades of this course, and modify assignments in the selected category.
+    These functions will take the user to the addStudentFrame, StudentGradeFrame or AssignmentFrame. In the StudentGradeFrame, user can give bonus points and add comments on all students. User can get all comment on a student by selecting and going to the CommentFrame where user can view and edit all comments of a student.
+    In the AssignmentFrame, user can modify assignments for sure, and most importantly, user can get into a specific assignment to grade/view grades for all students in the GradingFrame. Grading Frame has only the function to edit rawGrade column and comment column, meanwhile showing assignment statistics on the bottom.
+
+
+
