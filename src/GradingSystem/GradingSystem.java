@@ -128,9 +128,7 @@ public class GradingSystem {
         int id = 0;
         for(Course c : courses) {
             if(c.getCourseName().contains(sectionName)) {
-                if (c.getCourseIndex() + 1 > id) {
-                    id = c.getCourseIndex() + 1;
-                }
+                id+=1;
             }
         }
         Course newSection = new Section(current_semester, sectionName, new ArrayList<Category>(), new ArrayList<Student>(), id);
@@ -172,9 +170,7 @@ public class GradingSystem {
         int id = 0;
         for(Course c : courses) {
             if(c.getCourseName().contains(sectionName)) {
-                if (c.getCourseIndex() + 1 > id) {
-                    id = c.getCourseIndex() + 1;
-                }
+                id+=1;
             }
             if(c.getCourseName().contains(sectionTemplete)) {
                 templeteCategories = c.getAllCategories();

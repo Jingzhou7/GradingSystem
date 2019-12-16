@@ -2,6 +2,7 @@ package ui;
 
 import GradingSystem.GradingSystem;
 import model.Category;
+import model.Course;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +36,11 @@ public class AddCourseFrame extends JFrame {
     }
 
     private void addActiveComponent() {
+
+        for (Course c: gs.getAllCourses()) {
+            comboBox1.addItem(c.getCourseName());
+        }
+
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -43,35 +49,37 @@ public class AddCourseFrame extends JFrame {
                 String courseName = classNameTF.getText();
                 boolean createSection = yesCheckBox.isSelected();
                 String templete = comboBox1.getSelectedItem().toString();
-                if (templete.equals("Nah")) {
-                    if (!createSection) {
-                        //System.out.println("nah + !section");
-                        gs.addCourse(courseName);
-                        dispose();
-                        new CourseFrame(gs);
+                if (!courseName.equals("")){
+                    if (templete.equals("Nah")) {
+                        if (!createSection) {
+                            //System.out.println("nah + !section");
+                            gs.addCourse(courseName);
+                            dispose();
+                            new CourseFrame(gs);
+                        } else {
+                            //System.out.println("nah + section");
+                            gs.addSection(courseName);
+                            dispose();
+                            new CourseFrame(gs);
+                        }
+
                     } else {
-                        //System.out.println("nah + section");
-                        gs.addSection(courseName);
-                        dispose();
-                        new CourseFrame(gs);
+                        if (!createSection) {
+                            //System.out.println("not nah + !section");
+                            gs.addCourseWithTemplete(courseName, templete);
+                            dispose();
+                            new CourseFrame(gs);
+                        } else {
+                            //System.out.println("not nah + section");
+                            gs.addSectionWithTemplete(courseName, templete);
+                            dispose();
+                            new CourseFrame(gs);
+                        }
+
                     }
 
-                } else {
-                    if (!createSection) {
-                        //System.out.println("not nah + !section");
-                        gs.addCourseWithTemplete(courseName, templete);
-                        dispose();
-                        new CourseFrame(gs);
-                    } else {
-                        //System.out.println("not nah + section");
-                        gs.addSectionWithTemplete(courseName, templete);
-                        dispose();
-                        new CourseFrame(gs);
-                    }
 
                 }
-
-
             }
         });
 
