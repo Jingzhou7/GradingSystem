@@ -298,4 +298,18 @@ public class Course {
         }
     }
 
+    public String outputStats() {
+        calculateStatistics();
+        StringBuilder sb = new StringBuilder();
+
+
+        sb.append("Top Score: " + high).append("     ");
+        sb.append("Low Score: " + low).append("     ");
+        sb.append("Mean: " + mean).append("     ");
+        sb.append("Median: " + median).append("     ");
+        sb.append("Standard Deviation: " + standard_deviation);
+
+
+        return sb.toString();
+    }
 }

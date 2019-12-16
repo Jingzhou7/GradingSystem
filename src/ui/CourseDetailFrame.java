@@ -164,7 +164,7 @@ public class CourseDetailFrame extends JFrame {
         addCategoryBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Object[] obj = {"please enter category name", 0};
+                Object[] obj = {"category name", 0};
                 categoryModel.addRow(obj);
                 course.addCategory("Name");
             }

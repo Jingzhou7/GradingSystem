@@ -25,6 +25,7 @@ public class StudentGradeFrame extends JFrame {
     private JPanel ChoicePanel;
     private JButton scoreButton;
     private JTextField textField1;
+    private JLabel statsLbl;
     DefaultTableModel studentGradeModel;
 
     public StudentGradeFrame(GradingSystem gs, Course course) {
@@ -42,6 +43,13 @@ public class StudentGradeFrame extends JFrame {
         setLocationRelativeTo(null);
         //backButton = new JButton("Back");
         addActiveComponent();
+
+        statsLbl.setText(course.outputStats());
+    }
+
+    private void addActiveComponent() {
+        ArrayList<Student> allStudents = course.getAllStudents();
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -50,10 +58,6 @@ public class StudentGradeFrame extends JFrame {
                 dispose();
             }
         });
-    }
-
-    private void addActiveComponent() {
-        ArrayList<Student> allStudents = course.getAllStudents();
 
     }
 
@@ -62,7 +66,7 @@ public class StudentGradeFrame extends JFrame {
         DefaultTableModel studentGradeModel = new DefaultTableModel(header, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                if (column == 6) return true;
+                if (column == 6 || column == 2) return true;
                 else return false;
             }
         };
@@ -112,13 +116,14 @@ public class StudentGradeFrame extends JFrame {
                     //get the student that is added comment
                     if (textField1.getText().equals(""))
                         JOptionPane.showMessageDialog(source, "Please enter the amount you want to bump.");
-
+                    int bumpScore = Integer.parseInt(textField1.getText());
                     int studentId = Integer.parseInt(studentGradeModel.getValueAt(selected, 0).toString());
                     Student targetStudent = course.getStudent(studentId);
                     if (!targetStudent.isScoreUp()) {
                         targetStudent.setScoreUp(true);
                         studentGradeModel.removeRow(selected);
-                        int plusScore = targetStudent.bumpUpScoreBy(2);
+                        int plusScore = targetStudent.bumpUpScoreBy(bumpScore);
+                        //check if plusScore is too large. at most maxScore- highScore
                         Object[] obj = {targetStudent.getSid(), targetStudent.getName(), targetStudent.getAllBonusPoints(), targetStudent.getRawTotalScore(), targetStudent.getTotalScoreWeighted(), targetStudent.scoreToLetterGrade(), targetStudent.getLastComment().getText()};
                         studentGradeModel.insertRow(selected, obj);
                     } else {
@@ -168,7 +173,11 @@ public class StudentGradeFrame extends JFrame {
         for (int i = 0; i < course.getAllStudents().size(); i++) {
             String text = studentGradeModel.getValueAt(i, 6).toString();
             ArrayList<Comment> allComments = course.getAllStudents().get(i).getComments();
-
+            double bp = 0;
+            if(studentGradeModel.getValueAt(i, 2) != null) {
+                bp = Double.parseDouble(studentGradeModel.getValueAt(i, 2).toString());
+                course.getAllStudents().get(i).getBonusPoints().add(new BonusPoints(bp));
+            }
             boolean commentExist = false;
             for (Comment c : allComments) {
                 if (c.getText().equals(text)) {
@@ -182,8 +191,12 @@ public class StudentGradeFrame extends JFrame {
             }
 
 
+
+
         }
 
     }
+
+
 
 }

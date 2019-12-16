@@ -62,13 +62,13 @@ public class GradingFrame extends JFrame {
 
     private void createUIComponents() {
 
-        String[] header = {"Student Name", "Student ID", "Raw Score", "Scaled score"};
+        String[] header = {"Student Name", "Student ID", "Raw Score", "Scaled score", "Write Comment"};
 
         ArrayList<Student> allStudents = course.getAllStudents();
         model = new DefaultTableModel(header, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                if (column == 2) {
+                if (column == 2 || column == 4) {
                     return true;
                 } else
                     return false;
@@ -82,7 +82,7 @@ public class GradingFrame extends JFrame {
                     Object[] obj = {s.getName(), s.getSid()};
                     model.addRow(obj);
                 } else {
-                    Object[] obj = {s.getName(), s.getSid(), s.getGrade(assignment).getRawScore(), s.getGrade(assignment).getScaledScore()};
+                    Object[] obj = {s.getName(), s.getSid(), s.getGrade(assignment).getRawScore(), s.getGrade(assignment).getScaledScore(), s.getGrade(assignment).getComment()};
                     model.addRow(obj);
                 }
             }
@@ -102,6 +102,10 @@ public class GradingFrame extends JFrame {
         for (int i = 0; i < course.getAllStudents().size(); i++) {
             if (model.getValueAt(i, 2) != null) {
                 double tmp = Double.parseDouble(model.getValueAt(i, 2).toString());
+                String com = "";
+                if (model.getValueAt(i, 4) != null) {
+                    com = model.getValueAt(i, 4).toString();
+                }
                 if (tmp > assignment.getMaxPoint() || tmp < (0 - assignment.getMaxPoint())) {
                     msg = msg + "score exceeds total score of the assignment";
                     scoreSave = false;
@@ -117,6 +121,7 @@ public class GradingFrame extends JFrame {
                         } else {
                             g.setRawScore(totalScore + tmp);
                         }
+                        g.setComment(com);
                         course.getAllStudents().get(i).getGrades().add(g);
                     } else {
                         if (tmp >= 0) {
@@ -124,6 +129,7 @@ public class GradingFrame extends JFrame {
                         } else {
                             g.setRawScore(totalScore + tmp);
                         }
+                        g.setComment(com);
                         course.getAllStudents().get(i).getGrades().add(g);
                     }
                 }
